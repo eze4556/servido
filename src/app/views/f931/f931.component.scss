@@ -1,0 +1,381 @@
+
+  .custom-toolbar {
+    --background: #6a1b9a;
+    color: #fff;
+  }
+
+  .search-bar {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 0 10px;
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .icon-cart {
+    font-size: 24px;
+    color: #fff;
+  }
+
+  .product-header {
+    padding: 10px;
+    background-color: #f8f8f8;
+    // border-bottom: 1px solid #ccc;
+  }
+
+  .product-title {
+    font-weight: bold;
+    margin: 5px 0;
+  }
+
+  .image-slider {
+    margin: 10px 0;
+  }
+
+
+  .action-buttons ion-button {
+    margin: 5px 0;
+  }
+
+ .details-segment {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+
+
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-item {
+  position: relative;
+  text-align: center;
+}
+
+.slider-item img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.favorite-icon,
+.share-icon {
+  position: absolute;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.favorite-icon {
+  top: 10px;
+  right: 50px;
+}
+
+// .share-icon {
+//   top: 10px;
+//   right: 10px;
+// }
+
+.carousel-controls {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.carousel-controls button {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.carousel-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+
+
+
+
+.custom-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #5c2d91; /* Morado */
+    color: #fff;
+    padding: 8px;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 5px 10px;
+    flex-grow: 1;
+    margin-right: 10px; /* Espacio entre la barra y el carrito */
+}
+
+.icon-search {
+    color: #999;
+    margin-right: 5px;
+}
+
+ion-input {
+    flex-grow: 1;
+    font-size: 14px;
+    color: #333;
+}
+
+.icon-cart {
+    font-size: 24px;
+    margin-top: 20px;
+    color: #fff;
+    margin-left:161px;
+}
+
+.address-text {
+    font-size: 12px;
+    color: #fff;
+    margin-left: 147px
+}
+
+.action-segment {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  width: 100%;
+}
+
+/* Estilo para los botones del segmento */
+ion-segment-button {
+  // flex: 1;
+  text-align: center;
+  --background: transparent; /* Fondo transparente por defecto */
+  --color: #0f0101; /* Texto gris por defecto */
+  --indicator-color: #007bff; /* Indicador azul debajo del botón seleccionado */
+}
+
+ion-segment-button::part(button) {
+  /* Aseguramos que el fondo sea transparente y el texto gris */
+  --background: transparent;
+  --color: #333;
+}
+
+/* Cuando el botón está seleccionado */
+ion-segment-button[aria-selected="true"]::part(button) {
+  --background: #007bff !important; /* Fondo azul cuando está seleccionado */
+  --color: #ffffff !important; /* Texto blanco cuando está seleccionado */
+
+}
+
+ion-segment-button ion-label {
+  font-size: 16px; /* Tamaño del texto */
+}
+
+ion-segment-button ion-icon {
+  font-size: 18px; /* Tamaño de los íconos */
+  margin-bottom: 4px; /* Espacio entre el ícono y el texto */
+  display: block;
+}
+
+
+
+
+// precio
+
+// .price-section {
+//     text-align: center;
+//     margin: 10px 0;
+//   }
+
+//   .original-price {
+//     text-decoration: line-through;
+//     color: #aaa;
+//   }
+
+//   .discount-price {
+//     font-size: 24px;
+//     color: #4caf50;
+//     font-weight: bold;
+//   }
+
+//   .discount-percentage {
+//     color: #e53935;
+//   }
+
+//   .rating {
+//     color: #ff9800;
+//   }
+
+//   .stock-section {
+//     padding: 10px;
+//   }
+
+
+
+.price-section {
+  text-align: left;
+  margin: 20px 9px;
+  max-width: 300px; /* Ajusta el ancho si es necesario */
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #aaa;
+  font-size: 14px;
+  margin: 0 0 5px;
+}
+
+.discount-line {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.discount-price {
+  font-size: 20px;
+  color: #010801; /* Verde */
+  font-weight: bold;
+}
+
+.discount-percentage {
+  font-size: 14px;
+  color: #4caf50;
+}
+
+.rating {
+  font-size: 14px;
+  color: #ff9800; /* Naranja */
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rating ion-icon {
+  font-size: 16px;
+}
+
+.stock-section {
+  margin-top: 10px;
+}
+
+.stock-section p {
+  font-size: 14px;
+  color: #333;
+  margin: 5px 0;
+}
+
+ion-chip {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+// ion-input {
+//   max-width: 80px;
+//   padding: 2px 5px;
+//   font-size: 14px;
+//   border: 1px solid #ccc;
+//   border-radius: 4px;
+// }
+
+
+
+
+
+/* Contenedor para los botones */
+.action-buttons {
+  display: flex;
+  justify-content: space-between; /* Acomoda los botones uno al lado del otro */
+  gap: 10px; /* Espacio entre los botones */
+}
+
+/* Estilo general de ambos botones */
+ion-button {
+  flex: 1; /* Ambos botones ocupan el mismo espacio */
+  border-radius: 50px; /* Bordes redondeados */
+  font-size: 14px;
+  padding: 10px 0; /* Ajuste de padding para hacerlo largo */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centra el contenido dentro del botón */
+}
+
+/* Estilo del botón "Comprar ahora" */
+.buy-button {
+//   color: #fff;
+//   --background-color: #007bff;
+--color: #fff;
+}
+
+/* Estilo del botón "Agregar al carrito" */
+.add-button {
+  //  background-color: #d6d3ce;
+  --background: white;
+  --color: blue;
+}
+
+/* Icono del carrito en el botón "Agregar al carrito" */
+.add-button ion-icon {
+  margin-right: 8px; /* Espacio entre el ícono y el texto */
+  font-size: 20px; /* Tamaño del ícono */
+}
+
+
+
+// ------------
+
+
+.favorite-icon, .share-icon {
+  position: absolute;
+  cursor: pointer;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favorite-icon {
+  top: 10px;
+  right: 10px;
+}
+
+.share-icon {
+  bottom: 10px;
+  right: 10px;
+}
+
+/* Estilos de los íconos (puedes usar font-awesome o los que prefieras) */
+.favorite-icon i, .share-icon i {
+  font-size: 24px;
+}

@@ -1,0 +1,165 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <div class="search-container">
+      <!-- Flecha de atrás al lado de la barra de búsqueda -->
+      <ion-buttons slot="start">
+        <ion-back-button
+          defaultHref="/"
+          class="custom-back-button"
+          text=""
+        ></ion-back-button>
+      </ion-buttons>
+
+      <ion-icon name="search" class="icon-search"></ion-icon>
+      <ion-input placeholder="Buscar producto o servicio"></ion-input>
+    </div>
+
+    <ion-icon name="cart-outline" class="icon-cart"></ion-icon>
+    <p class="address-text">Dirección</p>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="product-header">
+    <p class="product-title">Cubierta Fate Sentiva 195 65 15</p>
+  </div>
+  <!--
+<div class="carousel-container" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd()">
+  <div class="carousel-track" [style.transform]="'translateX(' + (-currentIndex * 100) + '%)'">
+    <div class="carousel-slide" *ngFor="let slide of slides">
+      <img [src]="slide.image" [alt]="slide.alt" class="slider-image">
+    </div>
+  </div>
+</div> -->
+
+  <div
+    class="carousel-container"
+    (touchstart)="onTouchStart($event)"
+    (touchmove)="onTouchMove($event)"
+    (touchend)="onTouchEnd()"
+  >
+    <div
+      class="carousel-track"
+      [style.transform]="'translateX(' + -currentIndex * 100 + '%)'"
+    >
+      <div class="carousel-slide" *ngFor="let slide of slides">
+        <img [src]="slide.image" [alt]="slide.alt" class="slider-image" />
+
+        <!-- Botón de Favorito (arriba a la derecha) -->
+        <div class="favorite-icon">
+          <i class="fa fa-heart"></i>
+          <!-- Ícono de corazón -->
+        </div>
+
+        <!-- Botón de Compartir (abajo a la derecha) -->
+        <div class="share-icon">
+          <i class="fa fa-share-alt"></i>
+          <!-- Ícono de compartir -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="price-section">
+    <p class="original-price">$156.000</p>
+    <p class="discount-price">$120.000</p>
+    <p class="discount-percentage">30% OFF</p>
+    <p class="rating">
+      <ion-icon name="star" class="star-icon"></ion-icon> 4.5 <span>(363)</span>
+    </p>
+  </div> -->
+
+  <div class="price-section">
+    <!-- Precio original tachado -->
+    <p class="original-price">$156.000</p>
+
+    <!-- Precio con descuento y porcentaje en la misma línea -->
+    <div class="discount-line">
+      <span class="discount-price">$120.000</span>
+      <span class="discount-percentage">30% OFF</span>
+    </div>
+
+    <!-- Calificación con estrellas -->
+    <p class="rating">
+      4.5
+      <ion-icon name="star" class="star-icon"></ion-icon>
+      <ion-icon name="star" class="star-icon"></ion-icon>
+      <ion-icon name="star" class="star-icon"></ion-icon>
+      <ion-icon name="star" class="star-icon"></ion-icon>
+      <ion-icon name="star-half-outline" class="star-icon"></ion-icon>
+    </p>
+
+    <!-- Stock disponible -->
+    <div class="stock-section">
+      <p>Stock disponible:</p>
+      <ion-chip color="success">
+        <ion-label>10 unidades</ion-label>
+      </ion-chip>
+    </div>
+  </div>
+
+  <!-- <ion-segment value="buy" class="action-segment" (ionChange)="onSegmentChange($event)">
+  <ion-segment-button value="buy">
+    <ion-icon name="cart-outline"></ion-icon>
+    <ion-label>Comprar ahora</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="add">
+    <ion-icon name="add-circle-outline"></ion-icon>
+    <ion-label>Agregar al carrito</ion-label>
+  </ion-segment-button>
+</ion-segment> -->
+
+  <div class="action-buttons">
+    <ion-button class="buy-button">
+      <ion-label>Comprar ahora</ion-label>
+    </ion-button>
+
+    <ion-button class="add-button">
+      <ion-icon name="cart-outline"></ion-icon>
+      <ion-label>Agregar al carrito</ion-label>
+    </ion-button>
+  </div>
+
+  <ion-segment value="product-details" class="details-segment">
+    <ion-segment-button value="product-details" class="segment-button1">
+      <ion-label class="segment-label">Producto</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="seller" class="segment-button1">
+      <ion-label class="segment-label">Vendedor</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="opinions" class="segment-button1">
+      <ion-label class="segment-label">Opiniones</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="faq" class="segment-button1">
+      <ion-label class="segment-label">FAQ</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+<ion-tab-button tab="home" (click)="goToHome()">
+  <ion-icon name="home-outline"></ion-icon>
+  <ion-label>Inicio</ion-label>
+</ion-tab-button>
+
+
+        <ion-tab-button tab="store" (click)="goToTienda()">
+          <ion-icon name="storefront-outline"></ion-icon>
+          <ion-label>Tienda</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="notifications">
+          <ion-icon name="notifications-outline"></ion-icon>
+          <ion-label>Notificaciones</ion-label>
+        </ion-tab-button>
+        <ion-tab-button tab="more">
+          <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+          <ion-label>Más</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>
