@@ -177,51 +177,6 @@ ion-input {
 
 
 
-
-.recommended-section {
-  background-color: #f6f2ff;
-  padding: 20px;
-}
-
-.recommended-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #4a4a4a;
-}
-
-.recommended-items {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding: 10px 0;
-}
-
-.recommended-item {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 160px;
-  text-align: center;
-  padding: 10px;
-}
-
-.recommended-image {
-  width: 100%;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-.recommended-name {
-  font-size: 1rem;
-  margin-bottom: 8px;
-  color: #333;
-}
-
-.recommended-price {
-  font-size: 0.9rem;
-}
-
 .old-price {
   text-decoration: line-through;
   color: #888;
@@ -244,55 +199,55 @@ ion-input {
 
 
 
-.subscription-card {
-  background-color: #f8f8f8;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  margin: 16px;
-  text-align: center;
+// .subscription-card {
+//   background-color: #f8f8f8;
+//   border-radius: 10px;
+//   overflow: hidden;
+//   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+//   margin: 16px;
+//   text-align: center;
 
-  .card-header {
-    background-color: #5a2d81;
-    color: #fff;
-    font-weight: bold;
-    padding: 12px;
-  }
+//   .card-header {
+//     background-color: #5a2d81;
+//     color: #fff;
+//     font-weight: bold;
+//     padding: 12px;
+//   }
 
-  .card-details {
-    list-style-type: none;
-    padding: 16px;
-    margin: 0;
+//   .card-details {
+//     list-style-type: none;
+//     padding: 16px;
+//     margin: 0;
 
-    li {
-      margin: 8px 0;
-      font-size: 14px;
-      color: #333;
-    }
-  }
+//     li {
+//       margin: 8px 0;
+//       font-size: 14px;
+//       color: #333;
+//     }
+//   }
 
-  .card-footer {
-    background-color: #00e0ff;
-    padding: 10px;
+//   .card-footer {
+//     background-color: #00e0ff;
+//     padding: 10px;
 
-    .subscribe-button {
-      background: none;
-      border: none;
-      color: #000;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      gap: 5px;
-      cursor: pointer;
+//     .subscribe-button {
+//       background: none;
+//       border: none;
+//       color: #000;
+//       font-weight: bold;
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       font-size: 16px;
+//       gap: 5px;
+//       cursor: pointer;
 
-      ion-icon {
-        font-size: 18px;
-      }
-    }
-  }
-}
+//       ion-icon {
+//         font-size: 18px;
+//       }
+//     }
+//   }
+// }
 
 
 
@@ -368,148 +323,9 @@ ion-input {
 
 
 
-.marcas-section {
-  background-color:#ebebeb;
-    // background-color: #5a2d81;
-
-  padding: 1.25rem 0; /* 20px 0 */
-}
-
-.marcas-scroll-container {
-  display: flex;
-  overflow-x: auto;
-  padding: 0.625rem 0; /* 10px 0 */
-}
-
-// .marca-card {
-//   background-color: #fff;
-//   border-radius: 0.5rem;
-//   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
-//   width: 7.5rem;
-//   height: 7.5rem;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   margin: 0.3125rem;
-// }
-
-.marca-card {
-  background-color: transparent; /* Hacemos la card transparente */
-  border-radius: 0; /* Quitamos el borde redondeado */
-  box-shadow: none; /* Eliminamos la sombra */
-  width: 7.5rem; /* 120px */
-  height: 7.5rem; /* 120px */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0.3125rem; /* 5px */
-
-    position: relative; /* Necesario para los pseudo-elementos */
-
-}
 
 
 
-
-.marca-card::before,
-.marca-card::after {
-  content: '';
-  position: absolute;
-  left: 0; /* Línea comienza desde el borde izquierdo */
-  right: 0; /* Línea termina en el borde derecho */
-  height: 2px; /* Grosor de las líneas */
-  background-color: white;
-}
-
-.marca-card::before {
-  top: -1px; /* Línea superior, separada ligeramente */
-}
-
-.marca-card::after {
-  bottom: -1px; /* Línea inferior, separada ligeramente */
-}
-
-.marca-card img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-
-    z-index: 1; /* Asegura que la imagen quede sobre las líneas */
-
-}
-
-
-.dropdown-container {
-  position: absolute;
-  top: 8.125rem; /* 130px */
-  left: 32%; /* Ajusta según sea necesario para alinear con el botón */
-  z-index: 1000; /* Asegura que está sobre otros elementos */
-  display: none;
-  background: white;
-  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.15); /* 0 2px 8px */
-  width: 12.5rem; /* 200px */
-}
-
-.dropdown-container.open {
-  display: block;
-}
-
-.dropdown-arrow {
-  position: absolute;
-  top: -0.625rem; /* -10px */
-  left: 60%; /* Centrar horizontalmente */
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 0.625rem solid transparent; /* 10px */
-  border-right: 0.625rem solid transparent; /* 10px */
-  border-bottom: 0.625rem solid white; /* 10px */
-}
-.marcas-section {
-  text-align: center;
-}
-
-.marcas-scroll-container {
-  overflow: hidden;
-  position: relative;
-}
-
-.marcas-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-.marcas-carousel {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  display: flex;
-      background-color: #5a2d81;
-  justify-content: center;
-}
-
-.marcas-carousel-inner {
-  display: flex;
-  flex-direction: row;
-  animation: scrollMarcas 20s linear infinite;
-}
-
-.marca-card {
-  flex: 0 0 auto;
-  margin: 10px;
-}
-
-@keyframes scrollMarcas {
-  0% {
-    transform: translateX(50%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
 
 
 
@@ -605,49 +421,47 @@ margin-top:-17px;
 
 
 
-/* Contenedor principal */
-.section-deslogueado {
-  background-color: #e6dfff; /* Fondo violeta claro */
-  padding: -5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+// .section-deslogueado {
+//   background-color: #e6dfff;
+//   padding: -5px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
 
-}
+// }
 
-/* Contenedor de items */
-.items-deslogueado {
-  display: flex;
-  justify-content: center;
-  gap: 20px; /* Espaciado entre las tarjetas */
-  flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas si es necesario */
-  max-width: 1000px; /* Limita el ancho del contenedor */
-}
 
-/* Estilo individual de cada tarjeta */
-.item-deslogueado {
-  background-color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra */
-  border-radius: 12px;
-  text-align: center;
-  padding: 20px;
-  width: 250px; /* Ajusta el tamaño de cada tarjeta */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  flex: 1 1 calc(33.33% - 40px); /* Se ajusta automáticamente al espacio disponible */
-  max-width: 250px; /* Evita que las tarjetas sean más grandes de lo necesario */
-}
+// .items-deslogueado {
+//   display: flex;
+//   justify-content: center;
+//   gap: 20px;
+//   flex-wrap: wrap;
+//   max-width: 1000px;
+// }
 
-.item-deslogueado:hover {
-  transform: scale(1.05); /* Efecto de agrandamiento */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
-}
 
-/* Imagen dentro de cada tarjeta */
-.image-deslogueado {
-  width: 80px; /* Tamaño de la imagen */
-  height: auto;
-  margin-bottom: 10px;
-}
+// .item-deslogueado {
+//   background-color: white;
+//   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+//   border-radius: 12px;
+//   text-align: center;
+//   padding: 20px;
+//   width: 250px;
+//   transition: transform 0.2s ease, box-shadow 0.2s ease;
+//   flex: 1 1 calc(33.33% - 40px);
+//   max-width: 250px;
+// }
+
+// .item-deslogueado:hover {
+//   transform: scale(1.05);
+//   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+
+
+// .image-deslogueado {
+//   width: 80px;
+//   height: auto;
+//   margin-bottom: 10px;
+// }
 
 /* Texto del nombre */
 .name-deslogueado {
@@ -701,46 +515,123 @@ ion-toolbar {
 
 
 
-
-.custom-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #5c2d91; /* Morado */
-    color: #fff;
-    padding: 8px;
+/* Estilo del ion-toolbar */
+ion-toolbar.custom-toolbar {
+  --background: #4a008e; /* Fondo púrpura */
+  display: flex;
+  flex-direction: column; /* Organización en columna */
+  align-items: center;
+  padding: 8px 16px; /* Espaciado interno */
 }
 
+/* Contenedor para barra de búsqueda y carrito */
+.search-cart-container {
+  display: flex;
+  align-items: center; /* Alinea verticalmente */
+  width: 100%; /* Ocupa todo el ancho */
+  max-width: 600px; /* Ancho máximo del contenedor */
+  gap: 8px; /* Espaciado entre la barra de búsqueda y el carrito */
+}
+
+/* Contenedor de la barra de búsqueda */
 .search-container {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 5px 10px;
-    flex-grow: 1;
-    margin-right: 10px; /* Espacio entre la barra y el carrito */
+  display: flex;
+  align-items: center;
+  background-color: white; /* Fondo blanco */
+  border-radius: 25px; /* Bordes redondeados */
+  padding: 8px 16px; /* Espaciado interno */
+  flex: 1; /* Ocupa el máximo espacio posible */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
+/* Icono de búsqueda */
 .icon-search {
-    color: #999;
-    margin-right: 5px;
+  color: gray;
+  font-size: 20px;
+  margin-right: 8px;
 }
 
-ion-input {
-    flex-grow: 1;
-    font-size: 14px;
-    color: #333;
-}
-
+/* Icono del carrito */
 .icon-cart {
-    font-size: 24px;
-    margin-top: 20px;
-    color: #fff;
-    margin-left:161px;
+  color: white; /* Ícono del carrito en blanco */
+  font-size: 24px; /* Más grande para destacarse */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
 }
 
+/* Estilo del input */
+ion-input {
+  flex: 1; /* Hace que el input ocupe el espacio restante */
+  font-size: 16px;
+  color: #333; /* Color del texto */
+}
+
+/* Texto de dirección */
 .address-text {
-    font-size: 12px;
-    color: #fff;
-    margin-left: 10px;
+  color: white; /* Texto en blanco */
+  font-size: 14px;
+  text-align: center;
+  margin-top: 8px; /* Espaciado superior */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
+}
+
+
+
+
+
+
+
+
+// --------------
+
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.product-card {
+  flex: 0 0 calc(50% - 8px); // Ocupa la mitad del ancho con un espacio entre tarjetas
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 16px;
+  text-align: center;
+
+  .product-image {
+    text-align: center;
+    margin-bottom: 12px;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+  }
+
+  .product-title {
+    font-size: 14px;
+    margin: 8px 0;
+    color: #333;
+  }
+
+  .product-pricing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .price {
+      font-size: 16px;
+      color: #000;
+      font-weight: bold;
+    }
+
+    .discount {
+      font-size: 12px;
+      color: #28a745;
+      font-weight: bold;
+    }
+  }
 }

@@ -26,54 +26,63 @@ margin-top: -17px;
 
 
 
+/* Estilo del ion-toolbar */
 ion-toolbar.custom-toolbar {
-  --background: #4a008e; /* Fondo púrpura usando variables de Ionic */
-  padding: 16px; /* Espaciado interno */
+  --background: #4a008e; /* Fondo púrpura */
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Organización en columna */
   align-items: center;
+  padding: 8px 16px; /* Espaciado interno */
 }
 
-/* Estilo de la barra de búsqueda */
+/* Contenedor para barra de búsqueda y carrito */
+.search-cart-container {
+  display: flex;
+  align-items: center; /* Alinea verticalmente */
+  width: 100%; /* Ocupa todo el ancho */
+  max-width: 600px; /* Ancho máximo del contenedor */
+  gap: 8px; /* Espaciado entre la barra de búsqueda y el carrito */
+}
+
+/* Contenedor de la barra de búsqueda */
 .search-container {
   display: flex;
   align-items: center;
   background-color: white; /* Fondo blanco */
   border-radius: 25px; /* Bordes redondeados */
   padding: 8px 16px; /* Espaciado interno */
-  width: 100%; /* Ocupa todo el ancho */
-  max-width: 500px; /* Ancho máximo */
+  flex: 1; /* Ocupa el máximo espacio posible */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
-/* Estilos de los íconos */
-.icon-search,
-.icon-cart {
+/* Icono de búsqueda */
+.icon-search {
   color: gray;
   font-size: 20px;
-}
-
-.icon-search {
   margin-right: 8px;
 }
 
+/* Icono del carrito */
 .icon-cart {
-  margin-left: 8px;
+  color: white; /* Ícono del carrito en blanco */
+  font-size: 24px; /* Más grande para destacarse */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
 }
 
-/* Estilo del campo de entrada */
+/* Estilo del input */
 ion-input {
-  flex: 1; /* Expande el input para ocupar espacio disponible */
+  flex: 1; /* Hace que el input ocupe el espacio restante */
   font-size: 16px;
-  color: #333;
+  color: #333; /* Color del texto */
 }
 
-/* Estilo del texto de dirección */
+/* Texto de dirección */
 .address-text {
-  color: white; /* Color blanco para el texto */
-  margin-top: 12px;
+  color: white; /* Texto en blanco */
   font-size: 14px;
   text-align: center;
+  margin-top: 8px; /* Espaciado superior */
+  cursor: pointer; /* Cambia el cursor al pasar por encima */
 }
 
 
@@ -607,21 +616,13 @@ margin-top:-17px;
 
 /* Contenedor principal */
 .section-deslogueado {
-  background-color: #e6dfff; /* Fondo violeta claro */
-  padding: -5px;
+  background-color: #e6dfff;
   display: flex;
+  // flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-
-}
-
-/* Contenedor de items */
-.items-deslogueado {
-  display: flex;
-  justify-content: center;
-  gap: 20px; /* Espaciado entre las tarjetas */
-  flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas si es necesario */
-  max-width: 1000px; /* Limita el ancho del contenedor */
+  padding: 20px;
+  // gap: 20px;
+  gap: 3px;
 }
 
 /* Estilo individual de cada tarjeta */
@@ -631,10 +632,8 @@ margin-top:-17px;
   border-radius: 12px;
   text-align: center;
   padding: 20px;
-  width: 250px; /* Ajusta el tamaño de cada tarjeta */
+  width: 200px; /* Ancho fijo */
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  flex: 1 1 calc(33.33% - 40px); /* Se ajusta automáticamente al espacio disponible */
-  max-width: 250px; /* Evita que las tarjetas sean más grandes de lo necesario */
 }
 
 .item-deslogueado:hover {
@@ -644,7 +643,7 @@ margin-top:-17px;
 
 /* Imagen dentro de cada tarjeta */
 .image-deslogueado {
-  width: 80px; /* Tamaño de la imagen */
+  width: 70px; /* Tamaño de la imagen */
   height: auto;
   margin-bottom: 10px;
 }
@@ -654,64 +653,64 @@ margin-top:-17px;
   font-size: 16px;
   font-weight: bold;
   color: #4a4a4a;
-  margin-bottom: 10px;
-}
-
-/* Responsividad para pantallas más pequeñas */
-@media (max-width: 768px) {
-  .item-deslogueado {
-    flex: 1 1 calc(50% - 20px); /* Ajusta a dos tarjetas por fila en pantallas medianas */
-  }
-}
-
-@media (max-width: 480px) {
-  .item-deslogueado {
-    flex: 1 1 100%; /* Una tarjeta por fila en pantallas pequeñas */
-  }
 }
 
 
 
+// @media (max-width: 768px) {
+//   .item-deslogueado {
+//     flex: 1 1 calc(50% - 20px);
+//   }
+// }
 
-.custom-toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #5c2d91; /* Morado */
-    color: #fff;
-    padding: 8px;
-}
+// @media (max-width: 480px) {
+//   .item-deslogueado {
+//     flex: 1 1 100%;
+//   }
+// }
 
-.search-container {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 5px 10px;
-    flex-grow: 1;
-    margin-right: 10px; /* Espacio entre la barra y el carrito */
-}
 
-.icon-search {
-    color: #999;
-    margin-right: 5px;
-}
 
-ion-input {
-    flex-grow: 1;
-    font-size: 14px;
-    color: #333;
-}
 
-.icon-cart {
-    font-size: 24px;
-    margin-top: 20px;
-    color: #fff;
-    margin-left:161px;
-}
+// .custom-toolbar {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     background-color: #5c2d91; /* Morado */
+//     color: #fff;
+//     padding: 8px;
+// }
 
-.address-text {
-    font-size: 12px;
-    color: #fff;
-    margin-left: 10px;
-}
+// .search-container {
+//     display: flex;
+//     align-items: center;
+//     background-color: #fff;
+//     border-radius: 20px;
+//     padding: 5px 10px;
+//     flex-grow: 1;
+//     margin-right: 10px;
+// }
+
+// .icon-search {
+//     color: #999;
+//     margin-right: 5px;
+// }
+
+// ion-input {
+//     flex-grow: 1;
+//     font-size: 14px;
+//     color: #333;
+// }
+
+// .icon-cart {
+//     font-size: 24px;
+//     margin-top: 20px;
+//     color: #fff;
+//     margin-left:161px;
+// }
+
+// .address-text {
+//     font-size: 12px;
+//     color: #fff;
+//     margin-left: 10px;
+// }

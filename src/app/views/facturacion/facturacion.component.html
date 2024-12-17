@@ -1,7 +1,6 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar class="custom-toolbar">
     <div class="search-container">
-      <!-- Flecha de atrás al lado de la barra de búsqueda -->
       <ion-back-button defaultHref="/" class="custom-back-button" text=""></ion-back-button>
       <ion-icon name="search" class="icon-search"></ion-icon>
       <ion-input placeholder="Buscar producto o servicio"></ion-input>
@@ -11,7 +10,22 @@
     <p class="address-text">Dirección</p>
   </ion-toolbar>
 </ion-header>
+ -->
 
+
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <div class="search-cart-container">
+      <div class="search-container">
+        <ion-icon name="search" class="icon-search"></ion-icon>
+        <ion-input placeholder="Buscar producto o servicio"></ion-input>
+      </div>
+      <ion-icon name="cart-outline" class="icon-cart"></ion-icon>
+    </div>
+  <p class="address-text">Acá iría la dirección</p>
+
+  </ion-toolbar>
+</ion-header>
 
 
 
@@ -55,25 +69,10 @@
 
 
 
-    <!-- Filters row -->
-    <!-- <ion-row>
-      <ion-col size="3">
-        <ion-button expand="block" fill="outline">Categorías</ion-button>
-      </ion-col>
-      <ion-col size="3">
-        <ion-button expand="block" fill="outline">Marca</ion-button>
-      </ion-col>
-      <ion-col size="3">
-        <ion-button expand="block" fill="outline">Ordenar por</ion-button>
-      </ion-col>
-      <ion-col size="3">
-        <ion-button expand="block" fill="outline">Filtros</ion-button>
-      </ion-col>
-    </ion-row> -->
+<!--
 
-    <!-- Product grid -->
     <ion-row>
-      <ion-col size="6">
+      <ion-col >
         <ion-card>
           <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Cubierta Fate Sentiva">
           <ion-card-content>
@@ -85,7 +84,7 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col size="6">
+      <ion-col >
         <ion-card>
           <img src="../../../assets/icon/rueda-removebg-preview.png"alt="Cubierta Pirelli">
           <ion-card-content>
@@ -97,7 +96,7 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col size="6">
+      <ion-col >
         <ion-card>
           <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Cubierta Bridgestone">
           <ion-card-content>
@@ -109,7 +108,7 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col size="6">
+      <ion-col>
         <ion-card>
           <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Cubierta Michelin">
           <ion-card-content>
@@ -121,8 +120,60 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-    </ion-row>
-  <!-- </ion-grid> -->
+    </ion-row> -->
+
+
+
+
+
+
+
+<div class="product-grid">
+  <div class="product-card">
+    <div class="product-image" (click)="goToDetail()">
+      <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Cubierta Fate Sentiva">
+    </div>
+    <h2 class="product-title">Cubierta Fate Sentiva 195 65 15</h2>
+    <div class="product-pricing">
+      <p class="price">$120.000</p>
+      <p class="discount">30% OFF</p>
+    </div>
+  </div>
+  <div class="product-card">
+    <div class="product-image" (click)="goToDetail()">
+      <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Cubierta Pirelli">
+    </div>
+    <h2 class="product-title">Cubierta Pirelli 205 55 16</h2>
+    <div class="product-pricing">
+      <p class="price">$150.000</p>
+      <p class="discount">20% OFF</p>
+    </div>
+  </div>
+  <div class="product-card">
+    <div class="product-image" (click)="goToDetail()">
+      <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Cubierta Bridgestone">
+    </div>
+    <h2 class="product-title">Cubierta Bridgestone 185 60 14</h2>
+    <div class="product-pricing">
+      <p class="price">$100.000</p>
+      <p class="discount">25% OFF</p>
+    </div>
+  </div>
+  <div class="product-card">
+    <div class="product-image" (click)="goToDetail()">
+      <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Cubierta Michelin">
+    </div>
+    <h2 class="product-title">Cubierta Michelin 225 50 17</h2>
+    <div class="product-pricing">
+      <p class="price">$200.000</p>
+      <p class="discount">15% OFF</p>
+    </div>
+  </div>
+</div>
+
+
+
+
 </ion-content>
 
 <ion-footer>

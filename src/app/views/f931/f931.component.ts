@@ -146,7 +146,7 @@ private router: Router,
 
   onTouchStart(event: TouchEvent) {
     this.startX = event.touches[0].clientX;
-    this.deltaX = 0; // Reinicia el desplazamiento
+    this.deltaX = 0; 
   }
 
   onTouchMove(event: TouchEvent) {
@@ -154,12 +154,12 @@ private router: Router,
   }
 
   onTouchEnd() {
-    const threshold = 50; // Distancia mínima para considerar un deslizamiento válido
+    const threshold = 50;
     if (this.deltaX > threshold && this.currentIndex > 0) {
-      // Deslizar hacia la derecha
+
       this.currentIndex--;
     } else if (this.deltaX < -threshold && this.currentIndex < this.slides.length - 1) {
-      // Deslizar hacia la izquierda
+
       this.currentIndex++;
     }
   }

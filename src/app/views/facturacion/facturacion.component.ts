@@ -8,6 +8,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { IoniconsModule } from 'src/app/common/modules/ionicons.module';
 import { NavController } from '@ionic/angular';
 
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class FacturacionComponent implements OnInit {
     private firestoreService: FirestoreService,
     private storage: Storage,
     private sanitizer: DomSanitizer,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -40,7 +42,9 @@ export class FacturacionComponent implements OnInit {
     this.facturacionDocs$ = this.firestoreService.getCollectionChanges(path);
   }
 
-
+ goToDetail() {
+    this.router.navigate(['/detalle']);
+  }
 
 
   getSanitizedUrl(url: string): SafeResourceUrl {

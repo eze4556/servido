@@ -34,13 +34,10 @@ export const routes: Routes = [
     path: 'DISCOS',
     loadComponent: () => import('../app/views/declaracion/declaracion.component').then((m) => m.DeclaracionComponent),
   },
-
    {
     path: 'detalle',
     loadComponent: () => import('../app/views/f931/f931.component').then((m) => m.F931Component),
   },
-
-
   {
     path: 'tienda',
     loadComponent: () => import('./views/facturacion/facturacion.component').then((m) => m.FacturacionComponent),
