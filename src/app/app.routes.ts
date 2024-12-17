@@ -11,40 +11,24 @@ export const routes: Routes = [
     loadComponent: () => import('../app/views/login/login.component').then((m) => m.LoginComponent),
   },
     {
-    path: 'CATALOGO',
-    loadComponent: () => import('../app/views/carrito/carrito.component').then((m) => m.CarritoComponent),
-  },
-  {
-    path: 'certificacion',
-    loadComponent: () => import('./views/cert-ingresos/cert-ingresos.component').then((m) => m.CertIngresosComponent),
-  },
-  {
-    path: 'certificacion/:categoriaId',
-    loadComponent: () => import('./views/cert-ingresos/cert-ingresos.component').then((m) => m.CertIngresosComponent),
-  },
-    {
     path: 'perfil',
     loadComponent: () => import('../app/views/perfil/perfil.component').then((m) => m.PerfilComponent),
   },
   {
-    path: 'afip',
-    loadComponent: () => import('../app/views/afip/afip.component').then((m) => m.AfipComponent),
-  },
- {
-    path: 'DISCOS',
-    loadComponent: () => import('../app/views/declaracion/declaracion.component').then((m) => m.DeclaracionComponent),
+    path: 'marca',
+    loadComponent: () => import('./views/marca/marca.component').then((m) => m.MarcaComponent),
   },
    {
     path: 'detalle',
-    loadComponent: () => import('../app/views/f931/f931.component').then((m) => m.F931Component),
+    loadComponent: () => import('./views/detalle/detalle.component').then((m) => m.DetalleComponent),
   },
   {
     path: 'tienda',
-    loadComponent: () => import('./views/facturacion/facturacion.component').then((m) => m.FacturacionComponent),
+    loadComponent: () => import('./views/tienda/tienda.component').then((m) => m.TiendaComponent),
   },
   {
     path: 'product/:id',
-    loadComponent: () => import('./views/plan-pago/product-detail.component').then((m) => m.ProductDetailComponent),
+    loadComponent: () => import('./views/detalle-producto/product-detail.component').then((m) => m.ProductDetailComponent),
   },
 
    {
@@ -55,7 +39,7 @@ export const routes: Routes = [
 
   {
     path: 'register',
-    loadComponent: () => import('./views/recibo-sueldo/register.component').then((m) => m.RegisterComponent),
+    loadComponent: () => import('./views/register/register.component').then((m) => m.RegisterComponent),
   },
   {
     path: 'productos-marca/:id',

@@ -26,9 +26,9 @@ import { Producto } from 'src/app/common/models/producto.model';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-afip',
-  templateUrl: './afip.component.html',
-  styleUrls: ['./afip.component.scss'],
+  selector: 'app-marca',
+  templateUrl: './marca.component.html',
+  styleUrls: ['./marca.component.scss'],
   standalone: true,
   imports: [IonModal, IonFabButton, IonImg, IonSpinner, IonButton,IonButtons, IonBackButton,
     IonHeader,
@@ -54,7 +54,7 @@ import { Router } from '@angular/router';
     ReactiveFormsModule,
   ],
 })
-export class AfipComponent implements OnInit {
+export class MarcaComponent implements OnInit {
   userId: string;
   afip: any;
 

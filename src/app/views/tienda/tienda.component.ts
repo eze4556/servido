@@ -12,15 +12,14 @@ import { Router } from '@angular/router';
 
 
 @Component({
-  selector: 'app-facturacion',
-  templateUrl: './facturacion.component.html',
-  styleUrls: ['./facturacion.component.scss'],
+  selector: 'app-tienda',
+  templateUrl: './tienda.component.html',
+  styleUrls: ['./tienda.component.scss'],
   standalone: true,
   imports: [IonFooter, IonTabs, IonRow, IonCol,    IoniconsModule,
  IonTabButton,IonLabel, IonGrid,IonSelect, IonTabBar, IonSpinner,IonInput, IonSearchbar, IonSegment,IonSegmentButton,IonButton,IonIcon, IonTitle, IonBackButton, IonButtons, IonToolbar, IonHeader, CommonModule, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent]
 })
-export class FacturacionComponent implements OnInit {
-  facturacionDocs$: Observable<any[]>;
+export class TiendaComponent implements OnInit {
   userId: string;
 
   constructor(
@@ -33,13 +32,6 @@ export class FacturacionComponent implements OnInit {
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId');
-    this.loadFacturacion();
-  }
-
-
-  loadFacturacion() {
-    const path = `Usuarios/${this.userId}/facturacion`;
-    this.facturacionDocs$ = this.firestoreService.getCollectionChanges(path);
   }
 
  goToDetail() {

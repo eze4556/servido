@@ -56,9 +56,9 @@ import { RouterModule } from '@angular/router';
 
 
 @Component({
-  selector: 'app-f931',
-  templateUrl: './f931.component.html',
-  styleUrls: ['./f931.component.scss'],
+  selector: 'app-detalle',
+  templateUrl: './detalle.component.html',
+  styleUrls: ['./detalle.component.scss'],
   standalone: true,
   imports: [IonChip, IonSegmentButton,
 
@@ -106,7 +106,7 @@ IonFabButton,
 
   ],
 })
-export class F931Component implements OnInit {
+export class DetalleComponent implements OnInit {
 
 
   constructor(
@@ -146,7 +146,7 @@ private router: Router,
 
   onTouchStart(event: TouchEvent) {
     this.startX = event.touches[0].clientX;
-    this.deltaX = 0; 
+    this.deltaX = 0;
   }
 
   onTouchMove(event: TouchEvent) {
