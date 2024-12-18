@@ -1,23 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar class="custom-toolbar">
-    <div class="search-container">
-      <ion-buttons slot="start">
-        <ion-back-button
-          defaultHref="/"
-          class="custom-back-button"
-          text=""
-        ></ion-back-button>
-      </ion-buttons>
-
-      <ion-icon name="search" class="icon-search"></ion-icon>
-      <ion-input placeholder="Buscar producto o servicio"></ion-input>
-    </div>
-
-    <ion-icon name="cart-outline" class="icon-cart"></ion-icon>
-    <p class="address-text">Dirección</p>
-  </ion-toolbar>
-</ion-header> -->
-
 
 <ion-header>
   <ion-toolbar class="custom-toolbar">
@@ -37,14 +17,6 @@
   <div class="product-header">
     <p class="product-title">Cubierta Fate Sentiva 195 65 15</p>
   </div>
-  <!--
-<div class="carousel-container" (touchstart)="onTouchStart($event)" (touchmove)="onTouchMove($event)" (touchend)="onTouchEnd()">
-  <div class="carousel-track" [style.transform]="'translateX(' + (-currentIndex * 100) + '%)'">
-    <div class="carousel-slide" *ngFor="let slide of slides">
-      <img [src]="slide.image" [alt]="slide.alt" class="slider-image">
-    </div>
-  </div>
-</div> -->
 
   <div
     class="carousel-container"
@@ -73,15 +45,6 @@
       </div>
     </div>
   </div>
-
-  <!-- <div class="price-section">
-    <p class="original-price">$156.000</p>
-    <p class="discount-price">$120.000</p>
-    <p class="discount-percentage">30% OFF</p>
-    <p class="rating">
-      <ion-icon name="star" class="star-icon"></ion-icon> 4.5 <span>(363)</span>
-    </p>
-  </div> -->
 
   <div class="price-section">
     <!-- Precio original tachado -->
@@ -112,17 +75,6 @@
     </div>
   </div>
 
-  <!-- <ion-segment value="buy" class="action-segment" (ionChange)="onSegmentChange($event)">
-  <ion-segment-button value="buy">
-    <ion-icon name="cart-outline"></ion-icon>
-    <ion-label>Comprar ahora</ion-label>
-  </ion-segment-button>
-  <ion-segment-button value="add">
-    <ion-icon name="add-circle-outline"></ion-icon>
-    <ion-label>Agregar al carrito</ion-label>
-  </ion-segment-button>
-</ion-segment> -->
-
   <div class="action-buttons">
     <ion-button class="buy-button">
       <ion-label>Comprar ahora</ion-label>
@@ -134,20 +86,178 @@
     </ion-button>
   </div>
 
-  <ion-segment value="product-details" class="details-segment">
-    <ion-segment-button value="product-details" class="segment-button1">
+  <ion-segment [(ngModel)]="selectedSegment" class="details-segment">
+    <ion-segment-button
+      value="product-details"
+      class="segment-button1"
+      [ngClass]="{'active': selectedSegment === 'product-details'}">
       <ion-label class="segment-label">Producto</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="seller" class="segment-button1">
+
+    <ion-segment-button
+      value="seller"
+      class="segment-button1"
+      [ngClass]="{'active': selectedSegment === 'seller'}">
       <ion-label class="segment-label">Vendedor</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="opinions" class="segment-button1">
+
+    <ion-segment-button
+      value="opinions"
+      class="segment-button1"
+      [ngClass]="{'active': selectedSegment === 'opinions'}">
       <ion-label class="segment-label">Opiniones</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="faq" class="segment-button1">
+
+    <ion-segment-button
+      value="faq"
+      class="segment-button1"
+      [ngClass]="{'active': selectedSegment === 'faq'}">
       <ion-label class="segment-label">FAQ</ion-label>
     </ion-segment-button>
   </ion-segment>
+
+  <!-- Contenedor dinámico -->
+  <div [ngSwitch]="selectedSegment" class="segment-content">
+
+    <!-- Sección Producto -->
+    <div *ngSwitchCase="'product-details'" class="product-section">
+      <h2 class="section-title">Características generales</h2>
+      <table class="product-details-table">
+        <tr>
+          <td class="details-label"><strong>Marca</strong></td>
+          <td>Fate</td>
+        </tr>
+        <tr>
+          <td class="details-label"><strong>Modelo</strong></td>
+          <td>Sensitiva</td>
+        </tr>
+        <tr>
+          <td class="details-label"><strong>Tamaño</strong></td>
+          <td>195/65R15</td>
+        </tr>
+        <tr>
+          <td class="details-label"><strong>Cantidad</strong></td>
+          <td>2</td>
+        </tr>
+        <tr>
+          <td class="details-label"><strong>Velocidad máxima</strong></td>
+          <td>210 km/h</td>
+        </tr>
+      </table>
+
+      <h2 class="section-title">Descripción</h2>
+      <p class="product-description">
+        ¿Vas a esperar a que tu neumático se desgaste para cambiarlo?<br>
+        Podés evitar alargar la vida útil de una vieja cubierta y apostar a tu tranquilidad.
+        Encontrá la mejor tracción, dirección y confort con tu Fate Sport.<br>
+        Estabilidad y control.<br>
+        Gracias a su buen agarre, este neumático tiene un desempeño óptimo asegurado,
+        ya que se adapta a la usabilidad de tu vehículo.
+      </p>
+    </div>
+
+
+<!-- Sección Vendedor -->
+<div *ngSwitchCase="'seller'" class="seller-section">
+  <h3 class="seller-title">Información del vendedor</h3>
+
+  <!-- Tarjeta del Vendedor -->
+  <div class="seller-card">
+    <img src="../../../assets/icon/gomeria.png" alt="Logo Vendedor" class="seller-logo" />
+    <div class="seller-details">
+      <h4 class="seller-name">Gomería José</h4>
+      <div class="seller-rating">
+        <span class="stars">4.5 ★★★★★</span>
+        <span class="rating-count">(363)</span>
+      </div>
+      <button class="store-button">Ver tienda</button>
+    </div>
+  </div>
+
+  <!-- Plan Exclusivo -->
+  <div class="exclusive-plan">
+    <span class="plan-icon">💎</span>
+    <span class="plan-text">PLAN EXCLUSIVO</span>
+  </div>
+
+  <!-- Información Adicional -->
+  <div class="seller-info">
+    <p><strong>Provincia:</strong> Buenos Aires</p>
+    <p><strong>Ciudad:</strong> La Plata</p>
+    <p><strong>Dirección:</strong> Calle 7 Nº 1234, Barrio Centro</p>
+  </div>
+
+  <!-- Botón de WhatsApp -->
+  <div class="whatsapp-container">
+    <button class="whatsapp-button">
+      <img src="../../../assets/icon/wsplogo.png" alt="WhatsApp" class="whatsapp-icon" />
+      Hablar al whatsapp
+    </button>
+  </div>
+</div>
+
+
+<!-- Sección Opiniones -->
+<div *ngSwitchCase="'opinions'" class="opinions-section">
+  <h3 class="section-title">Opiniones del producto</h3>
+
+  <!-- Calificación general -->
+  <div class="general-rating">
+    <span class="rating-score">4.5</span>
+    <span class="stars">
+      ★★★★★
+      <span class="stars-filled">★★★★☆</span>
+    </span>
+    <span class="rating-count">363 calificaciones</span>
+  </div>
+
+  <!-- Lista de reseñas -->
+  <div *ngFor="let opinion of opinions" class="review-item">
+    <div class="review-header">
+      <span class="stars">
+        ★★★★★
+        <span class="stars-filled">{{ getFilledStars(opinion.rating) }}</span>
+      </span>
+      <span class="review-date">{{ formatDate(opinion.date) }}</span>
+    </div>
+    <p class="review-comment">{{ opinion.comment }}</p>
+  </div>
+
+  <!-- Mensaje si no hay reseñas -->
+  <p *ngIf="opinions.length === 0" class="no-reviews">
+    Aún no hay opiniones para este producto.
+  </p>
+</div>
+
+
+<!-- Sección FAQ -->
+<div *ngSwitchCase="'faq'" class="faq-section">
+  <h3 class="section-title">Preguntas Frecuentes</h3>
+
+  <!-- Input de preguntas -->
+  <div class="faq-input-container">
+    <input type="text" placeholder="Escribí tu pregunta..." class="faq-input" />
+    <p class="response-time">Tiempo aproximado de respuesta: 8 minutos</p>
+    <button class="faq-button">Preguntar</button>
+  </div>
+
+  <!-- Lista de preguntas y respuestas -->
+  <div class="faq-list">
+    <div *ngFor="let faq of faqs" class="faq-item">
+      <p class="question">{{ faq.question }}</p>
+      <p class="answer">{{ faq.answer }}</p>
+    </div>
+  </div>
+</div>
+
+
+    <!-- Contenido por defecto -->
+    <div *ngSwitchDefault>
+      <p>Selecciona una opción para ver más información.</p>
+    </div>
+
+  </div>
+
 </ion-content>
 
 <ion-footer>

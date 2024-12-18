@@ -88,10 +88,6 @@
   right: 50px;
 }
 
-// .share-icon {
-//   top: 10px;
-//   right: 10px;
-// }
 
 .carousel-controls {
   position: absolute;
@@ -179,81 +175,6 @@ ion-input {
   cursor: pointer; /* Cambia el cursor al pasar por encima */
 }
 
-
-.action-segment {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px 0;
-  width: 100%;
-}
-
-/* Estilo para los botones del segmento */
-ion-segment-button {
-  // flex: 1;
-  text-align: center;
-  --background: transparent; /* Fondo transparente por defecto */
-  --color: #0f0101; /* Texto gris por defecto */
-  --indicator-color: #007bff; /* Indicador azul debajo del botón seleccionado */
-}
-
-ion-segment-button::part(button) {
-  /* Aseguramos que el fondo sea transparente y el texto gris */
-  --background: transparent;
-  --color: #333;
-}
-
-/* Cuando el botón está seleccionado */
-ion-segment-button[aria-selected="true"]::part(button) {
-  --background: #007bff !important; /* Fondo azul cuando está seleccionado */
-  --color: #ffffff !important; /* Texto blanco cuando está seleccionado */
-
-}
-
-ion-segment-button ion-label {
-  font-size: 16px; /* Tamaño del texto */
-}
-
-ion-segment-button ion-icon {
-  font-size: 18px; /* Tamaño de los íconos */
-  margin-bottom: 4px; /* Espacio entre el ícono y el texto */
-  display: block;
-}
-
-
-
-
-// precio
-
-// .price-section {
-//     text-align: center;
-//     margin: 10px 0;
-//   }
-
-//   .original-price {
-//     text-decoration: line-through;
-//     color: #aaa;
-//   }
-
-//   .discount-price {
-//     font-size: 24px;
-//     color: #4caf50;
-//     font-weight: bold;
-//   }
-
-//   .discount-percentage {
-//     color: #e53935;
-//   }
-
-//   .rating {
-//     color: #ff9800;
-//   }
-
-//   .stock-section {
-//     padding: 10px;
-//   }
-
-
-
 .price-section {
   text-align: left;
   margin: 20px 9px;
@@ -313,58 +234,6 @@ ion-chip {
   padding: 5px 10px;
 }
 
-// ion-input {
-//   max-width: 80px;
-//   padding: 2px 5px;
-//   font-size: 14px;
-//   border: 1px solid #ccc;
-//   border-radius: 4px;
-// }
-
-
-
-
-
-/* Contenedor para los botones */
-.action-buttons {
-  display: flex;
-  justify-content: space-between; /* Acomoda los botones uno al lado del otro */
-  gap: 10px; /* Espacio entre los botones */
-}
-
-/* Estilo general de ambos botones */
-ion-button {
-  flex: 1; /* Ambos botones ocupan el mismo espacio */
-  border-radius: 50px; /* Bordes redondeados */
-  font-size: 14px;
-  padding: 10px 0; /* Ajuste de padding para hacerlo largo */
-  display: flex;
-  justify-content: center;
-  align-items: center; /* Centra el contenido dentro del botón */
-}
-
-/* Estilo del botón "Comprar ahora" */
-.buy-button {
-//   color: #fff;
-//   --background-color: #007bff;
---color: #fff;
-}
-
-/* Estilo del botón "Agregar al carrito" */
-.add-button {
-  //  background-color: #d6d3ce;
-  --background: white;
-  --color: blue;
-}
-
-/* Icono del carrito en el botón "Agregar al carrito" */
-.add-button ion-icon {
-  margin-right: 8px; /* Espacio entre el ícono y el texto */
-  font-size: 20px; /* Tamaño del ícono */
-}
-
-
-
 // ------------
 
 
@@ -393,4 +262,460 @@ ion-button {
 /* Estilos de los íconos (puedes usar font-awesome o los que prefieras) */
 .favorite-icon i, .share-icon i {
   font-size: 24px;
+}
+
+
+//
+
+/* Contenedor para los botones */
+.action-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+/* Estilo general de los botones */
+ion-button {
+  flex: 1;
+  height: 40px; /* Reducir altura ligeramente */
+  border-radius: 20px; /* Bordes redondeados más sutiles */
+  font-size: 12px; /* Tamaño de letra más pequeño */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  padding: 0 10px; /* Ajuste del padding para que se vean proporcionados */
+}
+
+/* Botón "Comprar ahora" */
+.buy-button {
+  background: linear-gradient(90deg, #5f0d91, #3e0673); /* Degradado púrpura */
+  color: white;
+  --background: linear-gradient(90deg, #5f0d91, #3e0673); /* Soporte para Ionic */
+  --color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra más ligera */
+}
+
+/* Botón "Agregar al carrito" */
+.add-button {
+  background: #f4f1ed; /* Fondo gris claro */
+  color: #5f0d91; /* Texto morado */
+  --background: #f4f1ed;
+  --color: #5f0d91;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra más ligera */
+}
+
+/* Icono en el botón "Agregar al carrito" */
+.add-button ion-icon {
+  margin-right: 4px; /* Ajustar margen para icono */
+  font-size: 16px; /* Tamaño del icono más pequeño */
+  color: #5f0d91; /* Color del icono */
+}
+
+/* Estilos para el contenedor del segmento */
+.details-segment {
+  background-color: #f4f4f4; /* Fondo gris claro */
+  border-bottom: 1px solid #ccc; /* Línea divisoria */
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Estilos generales para los botones del segmento */
+.segment-button1 {
+  background-color: transparent; /* Fondo transparente */
+  color: #000000; /* Letras negras */
+  // font-weight: bold;
+  text-transform: capitalize;
+  border: none; /* Elimina cualquier borde */
+  flex: 1; /* Distribuye espacio uniformemente */
+  padding: 10px 0; /* Espaciado interno vertical */
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+/* Estilos para la etiqueta dentro del botón */
+.segment-button1 .segment-label {
+  font-size: 14px;
+  color: inherit; /* Hereda el color del botón */
+}
+
+/* Estilos para el botón seleccionado */
+.segment-button1.active {
+  background-color: #ffffff; /* Fondo blanco para destacar */
+  color: #5f0d91; /* Texto morado */
+  // font-weight: bold;
+  text-decoration: underline; /* Subrayado */
+  flex: 1;
+}
+
+
+//
+
+/* Sección Detalles del Producto */
+.product-section {
+  padding: 20px;
+  background-color: #ffffff; /* Fondo blanco */
+  font-family: Arial, sans-serif;
+  color: #333333;
+
+  /* Título de sección */
+  .section-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px 0 10px;
+    color: #4a4a4a;
+    border-bottom: 2px solid #7a5ef2; /* Línea de color vibrante */
+    padding-bottom: 5px;
+  }
+
+  /* Tabla de detalles */
+  .product-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    border-radius: 8px;
+    overflow: hidden; /* Para que los bordes redondeados funcionen */
+
+    tr {
+      transition: background-color 0.3s ease;
+
+      /* Efecto hover en filas */
+      &:hover {
+        background-color: #f1f1f1; /* Fondo gris claro en hover */
+      }
+
+      /* Celda izquierda: etiqueta */
+      .details-label {
+        background-color: #e6e6e6; /* Gris claro */
+        font-weight: bold;
+        padding: 12px; /* Más espacio */
+        width: 40%;
+        color: #555555;
+      }
+
+      /* Celda derecha: valor */
+      td {
+        padding: 12px; /* Más espacio */
+        background-color: #f9f9f9; /* Gris más claro */
+      }
+    }
+  }
+
+  /* Descripción del producto */
+  .product-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444444;
+    margin-bottom: 10px;
+
+    /* Texto más profesional */
+    font-style: normal;
+    text-align: justify;
+  }
+}
+
+
+// seller
+/* Contenedor principal */
+.seller-section {
+  font-family: Arial, sans-serif;
+  padding: 16px;
+  background-color: #fff;
+}
+
+/* Título principal */
+.seller-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Tarjeta del vendedor */
+.seller-card {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.seller-logo {
+  // width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  margin-right: 16px;
+}
+
+.seller-details {
+  flex-grow: 1;
+}
+
+.seller-name {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.seller-rating {
+  display: flex;
+  align-items: center;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.stars {
+  color: #f39c12;
+}
+
+.rating-count {
+  margin-left: 6px;
+}
+
+.store-button {
+  background-color: #eee;
+  border: none;
+  padding: 6px 12px;
+  color: #6a1b9a;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+/* Plan Exclusivo */
+.exclusive-plan {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #4a0072, #7b1fa2);
+  color: #fff;
+  font-size: 1em;
+  padding: 12px;
+  margin: 16px 0;
+}
+
+.plan-icon {
+  margin-right: 8px;
+}
+
+/* Información Adicional */
+.seller-info {
+  text-align: center; /* Centra el contenido horizontalmente */
+  margin-top: 16px;
+}
+
+.seller-info p {
+  margin: 6px 0;
+  color: #333;
+  font-size: 1em;
+}
+
+/* Contenedor del Botón WhatsApp */
+.whatsapp-container {
+  display: flex;
+  justify-content: center; /* Centra el botón horizontalmente */
+  margin-top: 16px;
+}
+
+/* Botón WhatsApp */
+.whatsapp-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #25d366;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.whatsapp-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+
+//
+
+/* Sección de Opiniones */
+.opinions-section {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+
+  .section-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  /* Calificación general */
+  .general-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    .rating-score {
+      font-size: 36px;
+      font-weight: bold;
+      color: #000;
+    }
+
+    .stars {
+      font-size: 20px;
+      color: #e0e0e0;
+      position: relative;
+
+      .stars-filled {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #7a00ff; /* Color de estrellas llenas */
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+
+    .rating-count {
+      font-size: 14px;
+      color: #777;
+    }
+  }
+
+  /* Reseñas individuales */
+  .review-item {
+    border-top: 1px solid #ddd;
+    padding: 15px 0;
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+
+      .stars {
+        font-size: 16px;
+        color: #e0e0e0;
+        position: relative;
+
+        .stars-filled {
+          position: absolute;
+          top: 0;
+          left: 0;
+          color: #7a00ff;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+
+      .review-date {
+        font-size: 12px;
+        color: #888;
+      }
+    }
+
+    .review-comment {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.5;
+    }
+  }
+
+  /* Mensaje sin reseñas */
+  .no-reviews {
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
+//
+
+/* Sección FAQ */
+.faq-section {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+
+  .section-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #000; // Color similar al título de opiniones
+  }
+
+  /* Input y botón de preguntas */
+  .faq-input-container {
+    margin-bottom: 25px;
+
+    .faq-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+      color: #333;
+    }
+
+    .response-time {
+      font-size: 12px;
+      color: #888;
+      margin: 5px 0 10px 0;
+    }
+
+    .faq-button {
+      width: 100%;
+      background-color: #7a00ff; // Color del botón similar a las estrellas llenas
+      color: #fff;
+      border: none;
+      padding: 10px 0;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: darken(#7a00ff, 10%);
+      }
+    }
+  }
+
+  /* Lista de preguntas y respuestas */
+  .faq-list {
+    .faq-item {
+      border-top: 1px solid #ddd;
+      padding: 15px 0;
+
+      .question {
+        font-weight: bold;
+        color: #000; // Similar a los títulos en opiniones
+        margin-bottom: 5px;
+        font-size: 16px;
+      }
+
+      .answer {
+        font-size: 14px;
+        color: #444; // Color similar a los comentarios
+        line-height: 1.5;
+      }
+    }
+  }
+
+  /* Mensaje sin preguntas */
+  .no-faq {
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+    margin-top: 20px;
+  }
 }
