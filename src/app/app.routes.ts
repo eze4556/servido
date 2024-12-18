@@ -40,6 +40,14 @@ export const routes: Routes = [
     path: 'productos-marca/:id',
     loadComponent: () => import('./views/productos-marca/productos-marca.component').then((m) => m.ProductosMarcaComponent),
   },
+   {
+    path: 'notificaciones',
+    loadComponent: () => import('./views/notificaciones/notificaciones.component').then((m) => m.NotificacionesComponent),
+  },
+  {
+    path: 'carrito',
+    loadComponent: () => import('./views/carrito/carrito.component').then((m) => m.CarritoComponent),
+  },
   {
     path: '',
     redirectTo: 'home',
