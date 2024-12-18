@@ -1,0 +1,59 @@
+
+
+
+
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>Notificaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+
+  <div class="notifications-container">
+    <ion-card class="notification-card">
+      <!-- Imagen del producto -->
+   <div class="notification-image-container">
+
+  <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Oferta especial" class="notification-image"    />
+
+</div>
+
+
+      <!-- Contenido de la notificación -->
+      <ion-card-content>
+        <h3 class="notification-title"><strong>¡Aprovecha esta oferta!</strong></h3>
+        <p class="notification-description">
+          Tu vehículo se lo merece, viaja más seguro, renová tus cubiertas con esta nueva oferta <strong>imperdible</strong>.
+        </p>
+           <p>18:40</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+</ion-content>
+  <!-- Footer de navegación -->
+  <ion-footer>
+    <ion-toolbar>
+      <ion-segment  class="footer-menu" color="primary">
+        <ion-segment-button value="inicio">
+          <ion-icon name="home-outline"></ion-icon>
+          <ion-label>Inicio</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="tienda">
+          <ion-icon name="storefront-outline"></ion-icon>
+          <ion-label>Tienda</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="notificaciones" class="active-segment">
+          <ion-icon name="notifications-outline"></ion-icon>
+          <ion-label>Notificaciones</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="mas">
+          <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+          <ion-label>Más</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-footer>

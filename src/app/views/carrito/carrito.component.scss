@@ -1,0 +1,84 @@
+:host {
+
+      --ion-background-color:#ebebeb;
+}
+
+  .custom-toolbar {
+    --background: #6a1b9a;
+    color: #fff;
+  }
+
+
+
+
+.notifications-container {
+  padding: 1rem;
+  background-color: #f5f5f5; /* Fondo gris claro */
+}
+
+.notification-card {
+  background: #fff;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.notification-header h3 {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+}
+
+.reorder-link {
+  font-size: 0.9rem;
+  color: #673ab7; /* Color morado */
+  text-decoration: none;
+}
+
+.notification-content {
+  display: flex;
+  align-items: center;
+}
+
+.notification-image-container {
+  width: 80px;
+  height: 80px;
+  margin-right: 1rem;
+}
+
+.notification-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.notification-details {
+  flex-grow: 1;
+}
+
+.product-title {
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0 0 0.5rem 0;
+}
+
+.product-status {
+  font-size: 0.9rem;
+  color: green;
+  font-weight: bold;
+  margin: 0;
+}
+
+.delivery-date {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
