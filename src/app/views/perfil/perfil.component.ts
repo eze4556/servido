@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonHeader, IonToolbar,IonCardContent,IonCardHeader,IonCardTitle, IonTitle, IonContent, IonLabel, IonList, IonItem, IonCard, IonInput, IonSpinner, IonButtons, IonButton, IonIcon, IonImg, IonCol, IonRow, IonBackButton, IonGrid } from '@ionic/angular/standalone';
+import { IonHeader, IonToolbar,IonCardContent,IonCardHeader,IonCardTitle, IonTitle, IonContent, IonLabel, IonList, IonItem, IonCard, IonInput, IonSpinner, IonButtons, IonButton, IonIcon, IonImg, IonCol, IonRow, IonBackButton, IonGrid, IonFooter } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { IoniconsModule } from '../../common/modules/ionicons.module';
 import { FirestoreService } from 'src/app/common/services/firestore.service';
@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
     IoniconsModule,
     ReactiveFormsModule,
     CommonModule,
+    IonFooter,
     IonCardHeader,
     IonCardTitle,
     IonCardContent
@@ -41,9 +42,17 @@ export class PerfilComponent  implements OnInit {
  ) { }
 
  async ngOnInit() {
-    this.userId = localStorage.getItem('userId');
-    if (this.userId) {
-      this.user = await this.firestoreService.getUserData(this.userId);
-    }
+
   }
+
+
+ // Función para navegar a la tienda usando navigateByUrl
+ goToTienda() {
+  this.router.navigateByUrl('/tienda');
+}
+
+// Función para navegar a la página de inicio usando navigateByUrl
+goToHome() {
+  this.router.navigateByUrl('home');
+}
 }
