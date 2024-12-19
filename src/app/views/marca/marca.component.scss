@@ -148,3 +148,103 @@ ion-button {
 }
 
 
+
+/* Toolbar scrollable */
+.scrollable-toolbar {
+  --background: #fff; /* Fondo blanco */
+  height: 70px; /* Altura de la barra */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Para posicionar el indicador */
+}
+
+/* Indicador de deslizamiento */
+.scroll-hint {
+  position: absolute;
+  top: -16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #6a1b9a;
+  animation: scrollHint 1.5s infinite alternate;
+
+  ion-icon {
+    font-size: 16px;
+  }
+}
+
+/* Animación de la flecha */
+@keyframes scrollHint {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(8px);
+  }
+}
+
+/* Contenedor de Tabs con scroll horizontal */
+.scrollable-tabs {
+  display: flex;
+  overflow-x: auto; /* Habilita el scroll horizontal */
+  -webkit-overflow-scrolling: touch; /* Deslizamiento suave en móviles */
+  gap: 16px; /* Espacio entre tabs */
+  padding: 8px 12px; /* Espaciado interno */
+  width: 100%;
+  box-shadow: inset 0 -1px 0 #ddd; /* Línea sutil debajo */
+}
+
+/* Estilo de cada tab */
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px; /* Ancho mínimo de cada tab */
+  color: #6a1b9a; /* Color violeta para los íconos y texto */
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  ion-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+    color: #6a1b9a; /* Iconos violeta */
+    transition: color 0.3s ease;
+  }
+
+  ion-label {
+    color: #6a1b9a;
+    white-space: nowrap;
+  }
+
+  /* Hover */
+  &:hover {
+    color: #4a008e; /* Color violeta oscuro al pasar el cursor */
+    ion-icon {
+      color: #4a008e;
+    }
+  }
+
+  /* Efecto al presionar */
+  &:active {
+    transform: scale(0.9); /* Hace el botón ligeramente más pequeño */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al presionar */
+    transition: transform 0.1s, box-shadow 0.1s; /* Transición rápida */
+  }
+}
+
+
+/* Personaliza la barra de scroll */
+.scrollable-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.scrollable-tabs::-webkit-scrollbar-thumb {
+  background-color: #6a1b9a; /* Color del "thumb" */
+  border-radius: 10px;
+}

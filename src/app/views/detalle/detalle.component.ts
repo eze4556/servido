@@ -191,16 +191,7 @@ faqs = [
     }
   }
 
-
-
- // Función para navegar a la tienda usando navigateByUrl
-  goToTienda() {
-    this.router.navigateByUrl('/tienda');
+  navigateTo(route: string) {
+    this.router.navigate([`/${route}`]);
   }
-
-  // Función para navegar a la página de inicio usando navigateByUrl
-  goToHome() {
-    this.router.navigateByUrl('home');
-  }
-
 }

@@ -1,53 +1,79 @@
-.notifications-container {
-  // padding: 1rem;
-  margin-top: 2rem;
+/* Header */
+ion-toolbar {
+  --background: #4a008e; /* Fondo violeta */
+  --color: #fff; /* Texto blanco */
 }
 
-.notification-card {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Card principal */
+.opinion-card {
+  margin: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.notification-image-container {
-  width: 251px;
-  height: 70px;
-  // margin-right: 1rem;
+/* Información del producto */
+.product-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
 }
 
-.notification-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  border-radius: 8px;
+.product-status {
+  font-size: 14px;
+  color: green; /* Estado entregado */
+  margin: 0;
 }
 
-.notification-title {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  color: #000;
-}
+/* Sección de estrellas */
+.rating-section {
+  text-align: center;
 
-.notification-description {
-  font-size: 0.9rem;
-  color: #555;
-}
-
-
-
-
-:host {
-
-      --ion-background-color:#ebebeb;
-}
-
-  .custom-toolbar {
-    --background: #6a1b9a;
-    color: #fff;
+  h3 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
   }
+
+  .rating-stars {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+
+    ion-icon {
+      font-size: 24px;
+      color: #ffd700; /* Color dorado para las estrellas */
+      cursor: pointer;
+    }
+  }
+
+  .rating-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    padding: 0 16px;
+
+    span {
+      color: #888; /* Texto gris */
+    }
+  }
+}
+
+/* Botones de acción */
+.action-buttons {
+  margin-top: 16px;
+
+  ion-button {
+    border-radius: 8px;
+    font-weight: bold;
+  }
+
+  ion-button {
+    --background: linear-gradient(45deg, #6a1b9a, #4a008e); /* Degradado morado */
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    color: white;
+  }
+}
 
 
 /* Toolbar scrollable */

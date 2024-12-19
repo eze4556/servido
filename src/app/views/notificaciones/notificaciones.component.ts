@@ -79,4 +79,8 @@ constructor(
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit() {}
 
+
+  navigateTo(route: string) {
+    this.router.navigate([`/${route}`]);
+  }
 }

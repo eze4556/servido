@@ -15,7 +15,8 @@ import {
   IonCardContent,
   IonToolbar,
   IonTitle,
-  IonHeader, IonBackButton,IonFabButton, IonButtons, IonSpinner, IonImg, IonFab, IonModal } from '@ionic/angular/standalone';
+  IonHeader, IonBackButton,IonFabButton, IonButtons, IonSpinner, IonImg, IonFab, IonModal,
+  IonFooter} from '@ionic/angular/standalone';
 import { Component, OnInit, Input } from '@angular/core';
 import { FirestoreService } from '../../common/services/firestore.service';
 import { Observable } from 'rxjs';
@@ -33,6 +34,7 @@ import { Router } from '@angular/router';
   imports: [IonModal, IonFabButton, IonImg, IonSpinner, IonButton,IonButtons, IonBackButton,
     IonHeader,
     IonTitle,
+    IonFooter,
     IonToolbar,
     IonItem,
     IonInput,
@@ -98,9 +100,9 @@ export class MarcaComponent implements OnInit {
   }
 
 
-  navigateToDetail(product:Producto){
-  this.router.navigate(['/product', product.id]);
-}
+  navigateTo(route: string) {
+    this.router.navigate([`/${route}`]);
+  }
 
 
 

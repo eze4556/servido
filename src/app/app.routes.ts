@@ -49,6 +49,10 @@ export const routes: Routes = [
     loadComponent: () => import('./views/carrito/carrito.component').then((m) => m.CarritoComponent),
   },
   {
+    path: 'opinion',
+    loadComponent: () => import('./views/opinion-producto/opinion-producto.component').then((m) => m.OpinionProductoComponent),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
