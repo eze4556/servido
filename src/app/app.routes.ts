@@ -50,8 +50,12 @@ export const routes: Routes = [
     loadComponent: () => import('./views/notificaciones/notificaciones.component').then((m) => m.NotificacionesComponent),
   },
   {
-    path: 'carrito',
+    path: 'compras',
     loadComponent: () => import('./views/carrito/carrito.component').then((m) => m.CarritoComponent),
+  },
+   {
+    path: 'carrito',
+    loadComponent: () => import('./views/carrito-compras/carrito-compras.component').then((m) => m.CarritoComprasComponent),
   },
   {
     path: '',

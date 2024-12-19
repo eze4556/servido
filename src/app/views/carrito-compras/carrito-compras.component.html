@@ -1,0 +1,93 @@
+
+
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>Mis Compras</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="cart-container">
+    <!-- Producto 1 -->
+    <div class="product-card">
+      <div class="product-header">
+        <h3>Productos de:</h3>
+      </div>
+      <div class="product-content">
+        <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Rueda" class="product-image" />
+        <div class="product-details">
+          <h3 class="product-title">Cubierta Fate Sentiva 195 65 15</h3>
+          <div class="product-prices">
+            <span class="discount">-30% OFF</span>
+            <span class="old-price">$156.000</span>
+            <span class="new-price">$120.000</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-actions">
+        <a href="#" class="action-link">Eliminar</a>
+        <a href="#" class="action-link">Guardar</a>
+      </div>
+    </div>
+
+    <!-- Repetir para más productos -->
+    <div class="product-card">
+      <div class="product-header">
+        <h3>Productos de:</h3>
+      </div>
+      <div class="product-content">
+        <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Rueda" class="product-image" />
+        <div class="product-details">
+          <h3 class="product-title">Cubierta Fate Sentiva 195 65 15</h3>
+          <div class="product-prices">
+            <span class="discount">-30% OFF</span>
+            <span class="old-price">$156.000</span>
+            <span class="new-price">$120.000</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-actions">
+        <a href="#" class="action-link">Eliminar</a>
+        <a href="#" class="action-link">Guardar</a>
+      </div>
+    </div>
+
+    <!-- Resumen de compra -->
+    <div class="summary">
+      <p>Productos (2): <span class="summary-value">$240.000</span></p>
+      <p>Envíos (1): <span class="summary-value">$6.000</span></p>
+      <p class="total">Total: <span class="total-value">$246.000</span></p>
+    </div>
+
+    <!-- Botón continuar -->
+    <button class="continue-btn">Continuar compra</button>
+  </div>
+</ion-content>
+
+
+
+
+
+  <ion-footer>
+    <ion-toolbar>
+      <ion-segment  class="footer-menu" color="primary">
+        <ion-segment-button value="inicio">
+          <ion-icon name="home-outline"></ion-icon>
+          <ion-label>Inicio</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="tienda">
+          <ion-icon name="storefront-outline"></ion-icon>
+          <ion-label>Tienda</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="notificaciones" class="active-segment">
+          <ion-icon name="notifications-outline"></ion-icon>
+          <ion-label>Notificaciones</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="mas">
+          <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+          <ion-label>Más</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-footer>
