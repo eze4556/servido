@@ -15,7 +15,8 @@ import {
   IonCardContent,
   IonToolbar,
   IonTitle,
-  IonHeader, IonBackButton,IonFabButton, IonButtons, IonSpinner, IonImg, IonFab, IonModal } from '@ionic/angular/standalone';
+  IonHeader, IonBackButton,IonFabButton, IonButtons, IonSpinner, IonImg, IonFab, IonModal,
+  IonFooter} from '@ionic/angular/standalone';
 import { Component, OnInit, Input } from '@angular/core';
 import { FirestoreService } from '../../common/services/firestore.service';
 import { Observable } from 'rxjs';
@@ -49,6 +50,7 @@ import { ActivatedRoute, Router } from '@angular/router';
     IonCard,
     IonCardHeader,
     IonCardTitle,
+    IonFooter,
     IonList,
     IonCardContent,
     CommonModule,
@@ -95,8 +97,7 @@ async ngOnInit() {
     this.loadProductosByMarca(marcaId);
   }
 
-
-  navigateToDetail(product:Producto){
-  this.router.navigate(['/product', product.id]);
-}
+  navigateTo(route: string) {
+    this.router.navigate([`/${route}`]);
+  }
 }

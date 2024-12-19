@@ -1,32 +1,197 @@
-ion-content {
-  --background: hsla(24, 100%, 1%, 0.966); // Color de fondo gris claro
+/* Header del perfil */
+ion-toolbar.profile-header {
+  --background: #4a008e; /* Fondo morado */
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 16px;
 }
 
-
-.profile-card {
-  margin: 20px auto;
-  width: 90%;  // Ajusta el ancho de la tarjeta para que sea responsivo
-  max-width: 500px; // Limita el ancho máximo de la tarjeta
-  border-radius: 10px;  // Bordes redondeados
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); // Sombra sutil
+/* Información de Perfil */
+.profile-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
 }
 
-.profile-card-header {
-  background-color:  #CFB53B;
-  color: white;
+.profile-icon {
+  font-size: 64px; /* Icono grande */
+  color: #fff;
+  margin-right: 12px;
 }
 
-.profile-card-content {
-  padding: 20px;
+.profile-details {
+  display: flex;
+  flex-direction: column;
 }
 
-.label {
+.profile-name {
+  margin: 0;
+  font-size: 20px;
   font-weight: bold;
-  min-width: 100px; // Establece un ancho mínimo para las etiquetas
+  color: #fff;
 }
 
-ion-item {
-  --background: transparent; // Fondo transparente para que se vea el color de la tarjeta
-  --inner-padding-end: 0;    // Elimina el padding derecho interno de ion-item
-  --border-color: transparent; // Elimina el borde de ion-item
+.profile-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: #e0d7e5;
+}
+/* Botones Centrales */
+.top-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Espacio más pequeño entre botones */
+  width: 100%;
+}
+
+.top-buttons .subscribe-button {
+  --background: #ffffff; /* Fondo blanco */
+  --color: #4a008e; /* Texto morado oscuro */
+  font-weight: bold;
+  border-radius: 16px; /* Bordes redondeados más pequeños */
+  text-transform: none;
+  height: 32px; /* Altura más pequeña */
+  --padding-start: 16px; /* Padding más ajustado */
+  --padding-end: 16px;
+  font-size: 14px; /* Texto ligeramente más pequeño */
+}
+
+.top-buttons .payment-button {
+  --background: #6a1b9a; /* Fondo morado */
+  --color: #ffffff; /* Texto blanco */
+  font-weight: bold;
+  border-radius: 16px; /* Bordes redondeados más pequeños */
+  text-transform: none;
+  height: 32px; /* Altura más pequeña */
+  --padding-start: 16px; /* Padding más ajustado */
+  --padding-end: 16px;
+  font-size: 14px; /* Texto ligeramente más pequeño */
+}
+
+.payment-button ion-icon {
+  margin-right: 6px; /* Ajuste más pequeño del margen del ícono */
+  color: #fff;
+}
+
+
+/* Lista de opciones */
+.options-list {
+  margin-top: 16px;
+
+  ion-item {
+    font-size: 16px;
+    --padding-start: 16px;
+
+    ion-icon {
+      color: #6a1b9a;
+      font-size: 24px;
+    }
+
+    ion-label {
+      margin-left: 8px;
+      font-size: 16px;
+    }
+  }
+}
+
+
+/* Toolbar scrollable */
+.scrollable-toolbar {
+  --background: #fff; /* Fondo blanco */
+  height: 70px; /* Altura de la barra */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Para posicionar el indicador */
+}
+
+/* Indicador de deslizamiento */
+.scroll-hint {
+  position: absolute;
+  top: -16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #6a1b9a;
+  animation: scrollHint 1.5s infinite alternate;
+
+  ion-icon {
+    font-size: 16px;
+  }
+}
+
+/* Animación de la flecha */
+@keyframes scrollHint {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(8px);
+  }
+}
+
+/* Contenedor de Tabs con scroll horizontal */
+.scrollable-tabs {
+  display: flex;
+  overflow-x: auto; /* Habilita el scroll horizontal */
+  -webkit-overflow-scrolling: touch; /* Deslizamiento suave en móviles */
+  gap: 16px; /* Espacio entre tabs */
+  padding: 8px 12px; /* Espaciado interno */
+  width: 100%;
+  box-shadow: inset 0 -1px 0 #ddd; /* Línea sutil debajo */
+}
+
+/* Estilo de cada tab */
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px; /* Ancho mínimo de cada tab */
+  color: #6a1b9a; /* Color violeta para los íconos y texto */
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  ion-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+    color: #6a1b9a; /* Iconos violeta */
+    transition: color 0.3s ease;
+  }
+
+  ion-label {
+    color: #6a1b9a;
+    white-space: nowrap;
+  }
+
+  /* Hover */
+  &:hover {
+    color: #4a008e; /* Color violeta oscuro al pasar el cursor */
+    ion-icon {
+      color: #4a008e;
+    }
+  }
+
+  /* Efecto al presionar */
+  &:active {
+    transform: scale(0.9); /* Hace el botón ligeramente más pequeño */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al presionar */
+    transition: transform 0.1s, box-shadow 0.1s; /* Transición rápida */
+  }
+}
+
+
+/* Personaliza la barra de scroll */
+.scrollable-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.scrollable-tabs::-webkit-scrollbar-thumb {
+  background-color: #6a1b9a; /* Color del "thumb" */
+  border-radius: 10px;
 }

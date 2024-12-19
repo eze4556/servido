@@ -34,8 +34,8 @@ export class TiendaComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
   }
 
- goToDetail() {
-    this.router.navigate(['/detalle']);
+  navigateTo(route: string) {
+    this.router.navigate([`/${route}`]);
   }
 
 

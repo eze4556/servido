@@ -1,4 +1,4 @@
-import { IonContent, IonCard, IonIcon, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonTitle, IonButtons, IonToolbar, IonBackButton, IonHeader, IonGrid, IonRow, IonCol, IonSpinner, IonSegment, IonSegmentButton, IonLabel } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonIcon, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonTitle, IonButtons, IonToolbar, IonBackButton, IonHeader, IonGrid, IonRow, IonCol, IonSpinner, IonSegment, IonSegmentButton, IonLabel, IonFooter } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../../common/services/firestore.service';
@@ -12,12 +12,12 @@ import { AlertController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-productoferta-detail',
-  templateUrl: './productoferta-detail.component.html',
-  styleUrls: ['./productoferta-detail.component.scss'],
+  selector: 'app-oferta',
+  templateUrl: './oferta.component.html',
+  styleUrls: ['./oferta.component.scss'],
   standalone: true,
   imports: [ FormsModule,IonSegment, IonSegmentButton, IonLabel,
-    IonSpinner, IonCol, IonRow, IonIcon, IonGrid, IonHeader, IonBackButton, IonToolbar, IonButtons, IonButton, IonTitle, CommonModule, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent]
+    IonSpinner, IonCol, IonRow, IonIcon, IonGrid, IonHeader,IonFooter, IonBackButton, IonToolbar, IonButtons, IonButton, IonTitle, CommonModule, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent]
 })
 export class ProductofertaDetailComponent implements OnInit {
   productId: string;
@@ -65,8 +65,8 @@ export class ProductofertaDetailComponent implements OnInit {
     await alert.present();
   }
 
-  goToCart() {
-    this.router.navigate(['/carrito']);
+  navigateTo(route: string) {
+    this.router.navigate([`/${route}`]);
   }
 
 

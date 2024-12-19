@@ -138,21 +138,6 @@ export class HomePage implements OnInit {
     this.isLoggedIn = false; // Cambiar el estado de login
   }
 
-
-navegarAmaq() {
-    this.router.navigate(['/MAQUINARIAS']);
-  }
-
-login() {
-    this.router.navigate(['/login']);
-  }
-
-
-
-irTienda(){
-this.router.navigate(['/tienda'])
-}
-
 slideOpts = {
   initialSlide: 0,
   slidesPerView: 1, // Muestra una fila de tarjetas
@@ -162,10 +147,9 @@ slideOpts = {
   marcas: Marca[] = [];
 
 
-
-
-
-
+navigateTo(route: string) {
+  this.router.navigate([`/${route}`]);
+}
 
 
 

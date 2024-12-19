@@ -24,57 +24,82 @@ margin-top: -17px;
 
 
 
+.custom-toolbar {
+  --background: #6a1b9a;
+  color: #fff;
+}
 
+.search-bar {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 0 10px;
+  width: 70%;
+  margin: 0 auto;
+}
 
+/* Estilo del ion-toolbar */
 ion-toolbar.custom-toolbar {
-  --background: #4a008e; /* Fondo púrpura usando variables de Ionic */
-  padding: 16px; /* Espaciado interno */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+--background: #4a008e; /* Fondo púrpura */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 4px 8px; /* Reducido verticalmente para hacerla más fina */
+height: 75px; /* Ajuste de altura total del toolbar */
 }
 
-/* Estilo de la barra de búsqueda */
+/* Contenedor de búsqueda y carrito */
+.search-cart-container {
+display: flex;
+align-items: center;
+width: 100%; /* Ocupa todo el ancho */
+max-width: 600px; /* Ancho máximo del contenedor */
+gap: 8px; /* Espaciado entre búsqueda y carrito */
+margin-top: 30px;
+}
+
+/* Barra de búsqueda más fina */
 .search-container {
-  display: flex;
-  align-items: center;
-  background-color: white; /* Fondo blanco */
-  border-radius: 25px; /* Bordes redondeados */
-  padding: 8px 16px; /* Espaciado interno */
-  width: 100%; /* Ocupa todo el ancho */
-  max-width: 500px; /* Ancho máximo */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+display: flex;
+align-items: center;
+background-color: white;
+border-radius: 20px; /* Ligeramente menos redondeado */
+padding: 4px 12px; /* Menor espaciado interno vertical */
+flex: 1; /* Ocupa el máximo espacio horizontal */
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil ajustada */
+height: 32px; /* Grosor reducido de la barra */
 }
 
-/* Estilos de los íconos */
-.icon-search,
-.icon-cart {
-  color: gray;
-  font-size: 20px;
-}
-
+/* Icono de búsqueda */
 .icon-search {
-  margin-right: 8px;
+color: gray;
+font-size: 20px;
+margin-right: 6px; /* Espaciado entre icono y input */
 }
 
+/* Icono del carrito */
 .icon-cart {
-  margin-left: 8px;
+color: white;
+font-size: 24px;
+cursor: pointer;
+line-height: 1; /* Asegura alineación vertical con el grosor reducido */
 }
 
-/* Estilo del campo de entrada */
+/* Input de la barra de búsqueda */
 ion-input {
-  flex: 1; /* Expande el input para ocupar espacio disponible */
-  font-size: 16px;
-  color: #333;
+font-size: 14px;
+height: 100%; /* Alineado con el grosor de la barra */
+line-height: 1; /* Ajusta la altura de línea */
 }
 
-/* Estilo del texto de dirección */
+/* Texto de dirección */
 .address-text {
-  color: white; /* Color blanco para el texto */
-  margin-top: 12px;
-  font-size: 14px;
-  text-align: center;
+font-size: 12px;
+color: #fff;
+margin-top: 4px;
+text-align: center;
 }
+
+
 
 
 
@@ -506,81 +531,6 @@ margin-top:-17px;
   }
 }
 
-ion-toolbar {
-  --background: #ffffff; /* Fondo blanco */
-  --border-color: #ccc; /* Línea divisoria gris */
-  border-bottom: 1px solid #ccc;
-}
-
-
-
-
-/* Estilo del ion-toolbar */
-ion-toolbar.custom-toolbar {
-  --background: #4a008e; /* Fondo púrpura */
-  display: flex;
-  flex-direction: column; /* Organización en columna */
-  align-items: center;
-  padding: 8px 16px; /* Espaciado interno */
-}
-
-/* Contenedor para barra de búsqueda y carrito */
-.search-cart-container {
-  display: flex;
-  align-items: center; /* Alinea verticalmente */
-  width: 100%; /* Ocupa todo el ancho */
-  max-width: 600px; /* Ancho máximo del contenedor */
-  gap: 8px; /* Espaciado entre la barra de búsqueda y el carrito */
-}
-
-/* Contenedor de la barra de búsqueda */
-.search-container {
-  display: flex;
-  align-items: center;
-  background-color: white; /* Fondo blanco */
-  border-radius: 25px; /* Bordes redondeados */
-  padding: 8px 16px; /* Espaciado interno */
-  flex: 1; /* Ocupa el máximo espacio posible */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-}
-
-/* Icono de búsqueda */
-.icon-search {
-  color: gray;
-  font-size: 20px;
-  margin-right: 8px;
-}
-
-/* Icono del carrito */
-.icon-cart {
-  color: white; /* Ícono del carrito en blanco */
-  font-size: 24px; /* Más grande para destacarse */
-  cursor: pointer; /* Cambia el cursor al pasar por encima */
-}
-
-/* Estilo del input */
-ion-input {
-  flex: 1; /* Hace que el input ocupe el espacio restante */
-  font-size: 16px;
-  color: #333; /* Color del texto */
-}
-
-/* Texto de dirección */
-.address-text {
-  color: white; /* Texto en blanco */
-  font-size: 14px;
-  text-align: center;
-  margin-top: 8px; /* Espaciado superior */
-  cursor: pointer; /* Cambia el cursor al pasar por encima */
-}
-
-
-
-
-
-
-
-
 // --------------
 
 
@@ -634,4 +584,106 @@ ion-input {
       font-weight: bold;
     }
   }
+}
+
+
+
+/* Toolbar scrollable */
+.scrollable-toolbar {
+  --background: #fff; /* Fondo blanco */
+  height: 70px; /* Altura de la barra */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Para posicionar el indicador */
+}
+
+/* Indicador de deslizamiento */
+.scroll-hint {
+  position: absolute;
+  top: -16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #6a1b9a;
+  animation: scrollHint 1.5s infinite alternate;
+
+  ion-icon {
+    font-size: 16px;
+  }
+}
+
+/* Animación de la flecha */
+@keyframes scrollHint {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(8px);
+  }
+}
+
+/* Contenedor de Tabs con scroll horizontal */
+.scrollable-tabs {
+  display: flex;
+  overflow-x: auto; /* Habilita el scroll horizontal */
+  -webkit-overflow-scrolling: touch; /* Deslizamiento suave en móviles */
+  gap: 16px; /* Espacio entre tabs */
+  padding: 8px 12px; /* Espaciado interno */
+  width: 100%;
+  box-shadow: inset 0 -1px 0 #ddd; /* Línea sutil debajo */
+}
+
+/* Estilo de cada tab */
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px; /* Ancho mínimo de cada tab */
+  color: #6a1b9a; /* Color violeta para los íconos y texto */
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  ion-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+    color: #6a1b9a; /* Iconos violeta */
+    transition: color 0.3s ease;
+  }
+
+  ion-label {
+    color: #6a1b9a;
+    white-space: nowrap;
+  }
+
+  /* Hover */
+  &:hover {
+    color: #4a008e; /* Color violeta oscuro al pasar el cursor */
+    ion-icon {
+      color: #4a008e;
+    }
+  }
+
+  /* Efecto al presionar */
+  &:active {
+    transform: scale(0.9); /* Hace el botón ligeramente más pequeño */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al presionar */
+    transition: transform 0.1s, box-shadow 0.1s; /* Transición rápida */
+  }
+}
+
+
+/* Personaliza la barra de scroll */
+.scrollable-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.scrollable-tabs::-webkit-scrollbar-thumb {
+  background-color: #6a1b9a; /* Color del "thumb" */
+  border-radius: 10px;
 }

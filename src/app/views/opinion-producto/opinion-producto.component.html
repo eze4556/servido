@@ -1,38 +1,51 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-center" style="color: #ffffff;">Productos de {{ selectedMarca?.nombre }}</ion-title>
+    <ion-title>Opinar sobre el producto</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid *ngIf="selectedMarca && productos.length > 0">
-    <ion-row>
-      <ion-col size="12">
-        <h2>Productos de {{ selectedMarca?.nombre }}</h2>
-      </ion-col>
-      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let producto of productos">
-        <ion-card class="product-card">
-          <div class="image-container">
-            <img [src]="producto.imagen" *ngIf="producto.imagen" alt="{{ producto.nombre }}">
-          </div>
-          <ion-card-header>
-            <ion-card-title>{{ producto.nombre }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-           <p><strong>Codigo:</strong> {{ producto.codigo }}</p>
-            <p><strong>Precio Final:</strong> {{ producto.precioFinal }}</p>
-            <p><strong>Marca:</strong> {{ producto.marca.nombre }}</p>
-            <ion-button expand="full" color="primary" (click)="navigateTo('detalle')" style="color:white">Detalles</ion-button>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
+<ion-content class="ion-padding">
+  <ion-card class="opinion-card">
+    <ion-item lines="none">
+      <ion-thumbnail slot="start">
+        <img src="assets/product-placeholder.png" alt="Imagen del producto">
+      </ion-thumbnail>
+      <ion-label>
+        <h2 class="product-name">Cubierta Fate Sentiva 195 65 15</h2>
+        <p class="product-status">Entregado</p>
+      </ion-label>
+    </ion-item>
 
+    <ion-card-content>
+      <div class="rating-section">
+        <h3>¿Qué te pareció tu producto?</h3>
+        <div class="rating-stars">
+          <ion-icon
+            *ngFor="let star of stars; let i = index"
+            [name]="i < rating ? 'star' : 'star-outline'"
+            (click)="setRating(i + 1)">
+          </ion-icon>
+        </div>
+        <div class="rating-labels">
+          <span>Malo</span>
+          <span>Excelente</span>
+        </div>
+      </div>
+
+      <ion-item lines="none">
+        <ion-input placeholder="El producto me pareció..."></ion-input>
+      </ion-item>
+
+      <div class="action-buttons">
+        <ion-button expand="block">Opinar</ion-button>
+        <ion-button expand="block" color="danger" fill="outline">Eliminar opinión</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
 
 <ion-footer>
   <ion-toolbar class="scrollable-toolbar">
