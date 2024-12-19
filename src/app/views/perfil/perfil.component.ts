@@ -45,14 +45,7 @@ export class PerfilComponent  implements OnInit {
 
   }
 
-
- // Función para navegar a la tienda usando navigateByUrl
- goToTienda() {
-  this.router.navigateByUrl('/tienda');
-}
-
-// Función para navegar a la página de inicio usando navigateByUrl
-goToHome() {
-  this.router.navigateByUrl('home');
-}
+  navigateTo(route: string) {
+    this.router.navigate([`/${route}`]);
+  }
 }

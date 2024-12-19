@@ -76,44 +76,44 @@
     <!-- Tabs -->
     <div class="scrollable-tabs">
       <!-- Tab: Inicio -->
-      <div class="tab-item" (click)="goToHome()">
-        <ion-icon name="home-outline"></ion-icon>
+      <div class="tab-item">
+        <ion-icon name="home-outline" (click)="navigateTo('home')"></ion-icon>
         <ion-label>Inicio</ion-label>
       </div>
 
       <!-- Tab: Tienda -->
-      <div class="tab-item" (click)="goToTienda()">
-        <ion-icon name="storefront-outline"></ion-icon>
+      <div class="tab-item">
+        <ion-icon name="storefront-outline" (click)="navigateTo('tienda')"></ion-icon>
         <ion-label>Tienda</ion-label>
       </div>
 
       <!-- Tab: Notificaciones -->
       <div class="tab-item">
-        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-icon name="notifications-outline" (click)="navigateTo('notificaciones')"></ion-icon>
         <ion-label>Notificaciones</ion-label>
       </div>
 
       <!-- Nueva Tab: Perfil -->
       <div class="tab-item">
-        <ion-icon name="person-outline"></ion-icon>
+        <ion-icon name="person-outline" (click)="navigateTo('perfil')"></ion-icon>
         <ion-label>Perfil</ion-label>
       </div>
 
       <!-- Nueva Tab: Favoritos -->
       <div class="tab-item">
-        <ion-icon name="heart-outline"></ion-icon>
+        <ion-icon name="heart-outline" (click)="navigateTo('favoritos')"></ion-icon>
         <ion-label>Favoritos</ion-label>
       </div>
 
       <!-- Nueva Tab: Configuración -->
       <div class="tab-item">
-        <ion-icon name="settings-outline"></ion-icon>
+        <ion-icon name="settings-outline" (click)="navigateTo('perfil')"></ion-icon>
         <ion-label>Configuración</ion-label>
       </div>
 
       <!-- Nueva Tab: Ayuda -->
       <div class="tab-item">
-        <ion-icon name="help-circle-outline"></ion-icon>
+        <ion-icon name="help-circle-outline" (click)="navigateTo('ayuda')"></ion-icon>
         <ion-label>Ayuda</ion-label>
       </div>
     </div>
