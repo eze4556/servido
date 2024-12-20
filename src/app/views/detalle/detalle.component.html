@@ -227,7 +227,15 @@
   <p *ngIf="opinions.length === 0" class="no-reviews">
     Aún no hay opiniones para este producto.
   </p>
+
+  <!-- Botón para agregar opinión -->
+  <div class="add-opinion-button">
+    <ion-button class="buy-button" (click)="navigateTo('opinion')">
+      Agregar Opinión
+    </ion-button>
+  </div>
 </div>
+
 
 
 <!-- Sección FAQ -->
