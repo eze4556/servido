@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
     <string name="app_name">Servido</string>
-    <string name="title_activity_main">Infinite POC</string>
+    <string name="title_activity_main">Servido</string>
     <string name="package_name">com.servido</string>
     <string name="custom_url_scheme">com.servido</string>
     <string name="server_client_id"> 878643316794-ruhplae6bokqsp7oujouvedr1vd1dhmj.apps.googleusercontent.com  </string>
