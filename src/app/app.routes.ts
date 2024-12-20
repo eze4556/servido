@@ -31,7 +31,6 @@ export const routes: Routes = [
     loadComponent: () => import('./views/oferta/oferta.component').then((m) => m.ProductofertaDetailComponent),
   },
 
-
   {
     path: 'register',
     loadComponent: () => import('./views/register/register.component').then((m) => m.RegisterComponent),
