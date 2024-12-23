@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalles de la compra</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="purchase-card">
+    <h2>13 de junio</h2>
+    <div class="product-info">
+      <div class="product-details">
+        <p class="product-name">Productos</p>
+      </div>
+      <p class="purchase-details">$ 240.000</p>
+    </div>
+    <div class="product-info">
+      <div class="product-details">
+        <p class="product-name">Envíos</p>
+      </div>
+      <p class="purchase-details">$ 6.000</p>
+    </div>
+    <div class="product-info total">
+      <div class="product-details">
+        <p class="product-name">Total</p>
+      </div>
+      <p class="purchase-details">$ 246.000</p>
+    </div>
+  </div>
+
+  <div class="payment-section">
+    <h3>Detalles del pago</h3>
+    <div class="purchase-card">
+      <div class="payment-info">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg"
+          alt="Mastercard Logo"
+          class="payment-logo"
+        />
+        <div class="payment-details">
+          <p>1x $246.000</p>
+          <p>Mastercard ********6890</p>
+          <p>13 de junio</p>
+          <p class="payment-status">Pago aprobado</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+
+
+<ion-footer>
+  <ion-toolbar class="scrollable-toolbar">
+    <!-- Indicador de deslizamiento -->
+    <div class="scroll-hint">
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+      <span>Desliza para más opciones</span>
+    </div>
+
+    <!-- Tabs -->
+    <div class="scrollable-tabs">
+      <!-- Tab: Inicio -->
+      <div class="tab-item">
+        <ion-icon name="home-outline" (click)="navigateTo('home')"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </div>
+
+      <!-- Tab: Tienda -->
+      <div class="tab-item">
+        <ion-icon name="storefront-outline" (click)="navigateTo('tienda')"></ion-icon>
+        <ion-label>Tienda</ion-label>
+      </div>
+
+      <!-- Tab: Notificaciones -->
+      <div class="tab-item">
+        <ion-icon name="notifications-outline" (click)="navigateTo('notificaciones')"></ion-icon>
+        <ion-label>Notificaciones</ion-label>
+      </div>
+
+      <!-- Nueva Tab: Perfil -->
+      <div class="tab-item">
+        <ion-icon name="person-outline" (click)="navigateTo('perfil')"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </div>
+
+      <!-- Nueva Tab: Favoritos -->
+      <div class="tab-item">
+        <ion-icon name="heart-outline" (click)="navigateTo('favoritos')"></ion-icon>
+        <ion-label>Favoritos</ion-label>
+      </div>
+
+      <!-- Nueva Tab: Configuración -->
+      <div class="tab-item">
+        <ion-icon name="settings-outline" (click)="navigateTo('perfil')"></ion-icon>
+        <ion-label>Configuración</ion-label>
+      </div>
+
+      <!-- Nueva Tab: Ayuda -->
+      <div class="tab-item">
+        <ion-icon name="help-circle-outline" (click)="navigateTo('ayuda')"></ion-icon>
+        <ion-label>Ayuda</ion-label>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

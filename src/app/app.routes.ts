@@ -56,6 +56,14 @@ export const routes: Routes = [
     loadComponent: () => import('./views/opinion-producto/opinion-producto.component').then((m) => m.OpinionProductoComponent),
   },
   {
+    path: 'estado-compra',
+    loadComponent: () => import('./views/estado-compra/estado-compra.component').then((m) => m.EstadoCompraComponent),
+  },
+  {
+    path: 'detalles-compra',
+    loadComponent: () => import('./views/detalles-compra/detalles-compra.component').then((m) => m.DetallesCompraComponent),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
