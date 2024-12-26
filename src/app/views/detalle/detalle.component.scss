@@ -83,8 +83,13 @@ ion-input {
   }
 
   .product-title {
-    font-weight: bold;
-    margin: 5px 0;
+    // font-weight: bold;
+    // margin: 5px 0;
+
+
+    font-size: 14px;
+  color: #333;
+  margin: 5px 0;
   }
 
   .image-slider {
@@ -108,7 +113,8 @@ ion-input {
 
 .carousel-container {
   position: relative;
-  width: 100%;
+  width: 90%;
+  margin-left: 18px;
   overflow: hidden;
 }
 
@@ -130,7 +136,7 @@ ion-input {
 }
 
 .slider-item img {
-  max-width: 100%;
+  max-width: 80%;
   border-radius: 8px;
 }
 
@@ -238,8 +244,8 @@ ion-chip {
 .favorite-icon, .share-icon {
   position: absolute;
   cursor: pointer;
-  color: white;
-  background: rgba(0, 0, 0, 0.5);
+  color: #4a008e;
+  // background: rgba(0, 0, 0, 0.5);
   padding: 10px;
   border-radius: 50%;
   display: flex;
@@ -259,7 +265,7 @@ ion-chip {
 
 /* Estilos de los íconos (puedes usar font-awesome o los que prefieras) */
 .favorite-icon i, .share-icon i {
-  font-size: 24px;
+  font-size: 30px;
 }
 
 
@@ -404,13 +410,12 @@ ion-button {
 
   /* Descripción del producto */
   .product-description {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.6;
-    color: #444444;
+    color: #333;
     margin-bottom: 10px;
 
-    /* Texto más profesional */
-    font-style: normal;
+
     text-align: justify;
   }
 }
@@ -777,7 +782,7 @@ ion-button {
   align-items: center;
   justify-content: center;
   min-width: 80px; /* Ancho mínimo de cada tab */
-  color: #6a1b9a; /* Color violeta para los íconos y texto */
+  color: #6a1b9a;
   font-size: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -785,12 +790,12 @@ ion-button {
   ion-icon {
     font-size: 24px;
     margin-bottom: 4px;
-    color: #6a1b9a; /* Iconos violeta */
+    color: rgb(49, 47, 47);
     transition: color 0.3s ease;
   }
 
   ion-label {
-    color: #6a1b9a;
+    color: #0a010f;
     white-space: nowrap;
   }
 
@@ -817,6 +822,6 @@ ion-button {
 }
 
 .scrollable-tabs::-webkit-scrollbar-thumb {
-  background-color: #6a1b9a; /* Color del "thumb" */
+  background-color: #6a1b9a;
   border-radius: 10px;
 }
