@@ -1,4 +1,4 @@
-import { Component, OnInit ,NO_ERRORS_SCHEMA, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit ,NO_ERRORS_SCHEMA, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -114,11 +114,12 @@ export class DetalleComponent implements OnInit {
 
   constructor(
 private router: Router,
+private cdr: ChangeDetectorRef
   ) {}
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   async ngOnInit() {
-
+    this.cdr.detectChanges(); // Forzar detección de cambios
   }
 
 

@@ -1,9 +1,4 @@
 
-  .custom-toolbar {
-    --background: #6a1b9a;
-    color: #fff;
-  }
-
   .search-bar {
     background-color: #fff;
     border-radius: 8px;
@@ -97,16 +92,6 @@ ion-input {
   }
 
 
-  .action-buttons ion-button {
-    // margin: 5px 0;
-  }
-
-
-
-
-
-
-
 .carousel-container {
   position: relative;
   width: 90%;
@@ -136,18 +121,7 @@ ion-input {
   border-radius: 8px;
 }
 
-.favorite-icon,
-.share-icon {
-  position: absolute;
-  font-size: 24px;
-  color: #fff;
-  cursor: pointer;
-}
 
-.favorite-icon {
-  top: 10px;
-  right: 50px;
-}
 
 
 .carousel-controls {
@@ -236,11 +210,11 @@ ion-chip {
 
 // ------------
 
-
 .favorite-icon, .share-icon {
   position: absolute;
   cursor: pointer;
   color: #4a008e;
+  font-size: 24px;
   // background: rgba(0, 0, 0, 0.5);
   padding: 10px;
   border-radius: 50%;
@@ -336,6 +310,38 @@ ion-button {
   background-color: #ffffff !important;
   color: #5f0d91 !important;
   text-decoration: underline !important;
+}
+
+/* Estilos adaptados para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  .details-segment {
+    flex-direction:row !important; /* Cambia el diseño a una columna */
+    align-items: center !important; /* Centra los elementos */
+    padding: 10px 0 !important; /* Espaciado interno adicional */
+  }
+
+  .segment-button1 {
+    padding: 15px 0 !important; /* Incrementa el espacio vertical */
+    font-size: 14px !important; /* Ajusta el tamaño del texto */
+  }
+
+  .segment-button1.active {
+    background-color: #ffffff !important;
+    color: #5f0d91 !important;
+    text-decoration: underline !important;
+  }
+}
+
+/* Estilos aún más pequeños (teléfonos) */
+@media screen and (max-width: 480px) {
+  .details-segment {
+    padding: 5px 0 !important; /* Reduce el espaciado para pantallas muy pequeñas */
+  }
+
+  .segment-button1 {
+    padding: 10px 0 !important;
+    font-size: 12px !important; /* Texto más pequeño */
+  }
 }
 
 

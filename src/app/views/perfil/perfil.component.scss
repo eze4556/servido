@@ -96,6 +96,8 @@ ion-toolbar.profile-header {
 }
 
 
+// footer
+
 /* Toolbar scrollable */
 .scrollable-toolbar {
   --background: #fff; /* Fondo blanco */
@@ -152,7 +154,7 @@ ion-toolbar.profile-header {
   align-items: center;
   justify-content: center;
   min-width: 80px; /* Ancho mínimo de cada tab */
-  color: #6a1b9a; /* Color violeta para los íconos y texto */
+  color: #6a1b9a;
   font-size: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -160,12 +162,12 @@ ion-toolbar.profile-header {
   ion-icon {
     font-size: 24px;
     margin-bottom: 4px;
-    color: #6a1b9a; /* Iconos violeta */
+    color: rgb(49, 47, 47);
     transition: color 0.3s ease;
   }
 
   ion-label {
-    color: #6a1b9a;
+    color: #0a010f;
     white-space: nowrap;
   }
 
@@ -192,6 +194,6 @@ ion-toolbar.profile-header {
 }
 
 .scrollable-tabs::-webkit-scrollbar-thumb {
-  background-color: #6a1b9a; /* Color del "thumb" */
+  background-color: #6a1b9a;
   border-radius: 10px;
 }

@@ -2,15 +2,48 @@
 ion-toolbar.profile-header {
   --background: #4a008e; /* Fondo morado */
   color: #fff;
-  display: flex;
-  flex-direction: column;
-  // padding: 20px 16px;
+  text-align: center;
 }
 
-// .ion-padding{
-//   --background: #e0d7e5;
-// }
+/* Información del perfil */
+.profile-info {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background: linear-gradient(90deg, #4a008e, #6a1b9a);
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
 
+.profile-icon {
+  font-size: 64px;
+  color: #fff;
+  margin-right: 16px;
+}
+
+.profile-details {
+  color: #fff;
+}
+
+.profile-name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.profile-subtitle {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Botón "Comprar ahora" */
+// .buy-button {
+//   background: linear-gradient(90deg, #5f0d91, #3e0673);
+//   color: white;
+//   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+//   border-radius: 10px;
+//   margin-bottom: 16px;
+// }
 /* Botón "Comprar ahora" */
 .buy-button {
   background: linear-gradient(90deg, #5f0d91, #3e0673); /* Degradado púrpura */
@@ -18,102 +51,31 @@ ion-toolbar.profile-header {
   --background: linear-gradient(90deg, #5f0d91, #3e0673); /* Soporte para Ionic */
   --color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra más ligera */
-  width: 100%;
   border-radius: 10px;
 }
-
-.h1, h1 {
-  font-size: 1.5rem;
-}
-
-/* Información de Perfil */
-.profile-info {
-  display: flex;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.profile-icon {
-  font-size: 64px; /* Icono grande */
-  color: #fff;
-  margin-right: 12px;
-}
-
-.profile-details {
-  display: flex;
-  flex-direction: column;
-}
-
-.profile-name {
-  margin: 0;
-  font-size: 20px;
-  font-weight: bold;
-  color: #fff;
-}
-
-.profile-subtitle {
-  margin: 0;
-  font-size: 14px;
-  color: #e0d7e5;
-}
-/* Botones Centrales */
-.top-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 8px; /* Espacio más pequeño entre botones */
-  width: 100%;
-}
-
-.top-buttons .subscribe-button {
-  --background: #ffffff; /* Fondo blanco */
-  --color: #4a008e; /* Texto morado oscuro */
-  font-weight: bold;
-  border-radius: 16px; /* Bordes redondeados más pequeños */
-  text-transform: none;
-  height: 32px; /* Altura más pequeña */
-  --padding-start: 16px; /* Padding más ajustado */
-  --padding-end: 16px;
-  font-size: 14px; /* Texto ligeramente más pequeño */
-}
-
-.top-buttons .payment-button {
-  --background: #6a1b9a; /* Fondo morado */
-  --color: #ffffff; /* Texto blanco */
-  font-weight: bold;
-  border-radius: 16px; /* Bordes redondeados más pequeños */
-  text-transform: none;
-  height: 32px; /* Altura más pequeña */
-  --padding-start: 16px; /* Padding más ajustado */
-  --padding-end: 16px;
-  font-size: 14px; /* Texto ligeramente más pequeño */
-}
-
-.payment-button ion-icon {
-  margin-right: 6px; /* Ajuste más pequeño del margen del ícono */
-  color: #fff;
-}
-
 
 /* Lista de opciones */
 .options-list {
   margin-top: 16px;
-
-  ion-item {
-    font-size: 16px;
-    --padding-start: 16px;
-
-    ion-icon {
-      color: #6a1b9a;
-      font-size: 24px;
-    }
-
-    ion-label {
-      margin-left: 8px;
-      font-size: 16px;
-    }
-  }
 }
 
+.section-title {
+  font-size: 1.2rem;
+  margin: 16px 0;
+  color: #4a008e;
+}
+
+ion-item {
+  --padding-start: 16px;
+  font-size: 16px;
+}
+
+ion-item ion-icon {
+  color: #6a1b9a;
+  font-size: 24px;
+}
+
+// footer
 
 /* Toolbar scrollable */
 .scrollable-toolbar {
@@ -171,7 +133,7 @@ ion-toolbar.profile-header {
   align-items: center;
   justify-content: center;
   min-width: 80px; /* Ancho mínimo de cada tab */
-  color: #6a1b9a; /* Color violeta para los íconos y texto */
+  color: #6a1b9a;
   font-size: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -179,12 +141,12 @@ ion-toolbar.profile-header {
   ion-icon {
     font-size: 24px;
     margin-bottom: 4px;
-    color: #6a1b9a; /* Iconos violeta */
+    color: rgb(49, 47, 47);
     transition: color 0.3s ease;
   }
 
   ion-label {
-    color: #6a1b9a;
+    color: #0a010f;
     white-space: nowrap;
   }
 
@@ -211,6 +173,6 @@ ion-toolbar.profile-header {
 }
 
 .scrollable-tabs::-webkit-scrollbar-thumb {
-  background-color: #6a1b9a; /* Color del "thumb" */
+  background-color: #6a1b9a;
   border-radius: 10px;
 }
