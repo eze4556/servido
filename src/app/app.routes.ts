@@ -64,6 +64,10 @@ export const routes: Routes = [
     loadComponent: () => import('./views/detalles-compra/detalles-compra.component').then((m) => m.DetallesCompraComponent),
   },
   {
+    path: 'mi-perfil',
+    loadComponent: () => import('../app/views/mi-perfil/mi-perfil.component').then((m) => m.MiPerfilComponent),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',

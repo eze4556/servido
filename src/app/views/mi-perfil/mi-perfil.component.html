@@ -1,0 +1,120 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>Mi perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="perfil-container">
+    <div class="perfil-info">
+      <div class="avatar-container">
+        <ion-avatar>
+          <ion-icon name="person-circle-outline" class="avatar-icon"></ion-icon>
+        </ion-avatar>
+        <ion-button fill="clear" class="edit-icon">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </div>
+      <div class="user-details">
+        <h2>Jonathan</h2>
+        <p>jonathan&#64;gmail.com</p>
+      </div>
+    </div>
+    <ion-list>
+      <ion-item button (click)="navigateTo('personal-info')">
+        <ion-label>
+          <h3>Información personal</h3>
+          <p>Información de tu documento de identidad y actividad fiscal</p>
+        </ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item button (click)="navigateTo('account-info')">
+        <ion-label>
+          <h3>Datos de tu cuenta</h3>
+          <p>Datos que representan tu cuenta</p>
+        </ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item button (click)="navigateTo('security')">
+        <ion-label>
+          <h3>Seguridad</h3>
+          <p>Configura la seguridad de tu cuenta</p>
+        </ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item button (click)="navigateTo('cards')">
+        <ion-label>
+          <h3>Tarjetas</h3>
+          <p>Tarjetas guardadas de tu cuenta</p>
+        </ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+      <ion-item button (click)="navigateTo('addresses')">
+        <ion-label>
+          <h3>Direcciones</h3>
+          <p>Direcciones guardadas de tu cuenta</p>
+        </ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+    </ion-list>
+    <div class="cancel-account">
+      <p>Puedes <a href="#">cancelar tu cuenta</a> siempre que lo desees.</p>
+    </div>
+  </div>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar class="scrollable-toolbar">
+    <!-- Indicador de deslizamiento -->
+    <div class="scroll-hint">
+      <ion-icon name="arrow-forward-outline"></ion-icon>
+      <span>Desliza para más opciones</span>
+    </div>
+
+    <!-- Tabs -->
+    <div class="scrollable-tabs">
+      <!-- Tab: Inicio -->
+      <div class="tab-item">
+        <ion-icon name="home-outline" (click)="navigateTo('home')"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </div>
+
+      <!-- Tab: Tienda -->
+      <div class="tab-item">
+        <ion-icon name="storefront-outline" (click)="navigateTo('tienda')"></ion-icon>
+        <ion-label>Tienda</ion-label>
+      </div>
+
+      <!-- Tab: Notificaciones -->
+      <div class="tab-item">
+        <ion-icon name="notifications-outline" (click)="navigateTo('notificaciones')"></ion-icon>
+        <ion-label>Notificaciones</ion-label>
+      </div>
+
+      <!-- Nueva Tab: Perfil -->
+      <div class="tab-item">
+        <ion-icon name="person-outline" (click)="navigateTo('perfil')"></ion-icon>
+        <ion-label>Perfil</ion-label>
+      </div>
+
+      <!-- Nueva Tab: Favoritos -->
+      <div class="tab-item">
+        <ion-icon name="heart-outline" (click)="navigateTo('favoritos')"></ion-icon>
+        <ion-label>Favoritos</ion-label>
+      </div>
+
+      <!-- Nueva Tab: Configuración -->
+      <div class="tab-item">
+        <ion-icon name="settings-outline" (click)="navigateTo('perfil')"></ion-icon>
+        <ion-label>Configuración</ion-label>
+      </div>
+
+      <!-- Nueva Tab: Ayuda -->
+      <div class="tab-item">
+        <ion-icon name="help-circle-outline" (click)="navigateTo('ayuda')"></ion-icon>
+        <ion-label>Ayuda</ion-label>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>
