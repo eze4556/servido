@@ -1,90 +1,41 @@
-<!-- <ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>
-    <ion-title class="ion-text-center" style="color: #ffffff;">Marcas</ion-title>
+
+
+
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>Publicar</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-
-    <ion-row>
-      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let marca of marcas">
-        <ion-card (click)="onMarcaClick(marca.id)">
-          <img [src]="marca.imagen" *ngIf="marca.imagen" alt="{{ marca.nombre }}">
-          <ion-card-header>
-            <ion-card-title>{{ marca.nombre }}</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-
-    <ion-row *ngIf="productos.length > 0">
-      <ion-col size="12">
-        <h2>Productos de {{ selectedMarca?.nombre }}</h2>
-      </ion-col>
-      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let producto of productos">
-        <ion-card>
-          <img [src]="producto.imagen" *ngIf="producto.imagen" alt="{{ producto.nombre }}">
-          <ion-card-header>
-            <ion-card-title>{{ producto.nombre }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>{{ producto.descripcion }}</p>
-            <p><strong>Precio:</strong> {{ producto.precio }}</p>
-            <p><strong>Precio Final:</strong> {{ producto.precioFinal }}</p>
-             <p><strong>Marca:</strong> {{ producto.marca }}</p> -->
-          <!-- </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
- -->
-
-
-
-<!-- marcas -->
-
-
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>
-    <ion-title class="ion-text-center" style="color: #ffffff;">Marcas</ion-title>
-  </ion-toolbar>
-</ion-header>
-
- <ion-content>
+  <!-- Título -->
   <ion-list>
-    <ion-item *ngFor="let marca of marcas" (click)="onMarcaClick(marca.id)">
-
-      {{ marca.nombre }}
+    <ion-item lines="none">
+      <ion-label class="title-label">¿Qué deseas publicar?</ion-label>
     </ion-item>
   </ion-list>
 
-  <ion-grid *ngIf="selectedMarca && productos.length > 0">
+  <!-- Opciones -->
+  <ion-grid>
     <ion-row>
+      <!-- Producto -->
       <ion-col size="12">
-        <h2>Productos de {{ selectedMarca?.nombre }}</h2>
+        <ion-card button class="custom-card">
+          <ion-card-content class="card-content">
+            <ion-icon name="cube" class="card-icon"></ion-icon>
+            <ion-label class="card-label">Productos</ion-label>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
-      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let producto of productos">
-        <ion-card class="product-card">
-          <div class="image-container">
-            <img [src]="producto.imagen" *ngIf="producto.imagen" alt="{{ producto.nombre }}">
-          </div>
-          <ion-card-header>
-            <ion-card-title>{{ producto.nombre }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-           <p><strong>Codigo:</strong> {{ producto.codigo }}</p>
-            <p><strong>Precio Final:</strong> {{ producto.precioFinal }}</p>
-            <p><strong>Marca:</strong> {{ producto.marca.nombre }}</p>
-            <ion-button expand="full" color="primary" (click)="navigateTo('detalle')" style="color:white">Detalles</ion-button>
+    </ion-row>
+
+    <ion-row>
+      <!-- Servicio -->
+      <ion-col size="12">
+        <ion-card button class="custom-card">
+          <ion-card-content class="card-content">
+            <ion-icon name="cog" class="card-icon"></ion-icon>
+            <ion-label class="card-label">Servicios</ion-label>
           </ion-card-content>
         </ion-card>
       </ion-col>

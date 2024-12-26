@@ -1,128 +1,100 @@
 
-<ion-content *ngIf="productoferta" class="content">
-  <ion-card style="margin-top: 15em;" class="main-card">
-    <div class="product-container">
-      <!-- Imagen del productoferta -->
-      <img [src]="productoferta.imagen" [alt]="productoferta.nombre" class="product-image"/>
 
-      <!-- Información básica del productoferta -->
-      <div class="product-details">
-        <h2 class="product-title"><strong>{{ productoferta.nombre }}</strong></h2>
-        <p *ngIf="productoferta.descuento" class="product-original-price">${{ productoferta.precio | number:'1.2-2' }}</p>
-        <p class="product-price">
-          ${{
-            productoferta.precioFinal | number:'1.2-2'
-          }}
-          <span *ngIf="productoferta.descuento" class="discount-info">{{ productoferta.descuento }}% OFF</span>
-        </p>
-        <ul class="product-info-list">
-          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Código: <strong>{{ productoferta.codigo }}</strong></li>
-          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Categoría: <strong>{{ productoferta.categoria.nombre }}</strong></li>
-          <li><ion-icon name="checkmark-circle-outline"></ion-icon> Marca: <strong>{{ productoferta.marca.nombre }}</strong></li>
-        </ul>
-        <div class="product-payment">
-          <ion-card>
-            <ion-card-content>
-              <h3>Opciones de Pago</h3>
-              <p>Calcula cuándo llega</p>
-              <ion-button expand="full" color="primary" (click)="comprar()">Comprar ahora</ion-button>
-              <ion-button expand="full" color="secondary" (click)="addToCart(productoferta)">Agregar al carrito</ion-button>
-            </ion-card-content>
-          </ion-card>
-        </div>
-      </div>
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>Publicar</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-      <!-- Opciones de pago y carrito -->
 
-    </div>
 
-    <!-- Segmento de navegación, ubicado después del contenedor principal -->
-    <ion-segment [(ngModel)]="selectedSegment" color="primary" class="product-segment">
-      <ion-segment-button value="descripcion">
-        <ion-label>Descripción</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="especificaciones">
-        <ion-label>Especificaciones</ion-label>
-      </ion-segment-button>
-      <ion-segment-button value="dudas">
-        <ion-label>Dudas Frecuentes</ion-label>
-      </ion-segment-button>
-    </ion-segment>
+<ion-content>
+  <ion-list>
+    <ion-item lines="none">
+      <ion-label class="title-label">
+        Completa los datos para publicar tu producto
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
-    <!-- Contenido del segmento -->
-    <ion-card-content *ngIf="selectedSegment === 'descripcion'">
-      <p class="product-description"><strong>{{ productoferta.descripcion }}</strong></p>
-    </ion-card-content>
+   <ion-list>
+    <ion-item class="custom-item">
+      <ion-label>Fotos de tu producto</ion-label>
+      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
+    </ion-item>
+    <ion-item class="custom-item">
+      <ion-label>Título de la publicación</ion-label>
+      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
+    </ion-item>
+    <ion-item class="custom-item">
+      <ion-label>Categoría de tu producto</ion-label>
+      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
+    </ion-item>
+    <ion-item class="custom-item">
+      <ion-label>Precio</ion-label>
+      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
+    </ion-item>
+    <ion-item class="custom-item">
+      <ion-label>Descripción del producto</ion-label>
+      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
+    </ion-item>
+    <ion-item class="custom-item">
+      <ion-label>Variantes</ion-label>
+      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
+    </ion-item>
+    <ion-item class="custom-item">
+      <ion-label>Stock</ion-label>
+      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
+    </ion-item>
+  </ion-list>
 
-    <ion-card-content *ngIf="selectedSegment === 'especificaciones'">
-      <p>Aquí puedes añadir las especificaciones del productoferta...</p>
-    </ion-card-content>
-
-    <ion-card-content *ngIf="selectedSegment === 'dudas'">
-      <p>Sección de dudas frecuentes...</p>
-    </ion-card-content>
-  </ion-card>
+  <div class="button-container">
+    <ion-button expand="block" class="publish-button">Publicar</ion-button>
+  </div>
 </ion-content>
 
-<ion-content *ngIf="!productoferta" class="content">
-  <ion-card class="no-product-card">
-    <ion-card-content>
-      <h2>productoferta no encontrado</h2>
-    </ion-card-content>
-  </ion-card>
-</ion-content>
-
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar class="scrollable-toolbar">
-    <!-- Indicador de deslizamiento -->
     <div class="scroll-hint">
       <ion-icon name="arrow-forward-outline"></ion-icon>
       <span>Desliza para más opciones</span>
     </div>
 
-    <!-- Tabs -->
     <div class="scrollable-tabs">
-      <!-- Tab: Inicio -->
       <div class="tab-item">
         <ion-icon name="home-outline" (click)="navigateTo('home')"></ion-icon>
         <ion-label>Inicio</ion-label>
       </div>
 
-      <!-- Tab: Tienda -->
       <div class="tab-item">
         <ion-icon name="storefront-outline" (click)="navigateTo('tienda')"></ion-icon>
         <ion-label>Tienda</ion-label>
       </div>
 
-      <!-- Tab: Notificaciones -->
       <div class="tab-item">
         <ion-icon name="notifications-outline" (click)="navigateTo('notificaciones')"></ion-icon>
         <ion-label>Notificaciones</ion-label>
       </div>
 
-      <!-- Nueva Tab: Perfil -->
       <div class="tab-item">
         <ion-icon name="person-outline" (click)="navigateTo('perfil')"></ion-icon>
         <ion-label>Perfil</ion-label>
       </div>
 
-      <!-- Nueva Tab: Favoritos -->
       <div class="tab-item">
         <ion-icon name="heart-outline" (click)="navigateTo('favoritos')"></ion-icon>
         <ion-label>Favoritos</ion-label>
       </div>
 
-      <!-- Nueva Tab: Configuración -->
       <div class="tab-item">
         <ion-icon name="settings-outline" (click)="navigateTo('perfil')"></ion-icon>
         <ion-label>Configuración</ion-label>
       </div>
 
-      <!-- Nueva Tab: Ayuda -->
       <div class="tab-item">
         <ion-icon name="help-circle-outline" (click)="navigateTo('ayuda')"></ion-icon>
         <ion-label>Ayuda</ion-label>
       </div>
     </div>
   </ion-toolbar>
-</ion-footer>
+</ion-footer> -->

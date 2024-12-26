@@ -15,7 +15,7 @@ export const routes: Routes = [
     loadComponent: () => import('../app/views/perfil/perfil.component').then((m) => m.PerfilComponent),
   },
   {
-    path: 'marca',
+    path: 'elección',
     loadComponent: () => import('./views/marca/marca.component').then((m) => m.MarcaComponent),
   },
    {
@@ -27,7 +27,7 @@ export const routes: Routes = [
     loadComponent: () => import('./views/tienda/tienda.component').then((m) => m.TiendaComponent),
   },
    {
-    path: 'productOferta/:id',
+    path: 'publicar',
     loadComponent: () => import('./views/oferta/oferta.component').then((m) => m.ProductofertaDetailComponent),
   },
 
