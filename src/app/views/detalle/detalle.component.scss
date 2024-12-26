@@ -96,11 +96,7 @@ ion-input {
     // margin: 5px 0;
   }
 
- .details-segment {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
+
 
 
 
@@ -312,41 +308,30 @@ ion-button {
   color: #5f0d91; /* Color del icono */
 }
 
-/* Estilos para el contenedor del segmento */
 .details-segment {
-  background-color: #f4f4f4; /* Fondo gris claro */
-  border-bottom: 1px solid #ccc; /* Línea divisoria */
-  display: flex;
-  justify-content: space-around;
+  background-color: #f4f4f4 !important;
+  border-bottom: 1px solid #ccc !important;
+  display: flex !important;
+  justify-content: space-around !important;
 }
 
-/* Estilos generales para los botones del segmento */
 .segment-button1 {
-  background-color: transparent; /* Fondo transparente */
-  color: #000000; /* Letras negras */
-  // font-weight: bold;
-  text-transform: capitalize;
-  border: none; /* Elimina cualquier borde */
-  flex: 1; /* Distribuye espacio uniformemente */
-  padding: 10px 0; /* Espaciado interno vertical */
-  text-align: center;
-  transition: background-color 0.3s, color 0.3s; /* Transición suave */
+  background-color: transparent !important;
+  color: #000000 !important;
+  text-transform: capitalize !important;
+  border: none !important;
+  flex: 1 !important;
+  padding: 10px 0 !important;
+  text-align: center !important;
+  transition: background-color 0.3s, color 0.3s !important;
 }
 
-/* Estilos para la etiqueta dentro del botón */
-.segment-button1 .segment-label {
-  font-size: 14px;
-  color: inherit; /* Hereda el color del botón */
-}
-
-/* Estilos para el botón seleccionado */
 .segment-button1.active {
-  background-color: #ffffff; /* Fondo blanco para destacar */
-  color: #5f0d91; /* Texto morado */
-  // font-weight: bold;
-  text-decoration: underline; /* Subrayado */
-  flex: 1;
+  background-color: #ffffff !important;
+  color: #5f0d91 !important;
+  text-decoration: underline !important;
 }
+
 
 
 //

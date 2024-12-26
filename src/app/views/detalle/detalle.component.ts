@@ -1,4 +1,4 @@
-import { Component, OnInit ,NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, OnInit ,NO_ERRORS_SCHEMA, ViewEncapsulation } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -59,6 +59,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-detalle',
   templateUrl: './detalle.component.html',
   styleUrls: ['./detalle.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [IonChip, IonSegmentButton,
 
