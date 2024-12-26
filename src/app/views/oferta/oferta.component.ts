@@ -1,4 +1,4 @@
-import { IonContent, IonCard, IonIcon, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonTitle, IonButtons, IonToolbar, IonBackButton, IonHeader, IonGrid, IonRow, IonCol, IonSpinner, IonSegment, IonSegmentButton, IonLabel, IonFooter } from '@ionic/angular/standalone';
+import { IonContent, IonCard,IonItem, IonIcon, IonCardHeader, IonCardTitle, IonCardContent, IonButton, IonTitle, IonButtons, IonToolbar, IonBackButton, IonHeader, IonGrid, IonRow, IonCol, IonSpinner, IonSegment, IonSegmentButton, IonLabel, IonFooter, IonList } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FirestoreService } from '../../common/services/firestore.service';
@@ -10,19 +10,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/common/services/cart.service';
 import { AlertController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
+import { IoniconsModule } from 'src/app/common/modules/ionicons.module';
+
+
+
 
 @Component({
   selector: 'app-oferta',
   templateUrl: './oferta.component.html',
   styleUrls: ['./oferta.component.scss'],
   standalone: true,
-  imports: [ FormsModule,IonSegment, IonSegmentButton, IonLabel,
-    IonSpinner, IonCol, IonRow, IonIcon, IonGrid, IonHeader,IonFooter, IonBackButton, IonToolbar, IonButtons, IonButton, IonTitle, CommonModule, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent]
+  imports: [IonList,  FormsModule,IonSegment,IonItem, IonSegmentButton, IonLabel,
+    IonSpinner, IonCol, IonRow, IonIcon, IonGrid, IonHeader,IonFooter, IonBackButton, IonToolbar, IonButtons, IonButton, IonTitle, CommonModule, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IoniconsModule
+]
 })
 export class ProductofertaDetailComponent implements OnInit {
-  productId: string;
-  productoferta: Productoferta | undefined;
-  selectedSegment: string = 'caracteristicas'; // Default segment
+
+
   constructor(
     private firestoreService: FirestoreService,
     private storage: Storage,
@@ -33,46 +37,19 @@ export class ProductofertaDetailComponent implements OnInit {
     private router: Router,
   ) { }
 
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit() {
-    this.productId = this.route.snapshot.paramMap.get('id');
-    this.loadProduct();
+
   }
 
-  async loadProduct() {
-    if (this.productId) {
-      this.productoferta = await this.firestoreService.getProductofertaById(this.productId);
-    }
-  }
 
-  comprar() {
-    const message = `Hola, estoy interesado en el producto ${this.productoferta.nombre}`;
-    const whatsappUrl = `https://wa.me/5491167554362?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-  }
-
-  async addToCart(product: Productoferta) {
-    this.cartService.addToCart(product);
-    await this.showAlert(product.nombre);
-  }
-
-  async showAlert(productName: string) {
-    const alert = await this.alertController.create({
-      header: 'Producto Agregado',
-      message: `${productName} ha sido agregado al carrito.`,
-      buttons: ['OK'],
-    });
-
-    await alert.present();
-  }
 
   navigateTo(route: string) {
     this.router.navigate([`/${route}`]);
   }
 
 
- calculateOriginalPrice(precioFinal: number, descuento: number): number {
-    return precioFinal / (1 - descuento / 100);
-  }
+
 
 
 }

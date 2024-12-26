@@ -15,6 +15,7 @@ import {
   IonCardContent,
   IonToolbar,
   IonTitle,
+  IonThumbnail,
   IonHeader, IonBackButton,IonFabButton, IonButtons, IonSpinner, IonImg, IonFab, IonModal,
   IonFooter} from '@ionic/angular/standalone';
 import { Component, OnInit, Input } from '@angular/core';
@@ -25,6 +26,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Marca } from '../../common/models/marca.model';
 import { Producto } from 'src/app/common/models/producto.model';
 import { Router } from '@angular/router';
+import { IoniconsModule } from 'src/app/common/modules/ionicons.module';
+
 
 @Component({
   selector: 'app-marca',
@@ -38,6 +41,7 @@ import { Router } from '@angular/router';
     IonToolbar,
     IonItem,
     IonInput,
+    IonThumbnail,
     IonFab,
      IonIcon,
     IonLabel,
@@ -54,50 +58,21 @@ import { Router } from '@angular/router';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+        IoniconsModule
+
   ],
 })
 export class MarcaComponent implements OnInit {
-  userId: string;
-  afip: any;
 
-
-  marcas: Marca[] = [];
-  productos: Producto[] = [];
-  selectedMarca: Marca | undefined;
 
 
   constructor(private firestoreService: FirestoreService, private router: Router) {}
 
+ // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
  async ngOnInit() {
-    this.marcas = await this.firestoreService.getMarcas();
+
   }
 
-
-  //  async ngOnInit() {
-  //   this.loadCategories();
-  // }
-
-  async loadMarcas() {
-    try {
-      this.marcas = await this.firestoreService.getMarcas();
-    } catch (error) {
-      console.error('Error al obtener marcas:', error);
-    }
-  }
-
-  async loadProductosByMarca(marcaId: string) {
-    try {
-      this.productos = await this.firestoreService.getProductosByMarca(marcaId);
-      this.selectedMarca = this.marcas.find(marca => marca.id === marcaId);
-      console.log('Productos obtenidos de la marca:', this.productos);
-    } catch (error) {
-      console.error('Error al obtener productos por marca:', error);
-    }
-  }
-
-  onMarcaClick(marcaId: string) {
-    this.loadProductosByMarca(marcaId);
-  }
 
 
   navigateTo(route: string) {
