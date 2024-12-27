@@ -10,10 +10,10 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () => import('../app/views/login/login.component').then((m) => m.LoginComponent),
   },
-    {
-    path: 'perfil',
-    loadComponent: () => import('../app/views/perfil/perfil.component').then((m) => m.PerfilComponent),
-  },
+  //   {
+  //   path: 'perfil',
+  //   loadComponent: () => import('../app/views/perfil/perfil.component').then((m) => m.PerfilComponent),
+  // },
   {
     path: 'elección',
     loadComponent: () => import('./views/marca/marca.component').then((m) => m.MarcaComponent),

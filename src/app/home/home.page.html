@@ -5,7 +5,7 @@
         <ion-icon name="search" class="icon-search"></ion-icon>
         <ion-input placeholder="Buscar producto o servicio"></ion-input>
       </div>
-      <ion-icon name="cart-outline" class="icon-cart"></ion-icon>
+      <ion-icon name="cart-outline" class="icon-cart" (click)="navigateTo('carrito')"></ion-icon>
     </div>
   <p class="address-text" (click)="navigateTo('login')" *ngIf="!isLoggedIn">Login de prueba</p>
   </ion-toolbar>
@@ -460,7 +460,7 @@
 
       <!-- Nueva Tab: Perfil -->
       <div class="tab-item">
-        <ion-icon name="person-outline" (click)="navigateTo('perfil')"></ion-icon>
+        <ion-icon name="person-outline" (click)="navigateTo('mi-perfil')"></ion-icon>
         <ion-label>Perfil</ion-label>
       </div>
 
@@ -472,8 +472,8 @@
 
       <!-- Nueva Tab: Configuración -->
       <div class="tab-item">
-        <ion-icon name="settings-outline" (click)="navigateTo('perfil')"></ion-icon>
-        <ion-label>Configuración</ion-label>
+        <ion-icon name="settings-outline" (click)="navigateTo('mi-cuenta')"></ion-icon>
+        <ion-label>Más</ion-label>
       </div>
 
       <!-- Nueva Tab: Ayuda -->

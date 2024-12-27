@@ -20,7 +20,7 @@
     <ion-row>
       <!-- Producto -->
       <ion-col size="12">
-        <ion-card button class="custom-card">
+        <ion-card button class="custom-card" (click)="navigateTo('publicar')">
           <ion-card-content class="card-content">
             <ion-icon name="cube" class="card-icon"></ion-icon>
             <ion-label class="card-label">Productos</ion-label>
@@ -32,7 +32,7 @@
     <ion-row>
       <!-- Servicio -->
       <ion-col size="12">
-        <ion-card button class="custom-card">
+        <ion-card button class="custom-card"  (click)="navigateTo('publicar')">
           <ion-card-content class="card-content">
             <ion-icon name="cog" class="card-icon"></ion-icon>
             <ion-label class="card-label">Servicios</ion-label>
@@ -73,7 +73,7 @@
 
       <!-- Nueva Tab: Perfil -->
       <div class="tab-item">
-        <ion-icon name="person-outline" (click)="navigateTo('perfil')"></ion-icon>
+        <ion-icon name="person-outline" (click)="navigateTo('mi-perfil')"></ion-icon>
         <ion-label>Perfil</ion-label>
       </div>
 
@@ -85,8 +85,8 @@
 
       <!-- Nueva Tab: Configuración -->
       <div class="tab-item">
-        <ion-icon name="settings-outline" (click)="navigateTo('perfil')"></ion-icon>
-        <ion-label>Configuración</ion-label>
+        <ion-icon name="settings-outline" (click)="navigateTo('mi-cuenta')"></ion-icon>
+        <ion-label>Más</ion-label>
       </div>
 
       <!-- Nueva Tab: Ayuda -->

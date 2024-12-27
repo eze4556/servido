@@ -22,7 +22,7 @@
         </p>
       </ion-col>
     </ion-row>
-    <ion-button expand="block" class="action-button">Volver a comprar</ion-button>
+    <ion-button expand="block" class="action-button" (click)="navigateTo('tienda')">Volver a comprar</ion-button>
   </ion-card>
 
   <!-- Ayuda con la compra -->
@@ -31,7 +31,7 @@
       <ion-card-title>Ayuda con la compra</ion-card-title>
     </ion-card-header>
     <ion-list>
-      <ion-item button>
+      <ion-item button (click)="navigateTo('opinion')">
         <ion-label>Opinar sobre el vendedor</ion-label>
       </ion-item>
       <ion-item button>
@@ -49,7 +49,7 @@
       <ion-item button>
         <ion-label>Ver mensajes con GOMERIA JOSE</ion-label>
       </ion-item>
-      <ion-item button>
+      <ion-item button (click)="navigateTo('detalles-compra')">
         <ion-label>Ver detalles de la compra</ion-label>
       </ion-item>
     </ion-list>
@@ -87,7 +87,7 @@
 
       <!-- Nueva Tab: Perfil -->
       <div class="tab-item">
-        <ion-icon name="person-outline" (click)="navigateTo('perfil')"></ion-icon>
+        <ion-icon name="person-outline" (click)="navigateTo('mi-perfil')"></ion-icon>
         <ion-label>Perfil</ion-label>
       </div>
 
@@ -99,8 +99,8 @@
 
       <!-- Nueva Tab: Configuración -->
       <div class="tab-item">
-        <ion-icon name="settings-outline" (click)="navigateTo('perfil')"></ion-icon>
-        <ion-label>Configuración</ion-label>
+        <ion-icon name="settings-outline" (click)="navigateTo('mi-cuenta')"></ion-icon>
+        <ion-label>Más</ion-label>
       </div>
 
       <!-- Nueva Tab: Ayuda -->
