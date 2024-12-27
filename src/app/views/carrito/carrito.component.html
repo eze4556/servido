@@ -10,7 +10,7 @@
 <ion-content>
   <div class="notifications-container">
     <!-- Tarjeta 1 -->
-    <div class="notification-card">
+    <div class="notification-card" (click)="navigateTo('estado-compra')">
       <div class="notification-header">
         <h3>13 de julio</h3>
         <a class="reorder-link" href="#">Volver a comprar</a>
@@ -30,7 +30,7 @@
     </div>
 
     <!-- Tarjeta 2 (repetida) -->
-    <div class="notification-card">
+    <div class="notification-card" (click)="navigateTo('estado-compra')">
       <div class="notification-header">
         <h3>13 de julio</h3>
         <a class="reorder-link" href="#">Volver a comprar</a>
@@ -51,7 +51,7 @@
 
 
 
- <div class="notification-card">
+ <div class="notification-card" (click)="navigateTo('estado-compra')">
       <div class="notification-header">
         <h3>13 de julio</h3>
         <a class="reorder-link" href="#">Volver a comprar</a>
