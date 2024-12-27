@@ -239,54 +239,80 @@ ion-chip {
 }
 
 
-//
-
 /* Contenedor para los botones */
 .action-buttons {
   display: flex;
   justify-content: space-between;
-  gap: 5px;
+  gap: 10px; /* Espaciado entre los botones */
   margin-bottom: 20px;
-  padding:5px
+  padding: 0; /* Quitar padding innecesario */
+  background: transparent; /* Fondo transparente para el contenedor */
+  border-radius: 25px; /* Redondear igual que los botones */
+  overflow: hidden; /* Asegurarse de que los bordes redondeados oculten contenido adicional */
 }
 
-/* Estilo general de los botones */
+/* Botones generales */
 ion-button {
-  flex: 1;
-  height: 40px; /* Reducir altura ligeramente */
-  border-radius: 20px; /* Bordes redondeados más sutiles */
-  font-size: 12px; /* Tamaño de letra más pequeño */
+  flex: 1; /* Ambos botones ocupan el mismo espacio */
+  height: 45px;
+  border-radius: 25px; /* Bordes redondeados */
+  font-size: 14px; /* Tamaño de texto legible */
+  font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  padding: 0 10px; /* Ajuste del padding para que se vean proporcionados */
+  padding: 0; /* No padding interno adicional */
+  box-shadow: none; /* Quitar cualquier sombra que pueda distorsionar */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación */
+  border: none; /* Evita bordes adicionales */
+  background-clip: padding-box; /* Asegurar que el fondo no sobresalga */
 }
 
-/* Botón "Comprar ahora" */
+/* Efecto hover y clic */
+ion-button:hover {
+  transform: translateY(-2px);
+}
+ion-button:active {
+  transform: translateY(0);
+}
+
+/* Estilo del botón "Comprar ahora" */
 .buy-button {
-  background: linear-gradient(90deg, #5f0d91, #3e0673); /* Degradado púrpura */
+  background: linear-gradient(90deg, #5f0d91, #3e0673); /* Fondo degradado */
   color: white;
-  --background: linear-gradient(90deg, #5f0d91, #3e0673); /* Soporte para Ionic */
+  --background: none;
   --color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra más ligera */
 }
 
-/* Botón "Agregar al carrito" */
+/* Estilo del botón "Agregar al carrito" */
 .add-button {
-  background: #f4f1ed; /* Fondo gris claro */
-  color: #5f0d91; /* Texto morado */
-  --background: #f4f1ed;
+  background: #f9f9f9; /* Fondo claro */
+  color: #5f0d91; /* Texto púrpura */
+  --background: none;
   --color: #5f0d91;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra más ligera */
+  border: 1px solid #5f0d91; /* Borde sutil */
 }
 
 /* Icono en el botón "Agregar al carrito" */
 .add-button ion-icon {
-  margin-right: 4px; /* Ajustar margen para icono */
-  font-size: 16px; /* Tamaño del icono más pequeño */
-  color: #5f0d91; /* Color del icono */
+  margin-right: 6px; /* Separación del texto */
+  font-size: 18px; /* Tamaño adecuado */
+  color: #5f0d91; /* Icono del mismo color que el texto */
 }
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+    gap: 10px; /* Espaciado vertical */
+  }
+
+  ion-button {
+    height: 50px; /* Ajuste para pantallas pequeñas */
+    font-size: 16px; /* Texto más legible en móvil */
+  }
+}
+
 
 .details-segment {
   background-color: #f4f4f4 !important;
