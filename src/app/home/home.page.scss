@@ -266,10 +266,6 @@ text-align: center;
 
 
 
-
-
-
-
 .subscription-card {
   background-color: #f8f8f8;
   border-radius: 10px;
@@ -304,8 +300,8 @@ text-align: center;
     .subscribe-button {
       background: none;
       border: none;
-      color: #000;
-      font-weight: bold;
+      color: #485c65;
+      // font-weight: bold;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -667,9 +663,9 @@ margin-top:-17px;
 
 /* Texto del nombre */
 .name-deslogueado {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: bold;
-  color: #4a4a4a;
+  color: #534b4b;
 }
 
 
