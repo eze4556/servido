@@ -1,9 +1,4 @@
 
-  .custom-toolbar {
-    --background: #6a1b9a;
-    color: #fff;
-  }
-
   .search-bar {
     background-color: #fff;
     border-radius: 8px;
@@ -97,20 +92,6 @@ ion-input {
   }
 
 
-  .action-buttons ion-button {
-    // margin: 5px 0;
-  }
-
- .details-segment {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-
-
-
-
 .carousel-container {
   position: relative;
   width: 90%;
@@ -140,18 +121,7 @@ ion-input {
   border-radius: 8px;
 }
 
-.favorite-icon,
-.share-icon {
-  position: absolute;
-  font-size: 24px;
-  color: #fff;
-  cursor: pointer;
-}
 
-.favorite-icon {
-  top: 10px;
-  right: 50px;
-}
 
 
 .carousel-controls {
@@ -240,11 +210,11 @@ ion-chip {
 
 // ------------
 
-
 .favorite-icon, .share-icon {
   position: absolute;
   cursor: pointer;
   color: #4a008e;
+  font-size: 24px;
   // background: rgba(0, 0, 0, 0.5);
   padding: 10px;
   border-radius: 50%;
@@ -269,90 +239,137 @@ ion-chip {
 }
 
 
-//
-
 /* Contenedor para los botones */
 .action-buttons {
   display: flex;
   justify-content: space-between;
-  gap: 5px;
+  gap: 10px; /* Espaciado entre los botones */
   margin-bottom: 20px;
-  padding:5px
+  padding: 0; /* Quitar padding innecesario */
+  background: transparent; /* Fondo transparente para el contenedor */
+  border-radius: 25px; /* Redondear igual que los botones */
+  overflow: hidden; /* Asegurarse de que los bordes redondeados oculten contenido adicional */
 }
 
-/* Estilo general de los botones */
+/* Botones generales */
 ion-button {
-  flex: 1;
-  height: 40px; /* Reducir altura ligeramente */
-  border-radius: 20px; /* Bordes redondeados más sutiles */
-  font-size: 12px; /* Tamaño de letra más pequeño */
+  flex: 1; /* Ambos botones ocupan el mismo espacio */
+  height: 45px;
+  border-radius: 25px; /* Bordes redondeados */
+  font-size: 14px; /* Tamaño de texto legible */
+  font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  padding: 0 10px; /* Ajuste del padding para que se vean proporcionados */
+  padding: 0; /* No padding interno adicional */
+  box-shadow: none; /* Quitar cualquier sombra que pueda distorsionar */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animación */
+  border: none; /* Evita bordes adicionales */
+  background-clip: padding-box; /* Asegurar que el fondo no sobresalga */
 }
 
-/* Botón "Comprar ahora" */
+/* Efecto hover y clic */
+ion-button:hover {
+  transform: translateY(-2px);
+}
+ion-button:active {
+  transform: translateY(0);
+}
+
+/* Estilo del botón "Comprar ahora" */
 .buy-button {
-  background: linear-gradient(90deg, #5f0d91, #3e0673); /* Degradado púrpura */
+  background: linear-gradient(90deg, #5f0d91, #3e0673); /* Fondo degradado */
   color: white;
-  --background: linear-gradient(90deg, #5f0d91, #3e0673); /* Soporte para Ionic */
+  --background: none;
   --color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra más ligera */
 }
 
-/* Botón "Agregar al carrito" */
+/* Estilo del botón "Agregar al carrito" */
 .add-button {
-  background: #f4f1ed; /* Fondo gris claro */
-  color: #5f0d91; /* Texto morado */
-  --background: #f4f1ed;
+  background: #f9f9f9; /* Fondo claro */
+  color: #5f0d91; /* Texto púrpura */
+  --background: none;
   --color: #5f0d91;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra más ligera */
+  border: 1px solid #5f0d91; /* Borde sutil */
 }
 
 /* Icono en el botón "Agregar al carrito" */
 .add-button ion-icon {
-  margin-right: 4px; /* Ajustar margen para icono */
-  font-size: 16px; /* Tamaño del icono más pequeño */
-  color: #5f0d91; /* Color del icono */
+  margin-right: 6px; /* Separación del texto */
+  font-size: 18px; /* Tamaño adecuado */
+  color: #5f0d91; /* Icono del mismo color que el texto */
 }
 
-/* Estilos para el contenedor del segmento */
+/* Responsividad */
+@media (max-width: 768px) {
+  .action-buttons {
+    flex-direction: column;
+    gap: 10px; /* Espaciado vertical */
+  }
+
+  ion-button {
+    height: 50px; /* Ajuste para pantallas pequeñas */
+    font-size: 16px; /* Texto más legible en móvil */
+  }
+}
+
+
 .details-segment {
-  background-color: #f4f4f4; /* Fondo gris claro */
-  border-bottom: 1px solid #ccc; /* Línea divisoria */
-  display: flex;
-  justify-content: space-around;
+  background-color: #f4f4f4 !important;
+  border-bottom: 1px solid #ccc !important;
+  display: flex !important;
+  justify-content: space-around !important;
 }
 
-/* Estilos generales para los botones del segmento */
 .segment-button1 {
-  background-color: transparent; /* Fondo transparente */
-  color: #000000; /* Letras negras */
-  // font-weight: bold;
-  text-transform: capitalize;
-  border: none; /* Elimina cualquier borde */
-  flex: 1; /* Distribuye espacio uniformemente */
-  padding: 10px 0; /* Espaciado interno vertical */
-  text-align: center;
-  transition: background-color 0.3s, color 0.3s; /* Transición suave */
+  background-color: transparent !important;
+  color: #000000 !important;
+  text-transform: capitalize !important;
+  border: none !important;
+  flex: 1 !important;
+  padding: 10px 0 !important;
+  text-align: center !important;
+  transition: background-color 0.3s, color 0.3s !important;
 }
 
-/* Estilos para la etiqueta dentro del botón */
-.segment-button1 .segment-label {
-  font-size: 14px;
-  color: inherit; /* Hereda el color del botón */
-}
-
-/* Estilos para el botón seleccionado */
 .segment-button1.active {
-  background-color: #ffffff; /* Fondo blanco para destacar */
-  color: #5f0d91; /* Texto morado */
-  // font-weight: bold;
-  text-decoration: underline; /* Subrayado */
-  flex: 1;
+  background-color: #ffffff !important;
+  color: #5f0d91 !important;
+  text-decoration: underline !important;
 }
+
+/* Estilos adaptados para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+  .details-segment {
+    flex-direction:row !important; /* Cambia el diseño a una columna */
+    align-items: center !important; /* Centra los elementos */
+    padding: 10px 0 !important; /* Espaciado interno adicional */
+  }
+
+  .segment-button1 {
+    padding: 15px 0 !important; /* Incrementa el espacio vertical */
+    font-size: 14px !important; /* Ajusta el tamaño del texto */
+  }
+
+  .segment-button1.active {
+    background-color: #ffffff !important;
+    color: #5f0d91 !important;
+    text-decoration: underline !important;
+  }
+}
+
+/* Estilos aún más pequeños (teléfonos) */
+@media screen and (max-width: 480px) {
+  .details-segment {
+    padding: 5px 0 !important; /* Reduce el espaciado para pantallas muy pequeñas */
+  }
+
+  .segment-button1 {
+    padding: 10px 0 !important;
+    font-size: 12px !important; /* Texto más pequeño */
+  }
+}
+
 
 
 //

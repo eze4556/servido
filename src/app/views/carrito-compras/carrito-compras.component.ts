@@ -66,8 +66,14 @@ import { IoniconsModule } from 'src/app/common/modules/ionicons.module';
 })
 export class CarritoComprasComponent  implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {}
+
+  navigateTo(route: string) {
+    this.router.navigate([`/${route}`]);
+  }
 
 }

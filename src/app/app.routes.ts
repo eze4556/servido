@@ -68,6 +68,10 @@ export const routes: Routes = [
     loadComponent: () => import('../app/views/mi-perfil/mi-perfil.component').then((m) => m.MiPerfilComponent),
   },
   {
+    path: 'mi-cuenta',
+    loadComponent: () => import('../app/views/mi-cuenta/mi-cuenta.component').then((m) => m.MiCuentaComponent),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',

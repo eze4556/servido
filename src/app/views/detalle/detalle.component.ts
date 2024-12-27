@@ -1,4 +1,4 @@
-import { Component, OnInit ,NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, OnInit ,NO_ERRORS_SCHEMA, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -59,6 +59,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-detalle',
   templateUrl: './detalle.component.html',
   styleUrls: ['./detalle.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [IonChip, IonSegmentButton,
 
@@ -113,11 +114,12 @@ export class DetalleComponent implements OnInit {
 
   constructor(
 private router: Router,
+private cdr: ChangeDetectorRef
   ) {}
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   async ngOnInit() {
-
+    this.cdr.detectChanges(); // Forzar detección de cambios
   }
 
 
