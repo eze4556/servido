@@ -2,38 +2,14 @@ import { Component, OnInit ,NO_ERRORS_SCHEMA, ViewEncapsulation, ChangeDetectorR
 import {
   IonHeader,
   IonToolbar,
-
-  IonTitle,
   IonContent,
   IonLabel,
-  IonList,
-  IonItem,
-  IonCard,
   IonInput,
-  IonSpinner,
-  IonButtons,
   IonButton,
   IonIcon,
-  IonImg,
-  IonCol,
-  IonRow,
-  IonBackButton,
-  IonGrid,
-  IonRouterLink,
-
-  IonCardHeader,
-  IonCardTitle,
-  IonCardContent,
-  IonSelect,
   IonFooter,
-  IonTabs,
-  IonTabBar,
-  IonTabButton,
-IonFab,
-IonFabButton,
-  IonSelectOption,
   IonSegment,
-  IonBadge, IonSegmentButton, IonChip } from '@ionic/angular/standalone';
+  IonSegmentButton, IonChip } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { IoniconsModule } from '../../common/modules/ionicons.module';
 import { FirestoreService } from 'src/app/common/services/firestore.service';
@@ -49,9 +25,6 @@ import * as bcrypt from 'bcryptjs';
 import { Auth } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { Producto } from 'src/app/common/models/producto.model';
-import { CartService } from 'src/app/common/services/cart.service';
-
 import { RouterModule } from '@angular/router';
 
 
@@ -62,49 +35,23 @@ import { RouterModule } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [IonChip, IonSegmentButton,
-
-    IonGrid,
-    IonBackButton,
-IonSegment,
-IonFooter,
-IonFab,
-IonFabButton,
-    IonSelect,
-    IonSelectOption,
-    IonRow,
-    IonCol,
-      IonTabs,
-  IonTabBar,
-  IonTabButton,
-    IonImg,
-    IonList,
+    IonSegment,
+    IonFooter,
     IonLabel,
-
     IonHeader,
     IonToolbar,
-    IonTitle,
     IonContent,
-    IonList,
-    IonItem,
     IonInput,
     IonIcon,
     IonButton,
-    IonButtons,
-    IonSpinner,
     IonInput,
-    IonCard,
     FormsModule,
     IoniconsModule,
     ReactiveFormsModule,
     CommonModule,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardContent,
     PdfViewerModule,
-    IonBadge,
     IoniconsModule,
     RouterModule,
-
   ],
 })
 export class DetalleComponent implements OnInit {
