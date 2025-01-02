@@ -1,7 +1,6 @@
 import { IonContent, IonCard, IonInput,IonTabButton,IonLabel, IonSelect, IonTabBar, IonSegment,IonSegmentButton, IonSearchbar, IonButton,IonIcon, IonCardHeader, IonCardTitle, IonCardContent, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonSpinner, IonGrid, IonCol, IonRow, IonTabs, IonFooter } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from '../../common/services/firestore.service';
 import { Storage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -23,7 +22,6 @@ export class TiendaComponent implements OnInit {
   userId: string;
 
   constructor(
-    private firestoreService: FirestoreService,
     private storage: Storage,
     private sanitizer: DomSanitizer,
     private navCtrl: NavController,

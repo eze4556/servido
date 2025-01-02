@@ -12,7 +12,6 @@ import {
   IonSegmentButton, IonChip } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { IoniconsModule } from '../../common/modules/ionicons.module';
-import { FirestoreService } from 'src/app/common/services/firestore.service';
 import {
   FormBuilder,
   FormGroup,

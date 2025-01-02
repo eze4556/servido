@@ -13,7 +13,8 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { provideFirestore } from '@angular/fire/firestore';
 import { provideStorage } from '@angular/fire/storage';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
-
+import { importProvidersFrom } from '@angular/core'; // Importar esta función
+import { HttpClientModule } from '@angular/common/http'; // Importar HttpClientModule
 
 if (environment.production) {
   enableProdMode();
@@ -31,6 +32,7 @@ bootstrapApplication(AppComponent, {
     provideAuth(() => getAuth(firebaseApp)),
     provideFirestore(() => getFirestore(firebaseApp)),
     provideStorage(() => getStorage(firebaseApp)),
-     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+    importProvidersFrom(HttpClientModule), // Asegúrate de incluir HttpClientModule aquí
   ],
 });

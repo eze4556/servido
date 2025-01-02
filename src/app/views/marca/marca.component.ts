@@ -19,7 +19,6 @@ import {
   IonHeader, IonBackButton,IonFabButton, IonButtons, IonSpinner, IonImg, IonFab, IonModal,
   IonFooter} from '@ionic/angular/standalone';
 import { Component, OnInit, Input } from '@angular/core';
-import { FirestoreService } from '../../common/services/firestore.service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -66,7 +65,7 @@ export class MarcaComponent implements OnInit {
 
 
 
-  constructor(private firestoreService: FirestoreService, private router: Router) {}
+  constructor(private router: Router) {}
 
  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
  async ngOnInit() {

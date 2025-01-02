@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IonHeader, IonToolbar, IonTitle, IonCardHeader, IonCardContent,IonCardTitle, IonContent, IonLabel, IonList, IonItem, IonCard, IonInput, IonSpinner, IonButtons, IonButton, IonIcon, IonImg, IonCol, IonRow, IonBackButton, IonGrid } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
 import { IoniconsModule } from '../../common/modules/ionicons.module';
-import { FirestoreService } from 'src/app/common/services/firestore.service';
 import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, IonicModule } from '@ionic/angular';
@@ -30,12 +29,10 @@ export class LoginComponent  {
   password: string = '';
 
 constructor(
-    private firestoreService: FirestoreService,
     private router: Router,
     private alertController: AlertController,
     private fb: FormBuilder,
     private authService: AuthService
-
   ) {}
 
 

@@ -41,7 +41,7 @@ import { FormsModule } from '@angular/forms';
 import { IoniconsModule } from '../common/modules/ionicons.module';
 import { Router } from '@angular/router';
 import { AlertController, IonicModule } from '@ionic/angular';
-import { FirestoreService } from 'src/app/common/services/firestore.service';
+
 import { UserI } from '../common/models/users.models';
 import { CommonModule } from '@angular/common';
 import { Producto } from '../common/models/producto.model';
@@ -113,15 +113,12 @@ export class HomePage implements OnInit {
 
   constructor(
     private router: Router,
-    private firestoreService: FirestoreService,
     private authService: AuthService
 
   ) {}
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   async ngOnInit() {
-        this.marcas = await this.firestoreService.getMarcas();
-
         this.checkLoginStatus();
 
   }

@@ -35,10 +35,6 @@ export const routes: Routes = [
     path: 'register',
     loadComponent: () => import('./views/register/register.component').then((m) => m.RegisterComponent),
   },
-  {
-    path: 'productos-marca/:id',
-    loadComponent: () => import('./views/productos-marca/productos-marca.component').then((m) => m.ProductosMarcaComponent),
-  },
    {
     path: 'notificaciones',
     loadComponent: () => import('./views/notificaciones/notificaciones.component').then((m) => m.NotificacionesComponent),

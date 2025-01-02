@@ -1,7 +1,6 @@
 import { IonContent, IonCard, IonCardHeader,IonItem, IonNote, IonLabel, IonInput, IonCardTitle, IonCardContent, IonButtons, IonTitle, IonBackButton, IonToolbar, IonHeader, IonButton } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FirestoreService } from '../../common/services/firestore.service';
 import { Storage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
