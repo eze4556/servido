@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "878643316794",
-    "project_id": "servidoapp-de2a6",
-    "storage_bucket": "servidoapp-de2a6.firebasestorage.app"
+    "project_number": "691492663327",
+    "project_id": "pencuentro-8fdb3",
+    "storage_bucket": "pencuentro-8fdb3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:878643316794:android:f04c827106319598dd0d03",
+        "mobilesdk_app_id": "1:691492663327:android:6548c52cc33452c762252a",
         "android_client_info": {
-          "package_name": "com.servido"
+          "package_name": "com.desarrolloTest"
         }
       },
       "oauth_client": [
         {
-          "client_id": "878643316794-lmjrkrsaehk6a1m2ipsaac7r5k6gvg9d.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.servido",
-            "certificate_hash": "aff57bdb52587d25cec1a408168291d678091c09"
-          }
-        },
-        {
-          "client_id": "878643316794-ruhplae6bokqsp7oujouvedr1vd1dhmj.apps.googleusercontent.com",
+          "client_id": "691492663327-g6nmk7gadthb3r15e68al3klk41emvt7.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDUW23ymj6gs-Dz8lLdweE2-EKs8eKT-HQ"
+          "current_key": "AIzaSyBER42u4x8nbNqr-llTpNwRmeloeKqYiyY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "878643316794-ruhplae6bokqsp7oujouvedr1vd1dhmj.apps.googleusercontent.com",
+              "client_id": "691492663327-g6nmk7gadthb3r15e68al3klk41emvt7.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

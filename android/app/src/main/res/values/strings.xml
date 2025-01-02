@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Servido</string>
     <string name="title_activity_main">Servido</string>
-    <string name="package_name">com.servido</string>
-    <string name="custom_url_scheme">com.servido</string>
-    <string name="server_client_id"> 878643316794-ruhplae6bokqsp7oujouvedr1vd1dhmj.apps.googleusercontent.com  </string>
+    <string name="package_name">com.desarrolloTest</string>
+    <string name="custom_url_scheme">com.desarrolloTest</string>
+    <string name="server_client_id">691492663327-g6nmk7gadthb3r15e68al3klk41emvt7.apps.googleusercontent.com</string>
 </resources>

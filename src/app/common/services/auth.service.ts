@@ -104,7 +104,7 @@ export class AuthService {
     console.log('Inicializando GoogleAuth...');
     // Asegúrate de que el clientId esté en el archivo google-services.json y concuerde con el de Firebase
     await GoogleAuth.initialize({
-      clientId: '878643316794-ruhplae6bokqsp7oujouvedr1vd1dhmj.apps.googleusercontent.com',
+      clientId: '691492663327-g6nmk7gadthb3r15e68al3klk41emvt7.apps.googleusercontent.com',
       scopes: ['profile', 'email'],
     });
     console.log('GoogleAuth inicializado correctamente.');

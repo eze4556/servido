@@ -8,12 +8,12 @@ const config: CapacitorConfig = {
     },
     GoogleAuth: {
       scopes: ["profile", "email"],
-      serverClientId: "878643316794-ruhplae6bokqsp7oujouvedr1vd1dhmj.apps.googleusercontent.com",
+      serverClientId: "691492663327-g6nmk7gadthb3r15e68al3klk41emvt7.apps.googleusercontent.com",
       forceCodeForRefreshToken: false
     }
   },
 
-  appId: 'com.servido',
+  appId: 'com.desarrolloTest',
   appName: 'Infinite POC',
   webDir: 'www',
   server: {
