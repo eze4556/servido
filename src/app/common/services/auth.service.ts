@@ -1,136 +1,99 @@
-
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { UserI } from '../models/users.models';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map } from 'rxjs/operators';
 import firebase from 'firebase/compat/app';
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import { Auth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { UserI } from '../models/users.models';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
-
-
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private userSubject = new BehaviorSubject<UserI | null>(null);
+  public user$ = this.userSubject.asObservable();
 
 
-
-  user$: Observable<any>;
-  afs: any;
- constructor(private afAuth: AngularFireAuth, private router: Router,private auth: Auth   ) {
-    this.user$ = this.afAuth.authState.pipe(
-      map(user => {
-        if (user) {
-          return {
-            id: user.uid,
-            nombre: user.displayName?.split(' ')[0] || '',
-            apellido: user.displayName?.split(' ')[1] || '',
-            email: user.email || '',
-            password: ''
-          };
+  constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) {
+    // GoogleAuth.initialize();
+    this.userSubject = new BehaviorSubject<UserI | null>(null);
+    this.user$ = this.userSubject.asObservable();
+   this.afAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+      this.afAuth.authState.pipe(
+        switchMap(user => {
+          if (user) {
+            return this.firestore.collection<UserI>('usuarios').doc(user.uid).valueChanges();
+          } else {
+            return new Observable<UserI | null>(observer => observer.next(null));
+          }
+        })
+      ).subscribe(userData => {
+        this.userSubject.next(userData);
+        if (userData) {
+          localStorage.setItem('currentUser', JSON.stringify(userData));
         } else {
-          return null;
+          localStorage.removeItem('currentUser');
         }
-      })
-    );
+      });
+    });
   }
 
-  async register(user: UserI) {
+    // Método para obtener todos los usuarios
+  getAllUsers(): Observable<UserI[]> {
+    return this.firestore.collection<UserI>('usuarios').valueChanges();
+  }
+
+  async login(email: string, password: string): Promise<firebase.auth.UserCredential> {
     try {
-      const result = await this.afAuth.createUserWithEmailAndPassword(user.email, user.password);
-      await result.user?.updateProfile({
-        displayName: `${user.nombre} ${user.apellido}`
-      });
-      this.router.navigate(['/']);
+      const credential = await this.afAuth.signInWithEmailAndPassword(email, password);
+      return credential;
     } catch (error) {
-      console.error('Error during registration:', error);
+      console.error('Error during login:', error);
+      throw error;
     }
   }
 
-
-
-  async logout() {
+  async logout(): Promise<void> {
     try {
       await this.afAuth.signOut();
-      this.router.navigate(['/login']);
     } catch (error) {
-      console.log('Error during logout:', error);
+      console.error('Error during logout:', error);
+      throw error;
     }
   }
 
+  // async loginWithGoogle(): Promise<firebase.auth.UserCredential> {
+  //   const provider = new firebase.auth.GoogleAuthProvider();
+  //   const credential = await this.afAuth.signInWithPopup(provider);
+  //   await this.updateUserData(credential.user);
+  //   return credential;
+  // }
 
 
-   async getAllUsers(): Promise<UserI[]> {
-    try {
-      const userRecords = await this.afs.collection('users').get().toPromise();
-      const users = userRecords.docs.map((doc: { id: any; data: () => any; }) => ({
-        id: doc.id,
-        ...doc.data()
-      })) as UserI[];
-      console.log('Usuarios obtenidos:', users);
-      return users;
-    } catch (error) {
-      console.error('Error fetching users:', error);
-      return [];
-    }
-  }
+  // async signInWithGoogle() {
+  //   const googleUser = await GoogleAuth.signIn();
+  //   const credential = firebase.auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
+  //   return this.afAuth.signInWithCredential(credential);
+  // }
 
-
-
- // Método para iniciar sesión con correo y contraseña
-  async login(email: string, password: string) {
-    try {
-      const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
-      const user = userCredential.user;
-
-      // Guardar la información del usuario en el almacenamiento local
-      localStorage.setItem('user', JSON.stringify(user));
-
-      // Redirigir a la página de inicio
-      this.router.navigate(['/home']);
-    } catch (error) {
-      throw new Error('Error al iniciar sesión');
-    }
-  }
-
-//  async signInWithGoogle() {
+// async signInWithGoogle() {
 //   try {
-//     console.log('Inicializando GoogleAuth...');
+
 //     await GoogleAuth.initialize({
-//       clientId: '691492663327-g6nmk7gadthb3r15e68al3klk41emvt7.apps.googleusercontent.com',
+//       clientId: '292123662270-5e3165d2plr6dofhe5bifpulu56e3392.apps.googleusercontent.com',
 //       scopes: ['profile', 'email'],
 //     });
-//     console.log('GoogleAuth inicializado correctamente.');
-//     console.log('Intentando iniciar sesión con Google...');
 
 //     const googleUser = await GoogleAuth.signIn();
-//     console.log('Respuesta de Google sign-in:', googleUser);
-
-//     if (!googleUser || !googleUser.authentication) {
-//       throw new Error('No se obtuvo la autenticación completa del usuario de Google.');
+//     if (!googleUser || !googleUser.authentication || !googleUser.authentication.idToken) {
+//       throw new Error('No se obtuvo el token de autenticación');
 //     }
 
-//     const token = googleUser.authentication.idToken || googleUser.authentication.accessToken;
-//     if (!token) {
-//       throw new Error('No se obtuvo un token de autenticación válido de Google.');
-//     }
-
-//     console.log('Creando credencial de Firebase con el token de Google...');
-//     const credential = firebase.auth.GoogleAuthProvider.credential(token);
-
-//     console.log('Iniciando sesión en Firebase con la credencial...');
+//     const credential = firebase.auth.GoogleAuthProvider.credential(googleUser.authentication.idToken);
 //     const userCredential = await this.afAuth.signInWithCredential(credential);
-//     console.log('Respuesta de Firebase sign-in:', userCredential);
 
-
-
-//     console.log('Usuario inició sesión correctamente con Google:', userCredential);
+//     await this.updateUserData(userCredential.user);
 //     return userCredential;
 //   } catch (error) {
 //     console.error('Error al iniciar sesión con Google:', error);
@@ -138,33 +101,42 @@ export class AuthService {
 //   }
 // }
 
-
 async signInWithGoogle() {
   try {
     console.log('Inicializando GoogleAuth...');
+    // Asegúrate de que el clientId esté en el archivo google-services.json y concuerde con el de Firebase
     await GoogleAuth.initialize({
       clientId: '691492663327-g6nmk7gadthb3r15e68al3klk41emvt7.apps.googleusercontent.com',
       scopes: ['profile', 'email'],
     });
+    console.log('GoogleAuth inicializado correctamente.');
 
+    console.log('Intentando iniciar sesión con Google...');
     const googleUser = await GoogleAuth.signIn();
+    console.log('Respuesta de Google sign-in:', googleUser);
+
+    // Verifica si se obtuvo un usuario y la autenticación
+    if (!googleUser || !googleUser.authentication) {
+      throw new Error('No se obtuvo la autenticación completa del usuario de Google.');
+    }
+
+    // Usar idToken o accessToken según lo que devuelva GoogleAuth
     const token = googleUser.authentication.idToken || googleUser.authentication.accessToken;
+    if (!token) {
+      throw new Error('No se obtuvo un token de autenticación válido de Google.');
+    }
+
+    console.log('Creando credencial de Firebase con el token de Google...');
     const credential = firebase.auth.GoogleAuthProvider.credential(token);
+
+    console.log('Iniciando sesión en Firebase con la credencial...');
     const userCredential = await this.afAuth.signInWithCredential(credential);
+    console.log('Respuesta de Firebase sign-in:', userCredential);
 
-    // Obtener ubicación
-    const location = await this.getLocation();
-    console.log('Ubicación del usuario:', location);
-
-    // Guardar información del usuario y ubicación en el almacenamiento local
-    const userData = {
-      ...userCredential.user,
-      location,
-    };
-    localStorage.setItem('user', JSON.stringify(userData));
+    console.log('Actualizando los datos del usuario en Firestore...');
+    await this.updateUserData(userCredential.user);
 
     console.log('Usuario inició sesión correctamente con Google:', userCredential);
-    this.router.navigate(['/home']);
     return userCredential;
   } catch (error) {
     console.error('Error al iniciar sesión con Google:', error);
@@ -172,19 +144,66 @@ async signInWithGoogle() {
   }
 }
 
+  private async updateUserData(user: firebase.User | null): Promise<void> {
+    if (user) {
+      const userRef = this.firestore.collection('usuarios').doc(user.uid);
+      const userDoc = await userRef.get().toPromise();
 
+      if (!userDoc.exists) {
+        const data: Omit<any, 'password'> = {
+          id: user.uid,
+          nombre: user.displayName || 'Sin Nombre',
+          email: user.email || '',
+        };
 
-
-  // getUser() {
-  //   return JSON.parse(localStorage.getItem('user') || '{}');
-  // }
-
-
-// Devuelve un observable con el estado de autenticación
-  getUser(): Observable<any> {
-    return this.afAuth.authState; // Esto devuelve un observable del estado de autenticación
+        try {
+          await userRef.set(data);
+        } catch (error) {
+          console.error('Error setting new user data:', error);
+        }
+      }
+    }
   }
 
+  async register(email: string, password: string, nombre: string, apellido: string, dni:number): Promise<void> {
+    try {
+      const userCredential = await this.afAuth.createUserWithEmailAndPassword(email, password);
+      const uid = userCredential.user?.uid;
+      if (uid) {
+        await this.firestore.collection('usuarios').doc(uid).set({
+          id: uid,
+          nombre: nombre,
+          dni: dni,
+          email: email,
+          tipo_usuario: 'cliente',
+          apellido: apellido,
+        });
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+      throw error;
+    }
+  }
+
+  async resetPassword(email: string): Promise<void> {
+    try {
+      await this.afAuth.sendPasswordResetEmail(email);
+    } catch (error) {
+      console.error('Error during password reset:', error);
+      throw error;
+    }
+  }
+
+  getCurrentUser(): Observable<UserI | null> {
+    const storedUser = localStorage.getItem('currentUser');
+
+    if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        this.userSubject.next(parsedUser);
+    }
+
+    return this.user$;
+}
 
 getLocation(): Promise<{ latitude: number; longitude: number }> {
   return new Promise((resolve, reject) => {
@@ -207,15 +226,8 @@ getLocation(): Promise<{ latitude: number; longitude: number }> {
   });
 }
 
-
-
-
-
-
-
-
-
-
-
+getUser(): Observable<any> {
+  return this.afAuth.authState; // Esto devuelve un observable del estado de autenticación
+}
 
 }

@@ -110,62 +110,73 @@
   border-radius: 10px;
 }
 
+:host {
+  --ion-background-color: #f8f9fa;
+}
 
-.title-label {
-  font-size: 1.2rem;
-  font-weight: bold;
+.custom-toolbar {
+  --background: #6a1b9a;
+  color: #fff;
+}
+
+.form-container {
   padding: 16px;
-  color: black;
+  background: #fff;
+  border-radius: 8px;
+  margin: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-item {
+  margin-bottom: 16px;
+}
+
+.form-item label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #6a1b9a; /* Cambia el color del label */
+  margin-bottom: 4px;
+}
+
+.form-item input,
+.form-item select,
+.form-item textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #6a1b9a; /* Cambia el color del borde */
+  border-radius: 4px;
+  background-color: #000; /* Fondo negro */
+  color: #fff; /* Texto blanco */
+  box-sizing: border-box;
+}
+
+.form-item input::placeholder,
+.form-item textarea::placeholder {
+  color: rgba(255, 255, 255, 0.7); /* Texto de placeholder semitransparente */
+}
+
+.form-item textarea {
+  resize: vertical;
+  height: 80px;
 }
 
 .button-container {
-  padding: 16px;
-}
-
-ion-item {
-  --inner-padding-end: 8px;
-}
-
-ion-label {
-  font-size: 1rem;
-}
-
-ion-button {
-  --border-radius: 8px;
-  --background: var(--ion-color-secondary);
-}
-.custom-item {
-  border: 1px solid #4a008e; /* Color violeta medio */
-  border-radius: 8px;
-  margin: 8px;
-  --inner-padding-end: 8px;
-}
-
-.custom-item ion-label {
-  font-size: 1rem;
-}
-
-.custom-button {
-  --border-radius: 8px;
-  --background: #4a008e; /* Fondo violeta */
-  --color: white;
-  --border-color: #4a008e;;
-}
-
-.custom-button:hover {
-  filter: brightness(0.9);
+  text-align: center;
 }
 
 .publish-button {
-  --background: #4a008e;; /* Fondo violeta */
-  --color: white;
-  --border-radius: 8px;
+  background-color: #6a1b9a;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .publish-button:hover {
-  filter: brightness(0.9);
-}
-
-.button-container {
-  padding: 16px;
+  background-color: #4a008e;
 }

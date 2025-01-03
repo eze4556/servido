@@ -1,57 +1,57 @@
-
-
 <ion-header>
   <ion-toolbar class="custom-toolbar">
     <ion-title>Publicar</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
-
 <ion-content>
-  <ion-list>
-    <ion-item lines="none">
-      <ion-label class="title-label">
-        Completa los datos para publicar tu producto
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <div class="form-container">
+    <div class="form-item">
+      <label for="title">Nombre del producto</label>
+      <input id="title" type="text" [(ngModel)]="productData.title" />
+    </div>
 
-   <ion-list>
-    <ion-item class="custom-item">
-      <ion-label>Fotos de tu producto</ion-label>
-      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
-    </ion-item>
-    <ion-item class="custom-item">
-      <ion-label>Título de la publicación</ion-label>
-      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
-    </ion-item>
-    <ion-item class="custom-item">
-      <ion-label>Categoría de tu producto</ion-label>
-      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
-    </ion-item>
-    <ion-item class="custom-item">
-      <ion-label>Precio</ion-label>
-      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
-    </ion-item>
-    <ion-item class="custom-item">
-      <ion-label>Descripción del producto</ion-label>
-      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
-    </ion-item>
-    <ion-item class="custom-item">
-      <ion-label>Variantes</ion-label>
-      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
-    </ion-item>
-    <ion-item class="custom-item">
-      <ion-label>Stock</ion-label>
-      <ion-button slot="end" fill="outline" class="custom-button">Elegir</ion-button>
-    </ion-item>
-  </ion-list>
+    <div class="form-item">
+      <label for="category">Categoría</label>
+      <select id="category" [(ngModel)]="productData.category">
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
 
-  <div class="button-container">
-    <ion-button expand="block" class="publish-button">Publicar</ion-button>
+    <div class="form-item">
+      <label for="price">Precio</label>
+      <input id="price" type="number" [(ngModel)]="productData.price" />
+    </div>
+
+    <div class="form-item">
+      <label for="description">Descripción</label>
+      <textarea id="description" [(ngModel)]="productData.description"></textarea>
+    </div>
+
+    <div class="form-item">
+      <label for="stock">Stock</label>
+      <input id="stock" type="number" [(ngModel)]="productData.stock" />
+    </div>
+
+    <div class="form-item">
+      <label for="variants">Variantes</label>
+      <input id="variants" type="text" (input)="updateVariants($event)" />
+    </div>
+
+    <div class="form-item">
+      <label for="image">Imagen del producto</label>
+      <input id="image" type="file" (change)="onImageChange($event)" />
+    </div>
+
+    <div class="button-container">
+      <button class="publish-button" (click)="createProduct()">Publicar</button>
+    </div>
   </div>
 </ion-content>
+
+
 
 <ion-footer>
   <ion-toolbar class="scrollable-toolbar">

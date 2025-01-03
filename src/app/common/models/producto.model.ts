@@ -5,5 +5,5 @@ export interface Producto {
   description: string;
   stock: number;
   variants: string[]; // O cualquier tipo adecuado
-  images: string[];   // O cualquier tipo adecuado
+  images: string;   // O cualquier tipo adecuado
 }
