@@ -50,6 +50,7 @@ import { AuthService } from '../common/services/auth.service';
 import { Marca } from '../common/models/marca.model';
 import { Productoferta } from '../common/models/productofree.model';
 import { Categoria } from 'src/app/common/models/categoria.model';
+import { HttpClient } from '@angular/common/http';
 
 
 type DropdownSegment = 'categoria' | 'marcas' | 'productos' | 'perfil';
@@ -107,38 +108,49 @@ type DropdownSegment = 'categoria' | 'marcas' | 'productos' | 'perfil';
 export class HomePage implements OnInit {
 
     isLoggedIn: boolean = false;
-  isLoading: boolean = true; // Nueva propiedad para controlar el estado de carga
+  isLoading: boolean = true;
+  location: string = 'Cargando ubicación...'; // Inicializa con mensaje
 
 
 
   constructor(
     private router: Router,
-    private authService: AuthService
-
+    private authService: AuthService,
+    private http: HttpClient
   ) {}
 
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   async ngOnInit() {
         this.checkLoginStatus();
+
+  if (this.isLoggedIn) {
+    this.getLocation();
+  }
 
   }
 
   checkLoginStatus() {
     this.authService.getUser().subscribe(user => {
       this.isLoggedIn = !!user;
+
+      if (this.isLoggedIn) {
+        this.getLocation();
+      }
+
+
     });
   }
 
-  // Método para cerrar sesión
   logout() {
     this.authService.logout();
-    this.isLoggedIn = false; // Cambiar el estado de login
+    this.isLoggedIn = false;
+      localStorage.removeItem('location');
+
   }
 
 slideOpts = {
   initialSlide: 0,
-  slidesPerView: 1, // Muestra una fila de tarjetas
-  spaceBetween: 10, // Ajusta el espacio entre las tarjetas
+  slidesPerView: 1,
+  spaceBetween: 10,
 };
 
   marcas: Marca[] = [];
@@ -147,6 +159,56 @@ slideOpts = {
 navigateTo(route: string) {
   this.router.navigate([`/${route}`]);
 }
+
+
+
+
+  // Obtener ubicación y luego la ciudad
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+
+          // Llama a la función para obtener la ciudad
+          this.getCityName(latitude, longitude);
+        },
+        (error) => {
+          console.error('Error al obtener ubicación:', error.message);
+          this.location = 'No se pudo obtener la ubicación.';
+        }
+      );
+    } else {
+      this.location = 'Geolocalización no soportada.';
+    }
+  }
+
+  // Obtener la ciudad a partir de las coordenadas
+  getCityName(lat: number, lon: number) {
+    const apiKey = '98b2a3c7dffc490c972b130ea176974d'; 
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${apiKey}`;
+
+    this.http.get<any>(url).subscribe(
+      (response) => {
+        if (response && response.results && response.results.length > 0) {
+          const components = response.results[0].components;
+
+          // Busca el nombre de la ciudad
+          const city = components.city || components.town || components.village || 'Ciudad no encontrada';
+          const country = components.country;
+
+          this.location = `${city}, ${country}`; // Mostrar ciudad y país
+        } else {
+          this.location = 'Ciudad no encontrada.';
+        }
+      },
+      (error) => {
+        console.error('Error al obtener ciudad:', error);
+        this.location = 'Error al cargar ciudad.';
+      }
+    );
+  }
 
 
 

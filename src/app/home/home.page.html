@@ -8,6 +8,11 @@
       <ion-icon name="cart-outline" class="icon-cart" (click)="navigateTo('carrito')"></ion-icon>
     </div>
   <p class="address-text" (click)="navigateTo('login')" *ngIf="!isLoggedIn">Login de prueba</p>
+    <!-- Mostrar ubicación -->
+    <!-- Mostrar ubicación -->
+    <p class="address-text" *ngIf="isLoggedIn">
+      Ubicación: {{ location }}
+    </p>
   </ion-toolbar>
 </ion-header>
 
