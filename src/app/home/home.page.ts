@@ -186,7 +186,7 @@ navigateTo(route: string) {
 
   // Obtener la ciudad a partir de las coordenadas
   getCityName(lat: number, lon: number) {
-    const apiKey = '98b2a3c7dffc490c972b130ea176974d'; 
+    const apiKey = '98b2a3c7dffc490c972b130ea176974d';
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${apiKey}`;
 
     this.http.get<any>(url).subscribe(
@@ -207,8 +207,8 @@ navigateTo(route: string) {
         console.error('Error al obtener ciudad:', error);
         this.location = 'Error al cargar ciudad.';
       }
-    );
-  }
+    );
+  }
 
 
 

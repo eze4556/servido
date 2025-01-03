@@ -1,4 +1,4 @@
-package com.servido;
+package com.desarrolloTest;
 
 import com.getcapacitor.BridgeActivity;
 
