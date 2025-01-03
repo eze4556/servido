@@ -1,77 +1,80 @@
-import { IonContent, IonCard, IonInput,IonTabButton,IonLabel, IonSelect, IonTabBar, IonSegment,IonSegmentButton, IonSearchbar, IonButton,IonIcon, IonCardHeader, IonCardTitle, IonCardContent, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonSpinner, IonGrid, IonCol, IonRow, IonTabs, IonFooter } from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonInput,
+  IonLabel,
+  IonButton,
+  IonIcon,
+  IonHeader,
+  IonToolbar,
+  IonGrid,
+  IonCol,
+  IonRow,
+  IonFooter,
+} from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Storage } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { IoniconsModule } from 'src/app/common/modules/ionicons.module';
-import { NavController } from '@ionic/angular';
-
 import { Router } from '@angular/router';
-
+import { FirestoreService } from 'src/app/common/services/firestore.service'; // Servicio actualizado
+import { Producto } from 'src/app/common/models/producto.model'; // Modelo de producto
 
 @Component({
   selector: 'app-tienda',
   templateUrl: './tienda.component.html',
   styleUrls: ['./tienda.component.scss'],
   standalone: true,
-  imports: [IonFooter, IonTabs, IonRow, IonCol,    IoniconsModule,
- IonTabButton,IonLabel, IonGrid,IonSelect, IonTabBar, IonSpinner,IonInput, IonSearchbar, IonSegment,IonSegmentButton,IonButton,IonIcon, IonTitle, IonBackButton, IonButtons, IonToolbar, IonHeader, CommonModule, IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent]
+  imports: [
+    IonFooter,
+    IonRow,
+    IonCol,
+    IoniconsModule,
+    IonLabel,
+    IonGrid,
+    IonInput,
+    IonButton,
+    IonIcon,
+    IonToolbar,
+    IonHeader,
+    CommonModule,
+    IonContent,
+  ],
 })
 export class TiendaComponent implements OnInit {
   userId: string;
+  productos: Producto[] = []; // Productos cargados desde el servicio
+  isLoading = true; // Indicador de carga
 
   constructor(
-    private storage: Storage,
     private sanitizer: DomSanitizer,
-    private navCtrl: NavController,
-    private router: Router
-  ) { }
+    private router: Router,
+    private firestoreService: FirestoreService // Servicio actualizado
+  ) {}
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId');
+    this.loadProducts(); // Cargar productos desde el servicio
   }
 
   navigateTo(route: string) {
     this.router.navigate([`/${route}`]);
   }
 
+  loadProducts(): void {
+    this.firestoreService.getProductos().subscribe(
+      (data) => {
+        console.log('Productos recibidos:', data); // Verificar los datos en la consola
+        this.productos = data;
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Error al obtener los productos:', error);
+        this.isLoading = false;
+      }
+    );
+  }
 
   getSanitizedUrl(url: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
-
-
-
-  productos = [
-    {
-      nombre: 'Cubierta Fate Sentiva 195 65 15',
-      precioActual: 120000,
-      precioAnterior: 150000,
-      descuento: 20,
-      imagen: '../../../assets/icon/rueda-removebg-preview.png',
-    },
-    {
-      nombre: 'Cubierta Fate Sentiva 195 65 15',
-      precioActual: 120000,
-      precioAnterior: 150000,
-      descuento: 20,
-      imagen: '../../../assets/icon/rueda-removebg-preview.png',
-    },
-    {
-      nombre: 'Cubierta Fate Sentiva 195 65 15',
-      precioActual: 120000,
-      precioAnterior: 150000,
-      descuento: 20,
-      imagen: '../../../assets/icon/rueda-removebg-preview.png',
-    },
-    {
-      nombre: 'Cubierta Fate Sentiva 195 65 15',
-      precioActual: 120000,
-      precioAnterior: 150000,
-      descuento: 20,
-      imagen: '../../../assets/icon/rueda-removebg-preview.png',
-    },
-
-  ];
 }

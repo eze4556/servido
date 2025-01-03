@@ -28,9 +28,8 @@ export const routes: Routes = [
   },
    {
     path: 'publicar',
-    loadComponent: () => import('./views/oferta/oferta.component').then((m) => m.ProductofertaDetailComponent),
+    loadComponent: () => import('./views/publicar-producto/publicar-producto.component').then((m) => m.PublicarProductoComponent),
   },
-
   {
     path: 'register',
     loadComponent: () => import('./views/register/register.component').then((m) => m.RegisterComponent),

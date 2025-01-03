@@ -13,93 +13,83 @@
   </ion-toolbar>
 </ion-header>
 
-
-
-
 <ion-content>
-  <!-- <ion-grid> -->
+  <ion-toolbar style="border-bottom: 1px solid #ccc;">
+    <ion-grid>
+      <ion-row class="filters-row">
+        <ion-col size="auto">
+          <ion-button fill="clear" class="filter-button">
+            Categorías
+            <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button fill="clear" class="filter-button">
+            Marca
+            <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button fill="clear" class="filter-button">
+            Ordenar por
+            <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button fill="clear" class="filter-button">
+            Precio
+            <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="auto">
+          <ion-button fill="clear" class="filter-button">
+            <ion-icon name="funnel-outline"></ion-icon> Filtros
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
 
-
-<ion-toolbar style="border-bottom: 1px solid #ccc;">
-  <ion-grid>
-    <ion-row class="filters-row">
-      <ion-col size="auto">
-        <ion-button fill="clear" class="filter-button">
-          Categorías <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col size="auto">
-        <ion-button fill="clear" class="filter-button">
-          Marca <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col size="auto">
-        <ion-button fill="clear" class="filter-button">
-          Ordenar por <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col size="auto">
-        <ion-button fill="clear" class="filter-button">
-          Precio <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
-        </ion-button>
-      </ion-col>
-      <ion-col size="auto">
-        <ion-button fill="clear" class="filter-button">
-          <ion-icon name="funnel-outline"></ion-icon> Filtros
-        </ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-toolbar>
-
-
-<div class="product-grid">
-  <div class="product-card">
-    <div class="product-image" (click)="navigateTo('detalle')">
-      <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Cubierta Fate Sentiva">
-    </div>
-    <h2 class="product-title">Cubierta Fate Sentiva 195 65 15</h2>
-    <div class="product-pricing">
-      <p class="price">$120.000</p>
-      <p class="discount">30% OFF</p>
-    </div>
+  <div class="product-grid">
+    <ng-container *ngIf="!isLoading; else loading">
+      <div
+        class="product-card"
+        *ngFor="let producto of productos"
+        (click)="navigateTo('detalle')"
+      >
+        <div class="product-image">
+          <img
+            *ngIf="producto.images"
+            [src]="producto.images"
+            [alt]="producto.title || 'Producto sin título'"
+          />
+        </div>
+        <h2 class="product-title">{{ producto.title || 'Producto sin título' }}</h2>
+        <div class="product-pricing">
+          <p class="price">{{ producto.price | currency }}</p>
+          <!-- <p *ngIf="producto.stock > 0" class="stock">En stock: {{ producto.stock }}</p>
+          <p *ngIf="producto.stock === 0" class="out-of-stock">Agotado</p> -->
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #loading>
+      <p>Cargando productos...</p>
+    </ng-template>
   </div>
-  <div class="product-card">
-    <div class="product-image"  (click)="navigateTo('detalle')">
-      <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Cubierta Pirelli">
-    </div>
-    <h2 class="product-title">Cubierta Pirelli 205 55 16</h2>
-    <div class="product-pricing">
-      <p class="price">$150.000</p>
-      <p class="discount">20% OFF</p>
-    </div>
-  </div>
-  <div class="product-card">
-    <div class="product-image"  (click)="navigateTo('detalle')">
-      <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Cubierta Bridgestone">
-    </div>
-    <h2 class="product-title">Cubierta Bridgestone 185 60 14</h2>
-    <div class="product-pricing">
-      <p class="price">$100.000</p>
-      <p class="discount">25% OFF</p>
-    </div>
-  </div>
-  <div class="product-card">
-    <div class="product-image" (click)="navigateTo('detalle')">
-      <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Cubierta Michelin">
-    </div>
-    <h2 class="product-title">Cubierta Michelin 225 50 17</h2>
-    <div class="product-pricing">
-      <p class="price">$200.000</p>
-      <p class="discount">15% OFF</p>
-    </div>
-  </div>
-</div>
-
-
-
 
 </ion-content>
+
+
+<!-- <div class="product-card">
+  <div class="product-image" (click)="navigateTo('detalle')">
+    <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Cubierta Michelin">
+  </div>
+  <h2 class="product-title">Cubierta Michelin 225 50 17</h2>
+  <div class="product-pricing">
+    <p class="price">$200.000</p>
+    <p class="discount">15% OFF</p>
+  </div>
+</div> -->
 
 <ion-footer>
   <ion-toolbar class="scrollable-toolbar">
