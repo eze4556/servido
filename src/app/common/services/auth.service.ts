@@ -99,47 +99,79 @@ export class AuthService {
     }
   }
 
- async signInWithGoogle() {
+//  async signInWithGoogle() {
+//   try {
+//     console.log('Inicializando GoogleAuth...');
+//     await GoogleAuth.initialize({
+//       clientId: '691492663327-g6nmk7gadthb3r15e68al3klk41emvt7.apps.googleusercontent.com',
+//       scopes: ['profile', 'email'],
+//     });
+//     console.log('GoogleAuth inicializado correctamente.');
+//     console.log('Intentando iniciar sesión con Google...');
+
+//     const googleUser = await GoogleAuth.signIn();
+//     console.log('Respuesta de Google sign-in:', googleUser);
+
+//     if (!googleUser || !googleUser.authentication) {
+//       throw new Error('No se obtuvo la autenticación completa del usuario de Google.');
+//     }
+
+//     const token = googleUser.authentication.idToken || googleUser.authentication.accessToken;
+//     if (!token) {
+//       throw new Error('No se obtuvo un token de autenticación válido de Google.');
+//     }
+
+//     console.log('Creando credencial de Firebase con el token de Google...');
+//     const credential = firebase.auth.GoogleAuthProvider.credential(token);
+
+//     console.log('Iniciando sesión en Firebase con la credencial...');
+//     const userCredential = await this.afAuth.signInWithCredential(credential);
+//     console.log('Respuesta de Firebase sign-in:', userCredential);
+
+
+
+//     console.log('Usuario inició sesión correctamente con Google:', userCredential);
+//     return userCredential;
+//   } catch (error) {
+//     console.error('Error al iniciar sesión con Google:', error);
+//     throw error;
+//   }
+// }
+
+
+async signInWithGoogle() {
   try {
     console.log('Inicializando GoogleAuth...');
-    // Asegúrate de que el clientId esté en el archivo google-services.json y concuerde con el de Firebase
     await GoogleAuth.initialize({
       clientId: '691492663327-g6nmk7gadthb3r15e68al3klk41emvt7.apps.googleusercontent.com',
       scopes: ['profile', 'email'],
     });
-    console.log('GoogleAuth inicializado correctamente.');
 
-    console.log('Intentando iniciar sesión con Google...');
     const googleUser = await GoogleAuth.signIn();
-    console.log('Respuesta de Google sign-in:', googleUser);
-
-    // Verifica si se obtuvo un usuario y la autenticación
-    if (!googleUser || !googleUser.authentication) {
-      throw new Error('No se obtuvo la autenticación completa del usuario de Google.');
-    }
-
-    // Usar idToken o accessToken según lo que devuelva GoogleAuth
     const token = googleUser.authentication.idToken || googleUser.authentication.accessToken;
-    if (!token) {
-      throw new Error('No se obtuvo un token de autenticación válido de Google.');
-    }
-
-    console.log('Creando credencial de Firebase con el token de Google...');
     const credential = firebase.auth.GoogleAuthProvider.credential(token);
-
-    console.log('Iniciando sesión en Firebase con la credencial...');
     const userCredential = await this.afAuth.signInWithCredential(credential);
-    console.log('Respuesta de Firebase sign-in:', userCredential);
 
+    // Obtener ubicación
+    const location = await this.getLocation();
+    console.log('Ubicación del usuario:', location);
 
+    // Guardar información del usuario y ubicación en el almacenamiento local
+    const userData = {
+      ...userCredential.user,
+      location,
+    };
+    localStorage.setItem('user', JSON.stringify(userData));
 
     console.log('Usuario inició sesión correctamente con Google:', userCredential);
+    this.router.navigate(['/home']);
     return userCredential;
   } catch (error) {
     console.error('Error al iniciar sesión con Google:', error);
     throw error;
   }
 }
+
 
 
 
@@ -152,5 +184,38 @@ export class AuthService {
   getUser(): Observable<any> {
     return this.afAuth.authState; // Esto devuelve un observable del estado de autenticación
   }
+
+
+getLocation(): Promise<{ latitude: number; longitude: number }> {
+  return new Promise((resolve, reject) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const coords = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          };
+          resolve(coords);
+        },
+        (error) => {
+          reject('Error al obtener la ubicación: ' + error.message);
+        }
+      );
+    } else {
+      reject('Geolocalización no es soportada por este navegador.');
+    }
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
 
 }
