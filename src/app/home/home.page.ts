@@ -116,8 +116,10 @@ export class HomePage implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient,
+
+  ) {   setInterval(() => this.moveSlide(1), 3000);
+}
 
   async ngOnInit() {
         this.checkLoginStatus();
@@ -147,11 +149,8 @@ export class HomePage implements OnInit {
 
   }
 
-slideOpts = {
-  initialSlide: 0,
-  slidesPerView: 1,
-  spaceBetween: 10,
-};
+
+
 
   marcas: Marca[] = [];
 
@@ -211,5 +210,24 @@ navigateTo(route: string) {
   }
 
 
+images = [
+
+    '../../assets/icon/2.png',
+    '../../assets/icon/4enero.png',
+    '../../assets/icon/4enero1.png',
+    '../../assets/icon/4enero2.png',
+  ];
+
+
+  currentSlide = 0;
+
+  moveSlide(step: number) {
+    const totalSlides = this.images.length;
+    this.currentSlide += step;
+
+    // Ciclo infinito en el carrusel
+    if (this.currentSlide >= totalSlides) this.currentSlide = 0;
+    if (this.currentSlide < 0) this.currentSlide = totalSlides - 1;
+  }
 
 }
