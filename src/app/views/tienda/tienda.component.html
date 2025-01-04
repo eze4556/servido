@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-toolbar class="custom-toolbar">
     <div class="search-cart-container">
@@ -8,9 +7,13 @@
       </div>
       <ion-icon name="cart-outline" class="icon-cart" (click)="navigateTo('carrito')"></ion-icon>
     </div>
-
-
+  <p class="address-text" (click)="navigateTo('login')" *ngIf="!isLoggedIn">Login de prueba</p>
+  <!-- Mostrar ubicación flotante más abajo -->
   </ion-toolbar>
+ <p class="floating-location" *ngIf="isLoggedIn">
+    <ion-icon name="location-outline" style="margin-right: 8px;"></ion-icon>
+    {{ location }}
+  </p>
 </ion-header>
 
 <ion-content>
@@ -72,9 +75,14 @@
         </div>
       </div>
     </ng-container>
-    <ng-template #loading>
-      <p>Cargando productos...</p>
-    </ng-template>
+  <ng-template #loading   >
+  <div style="align-items: center;">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Cargando...</span>
+    </div>
+    <p>Cargando productos...</p>
+  </div>
+</ng-template>
   </div>
 
 </ion-content>

@@ -19,35 +19,28 @@
 
 
 <ion-content>
-  <!-- Carrusel de imágenes -->
-  <ion-slides class="custom-slides" pager="true" [options]="slideOpts">
-    <ion-slide>
-      <div class="slide-content">
-        <img
-          src="../../assets/icon/imagenmodif.jfif"
-          alt="Audífonos 1"
-          class="slide-image"
-        />
-      </div>
-    </ion-slide>
-    <!-- <ion-slide>
-    <div class="slide-content">
-      <img src="../../assets/icon/headphones2.png" alt="Audífonos 2" class="slide-image" />
+
+<div class="carousel-container1">
+  <div
+    class="carousel-slide1"
+    [style.transform]="'translateX(-' + currentSlide * 100 + '%)'"
+  >
+    <div class="slide1" *ngFor="let image of images">
+      <img [src]="image" alt="Imagen del carrusel" />
     </div>
-  </ion-slide>
-  <ion-slide>
-    <div class="slide-content">
-      <img src="../../assets/icon/headphones3.png" alt="Audífonos 3" class="slide-image" />
-    </div>
-  </ion-slide> -->
-  </ion-slides>
+  </div>
+</div>
+
+
 
   <!-- Botones en la parte inferior -->
   <div class="buttons-row">
-    <div class="circle-button">
-      <img src="../../assets/icon/750_750-a235.jpg" alt="Icono" />
-      <p>Botón</p>
-    </div>
+    <a href="/elección">
+  <div class="circle-button">
+    <img src="../../assets/icon/vender.png" alt="Icono" />
+    <p>Vender</p>
+  </div>
+</a>
     <div class="circle-button">
       <img src="../../assets/icon/750_750-a235.jpg" alt="Icono" />
       <p>Botón</p>
@@ -78,7 +71,7 @@
       />
     </div>
     <div class="banner">
-      <img src="../../assets/icon/4.png" alt="Banner 2" class="banner-image" />
+      <img src="../../assets/icon/12.png" alt="Banner 2" class="banner-image" />
     </div>
   </div>
 
@@ -293,7 +286,7 @@
   <!-- Nuevos banners -->
   <div class="banners-container1" *ngIf="isLoggedIn">
     <div class="banner">
-      <img src="../../assets/icon/4.png" alt="Banner 2" class="banner-image" />
+      <img src="../../assets/icon/11.png" alt="Banner 2" class="banner-image" />
     </div>
   </div>
 
@@ -357,7 +350,7 @@
   <!-- Nuevos banners -->
   <div class="banners-container1" *ngIf="isLoggedIn">
     <div class="banner">
-      <img src="../../assets/icon/4.png" alt="Banner 2" class="banner-image" />
+      <img src="../../assets/icon/9.png" alt="Banner 2" class="banner-image" />
     </div>
   </div>
 

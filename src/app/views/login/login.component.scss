@@ -1,9 +1,8 @@
-::ng-deep {
-  .custom-toolbar {
-    background-color: #ffe600; /* Amarillo de Mercado Libre */
-    color: #000 !important;
-    --ion-color-primary: #000 !important;
-  }
+// ::ng-deep {
+//   .custom-toolbar {
+//     color: #000 !important;
+//     --ion-color-primary: #000 !important;
+//   }
 
   .custom-back-button {
     color: #000 !important;
@@ -48,7 +47,7 @@
     font-weight: bold !important;
     border-radius: 50px !important;
     margin-top: 20px !important;
-   
+
     transition: filter 0.3s !important;
   }
 
@@ -129,4 +128,4 @@
     text-decoration: underline !important;
     cursor: pointer !important;
   }
-}
+

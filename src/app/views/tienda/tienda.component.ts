@@ -19,6 +19,8 @@ import { Router } from '@angular/router';
 import { FirestoreService } from 'src/app/common/services/firestore.service'; // Servicio actualizado
 import { Producto } from 'src/app/common/models/producto.model'; // Modelo de producto
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../common/services/auth.service';
+
 
 @Component({
   selector: 'app-tienda',
@@ -50,6 +52,7 @@ export class TiendaComponent implements OnInit {
   constructor(
     private sanitizer: DomSanitizer,
         private http: HttpClient,
+    private authService: AuthService,
 
     private router: Router,
     private firestoreService: FirestoreService // Servicio actualizado
@@ -58,7 +61,9 @@ export class TiendaComponent implements OnInit {
   ngOnInit() {
     this.userId = localStorage.getItem('userId');
     this.loadProducts(); // Cargar productos desde el servicio
-     if (this.isLoggedIn) {
+    this.checkLoginStatus();
+
+  if (this.isLoggedIn) {
     this.getLocation();
   }
   }
@@ -68,7 +73,17 @@ export class TiendaComponent implements OnInit {
   }
 
     location: string = 'Cargando ubicación...'; // Inicializa con mensaje
+checkLoginStatus() {
+    this.authService.getUser().subscribe(user => {
+      this.isLoggedIn = !!user;
 
+      if (this.isLoggedIn) {
+        this.getLocation();
+      }
+
+
+    });
+  }
 
   loadProducts(): void {
     this.firestoreService.getProductos().subscribe(
