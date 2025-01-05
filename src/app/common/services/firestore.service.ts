@@ -104,4 +104,21 @@ export class FirestoreService {
     const productsQuery = query(productsCollection, where('stock', '>', 1));
     return collectionData(productsQuery, { idField: 'id' });
   }
+
+  getProductoById(id: string): Observable<any> {
+    const productDocRef = doc(this.firestore, `products/${id}`);
+    return docData(productDocRef, { idField: 'id' });
+  }
+
+
+  async addProduct(product: any): Promise<void> {
+    // Genera un ID único
+    const id = this.createIdDoc();
+
+    // Crea la referencia al documento con el ID generado
+    const productDocRef = doc(this.firestore, `products/${id}`);
+
+    // Incluye el ID generado dentro del producto y guarda el documento
+    await setDoc(productDocRef, { ...product, id });
+  }
 }

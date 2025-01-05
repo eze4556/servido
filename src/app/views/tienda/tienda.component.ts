@@ -154,5 +154,10 @@ checkLoginStatus() {
     );
   }
 
+navigateToProduct(productId: string) {
+  this.router.navigate([`/product/${productId}`]); // Navegar a la ruta dinámica
+}
+
+
 
 }

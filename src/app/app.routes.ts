@@ -19,7 +19,7 @@ export const routes: Routes = [
     loadComponent: () => import('./views/marca/marca.component').then((m) => m.MarcaComponent),
   },
    {
-    path: 'detalle',
+    path: 'product/:id',
     loadComponent: () => import('./views/detalle/detalle.component').then((m) => m.DetalleComponent),
   },
   {

@@ -18,13 +18,16 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import * as bcrypt from 'bcryptjs';
 import { Auth } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { RouterModule } from '@angular/router';
+import { Producto } from 'src/app/common/models/producto.model';
+import { Observable } from 'rxjs/internal/Observable';
+import { FirestoreService } from 'src/app/common/services/firestore.service';
 
 
 @Component({
@@ -56,15 +59,22 @@ import { RouterModule } from '@angular/router';
 export class DetalleComponent implements OnInit {
   // Segmento seleccionado por defecto
   selectedSegment: string = 'product-details';
-
+  product$: Observable<Producto | undefined>; // Producto dinámico
+  currentIndex = 0;
 
   constructor(
 private router: Router,
-private cdr: ChangeDetectorRef
+private route: ActivatedRoute,
+private cdr: ChangeDetectorRef,
+private firestoreService: FirestoreService,
   ) {}
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   async ngOnInit() {
+    const productId = this.route.snapshot.paramMap.get('id');
+    if (productId) {
+      this.product$ = this.firestoreService.getProductoById(productId);
+    }
     this.cdr.detectChanges(); // Forzar detección de cambios
   }
 
@@ -113,8 +123,6 @@ faqs = [
       alt: 'Cubierta 3',
     },
   ];
-
- currentIndex = 0;
 
   private startX = 0;
   private deltaX = 0;

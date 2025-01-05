@@ -58,7 +58,7 @@
       <div
         class="product-card"
         *ngFor="let producto of productos"
-        (click)="navigateTo('detalle')"
+        (click)="navigateToProduct(producto.id)"
       >
         <div class="product-image">
           <img
@@ -70,20 +70,19 @@
         <h2 class="product-title">{{ producto.title || 'Producto sin título' }}</h2>
         <div class="product-pricing">
           <p class="price">{{ producto.price | currency }}</p>
-          <!-- <p *ngIf="producto.stock > 0" class="stock">En stock: {{ producto.stock }}</p>
-          <p *ngIf="producto.stock === 0" class="out-of-stock">Agotado</p> -->
         </div>
       </div>
     </ng-container>
-  <ng-template #loading   >
-  <div style="align-items: center;">
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Cargando...</span>
-    </div>
-    <p>Cargando productos...</p>
+    <ng-template #loading>
+      <div style="align-items: center;">
+        <div class="spinner-border" role="status">
+          <span class="sr-only">Cargando...</span>
+        </div>
+        <p>Cargando productos...</p>
+      </div>
+    </ng-template>
   </div>
-</ng-template>
-  </div>
+
 
 </ion-content>
 

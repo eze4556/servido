@@ -22,69 +22,65 @@ margin-top: -17px;
 
 }
 
-
-
-
-
 .custom-toolbar {
   --background: #6a1b9a;
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
 }
 
-.search-bar {
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 0 10px;
-  width: 70%;
-  margin: 0 auto;
-}
-
-/* Estilo del ion-toolbar */
-ion-toolbar.custom-toolbar {
---background: #4a008e; /* Fondo púrpura */
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 4px 8px; /* Reducido verticalmente para hacerla más fina */
-height: 88px;
-}
-
-/* Contenedor de búsqueda y carrito */
 .search-cart-container {
-display: flex;
-align-items: center;
-width: 100%; /* Ocupa todo el ancho */
-max-width: 600px; /* Ancho máximo del contenedor */
-gap: 8px; /* Espaciado entre búsqueda y carrito */
-// margin-top: 51px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  gap: 8px;
 }
 
-/* Barra de búsqueda más fina */
 .search-container {
-display: flex;
-align-items: center;
-background-color: white;
-border-radius: 20px; /* Ligeramente menos redondeado */
-padding: 4px 12px; /* Menor espaciado interno vertical */
-flex: 1; /* Ocupa el máximo espacio horizontal */
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil ajustada */
-height: 32px; /* Grosor reducido de la barra */
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  padding: 4px 12px;
+  flex: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 32px;
 }
 
-/* Icono de búsqueda */
 .icon-search {
-color: gray;
-font-size: 20px;
-margin-right: 6px; /* Espaciado entre icono y input */
+  color: gray;
+  font-size: 20px;
+  margin-right: 6px;
 }
 
-/* Icono del carrito */
 .icon-cart {
-color: white;
-font-size: 24px;
-cursor: pointer;
-line-height: 1; /* Asegura alineación vertical con el grosor reducido */
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
 }
+
+.address-text {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #fff;
+}
+
+.location-info {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background-color: #4a008e;
+  padding: 4px 12px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 
 /* Input de la barra de búsqueda */
 ion-input {
@@ -805,7 +801,7 @@ margin-top:-17px;
 .carousel-slide1 {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  width: 100%; 
+  width: 100%;
 }
 
 .slide1 {

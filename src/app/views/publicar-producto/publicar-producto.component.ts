@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductService } from '../../common/services/product.service';
 import {
   AlertController,
   IonContent,
@@ -18,9 +17,10 @@ import { IoniconsModule } from 'src/app/common/modules/ionicons.module';
 import { Producto } from 'src/app/common/models/producto.model';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { FirestoreService } from 'src/app/common/services/firestore.service';
 
 @Component({
-  selector: 'app-pubilcar-producto',
+  selector: 'app-pubicar-producto',
   templateUrl: './publicar-producto.component.html',
   styleUrls: ['./publicar-producto.component.scss'],
   standalone: true,
@@ -43,6 +43,7 @@ export class PublicarProductoComponent implements OnInit {
   categories: string[] = ['Electrónica', 'Ropa', 'Hogar', 'Deportes'];
 
   productData: Producto = {
+    id:'',
     title: '',
     category: '',
     price: 0,
@@ -53,7 +54,7 @@ export class PublicarProductoComponent implements OnInit {
   };
 
   constructor(
-    private productService: ProductService,
+    private firestoreService: FirestoreService,
     private alertController: AlertController,
     private router: Router,
     private loadingController: LoadingController // Inyectar el LoadingController
@@ -71,9 +72,8 @@ export class PublicarProductoComponent implements OnInit {
       // Mostrar el indicador de carga
       await loading.present();
 
-      const response = await this.productService
-        .createProduct(this.productData)
-        .toPromise();
+      // Crear producto usando el nuevo método
+      await this.firestoreService.addProduct(this.productData);
 
       await this.showAlert('Éxito', '¡Producto creado exitosamente!');
       this.router.navigate(['/tienda']);
