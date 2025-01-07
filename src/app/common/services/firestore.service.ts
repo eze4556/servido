@@ -121,4 +121,20 @@ export class FirestoreService {
     // Incluye el ID generado dentro del producto y guarda el documento
     await setDoc(productDocRef, { ...product, id });
   }
+
+
+
+  // Obtener marcas
+  getMarcas(): Observable<any[]> {
+    const marcasCollection = collection(this.firestore, 'marcas');
+    return collectionData(marcasCollection, { idField: 'id' });
+  }
+
+  // Obtener categorías
+  getCategorias(): Observable<any[]> {
+    const categoriasCollection = collection(this.firestore, 'categorias');
+    return collectionData(categoriasCollection, { idField: 'id' });
+  }
+
+  
 }
