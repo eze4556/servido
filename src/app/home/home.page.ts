@@ -51,6 +51,7 @@ import { Marca } from '../common/models/marca.model';
 import { Productoferta } from '../common/models/productofree.model';
 import { Categoria } from 'src/app/common/models/categoria.model';
 import { HttpClient } from '@angular/common/http';
+import { FirestoreService } from '../common/services/firestore.service';
 
 
 type DropdownSegment = 'categoria' | 'marcas' | 'productos' | 'perfil';
@@ -117,6 +118,7 @@ export class HomePage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private http: HttpClient,
+    private firestoreService: FirestoreService
 
   ) {   setInterval(() => this.moveSlide(1), 3000);
 }
@@ -127,6 +129,9 @@ export class HomePage implements OnInit {
   if (this.isLoggedIn) {
     this.getLocation();
   }
+
+   this.loadMarcas();       // Cargar marcas al iniciar
+    this.loadCategorias();   // Cargar categorías al iniciar
 
   }
 
@@ -152,8 +157,8 @@ export class HomePage implements OnInit {
 
 
 
-  marcas: Marca[] = [];
-
+    marcas$: Observable<any[]>;      // Observable para marcas
+  categorias$: Observable<any[]>;  // Observable para categorías
 
 navigateTo(route: string) {
   this.router.navigate([`/${route}`]);
@@ -228,6 +233,24 @@ images = [
     // Ciclo infinito en el carrusel
     if (this.currentSlide >= totalSlides) this.currentSlide = 0;
     if (this.currentSlide < 0) this.currentSlide = totalSlides - 1;
+  }
+
+
+
+   // Método para obtener marcas
+  loadMarcas() {
+    this.marcas$ = this.firestoreService.getMarcas();
+    this.marcas$.subscribe(marcas => {
+      console.log('Marcas cargadas:', marcas);
+    });
+  }
+
+  // Método para obtener categorías
+  loadCategorias() {
+    this.categorias$ = this.firestoreService.getCategorias();
+    this.categorias$.subscribe(categorias => {
+      console.log('Categorías cargadas:', categorias);
+    });
   }
 
 }
