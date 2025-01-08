@@ -14,8 +14,17 @@
     <div class="form-item">
       <label for="category">Categoría</label>
       <select id="category" [(ngModel)]="productData.category">
-        <option *ngFor="let category of categories" [value]="category">
-          {{ category }}
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.nombre }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-item">
+      <label for="brand">Marca</label>
+      <select id="brand" [(ngModel)]="productData.brand">
+        <option *ngFor="let brand of brands" [value]="brand.id">
+          {{ brand.nombre }}
         </option>
       </select>
     </div>
@@ -35,15 +44,36 @@
       <input id="stock" type="number" [(ngModel)]="productData.stock" />
     </div>
 
-    <div class="form-item">
+    <!-- <div class="form-item">
       <label for="variants">Variantes</label>
       <input id="variants" type="text" (input)="updateVariants($event)" />
-    </div>
+    </div> -->
 
     <div class="form-item">
-      <label for="image">Imagen del producto</label>
-      <input id="image" type="file" (change)="onImageChange($event)" />
+      <label for="images">Imágenes del producto</label>
+      <p class="helper-text">
+        Puedes agregar más de una imagen para el producto (máximo 6 imágenes).
+      </p>
+      <input
+        id="images"
+        type="file"
+        (change)="onImagesChange($event)"
+        multiple
+        accept="image/*"
+      />
     </div>
+
+    <h3 class="preview-title">Previsualización de imágenes</h3>
+    <div class="image-preview-container">
+      <div
+        class="image-preview"
+        *ngFor="let image of previewImages; let i = index"
+      >
+        <img [src]="image" alt="Imagen del producto" />
+        <button type="button" class="delete-button" (click)="removeImage(i)">×</button>
+      </div>
+    </div>
+
 
     <div class="button-container">
       <button class="publish-button" (click)="createProduct()">Publicar</button>

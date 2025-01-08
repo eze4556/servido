@@ -20,6 +20,7 @@ import { FirestoreService } from 'src/app/common/services/firestore.service'; //
 import { Producto } from 'src/app/common/models/producto.model'; // Modelo de producto
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../common/services/auth.service';
+import { ProductService } from 'src/app/common/services/product.service';
 
 
 @Component({
@@ -53,7 +54,7 @@ export class TiendaComponent implements OnInit {
     private sanitizer: DomSanitizer,
         private http: HttpClient,
     private authService: AuthService,
-
+    private productoService: ProductService,
     private router: Router,
     private firestoreService: FirestoreService // Servicio actualizado
   ) {}
@@ -86,7 +87,7 @@ checkLoginStatus() {
   }
 
   loadProducts(): void {
-    this.firestoreService.getProductos().subscribe(
+    this.productoService.getProducts().subscribe(
       (data) => {
         console.log('Productos recibidos:', data); // Verificar los datos en la consola
         this.productos = data;
