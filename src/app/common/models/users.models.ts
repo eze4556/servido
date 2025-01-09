@@ -2,6 +2,7 @@ export interface UserI {
   id: string;
   nombre: string;
   apellido: string;
-   email: string;
-  password: string;
+  email: string;
+  // password:string;
+  tipo_usuario: string;
 }

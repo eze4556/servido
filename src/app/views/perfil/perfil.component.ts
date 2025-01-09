@@ -33,6 +33,7 @@ export class PerfilComponent  implements OnInit {
 
   user: UserI | undefined;
   userId: string | null = null;
+  currentRoute: string = '';
 
   constructor(  private firestoreService: FirestoreService,
     private router: Router,
@@ -42,7 +43,10 @@ export class PerfilComponent  implements OnInit {
  ) { }
 
  async ngOnInit() {
-
+   // Actualiza la ruta actual cada vez que cambia
+   this.router.events.subscribe(() => {
+    this.currentRoute = this.router.url.replace('/', '');
+  });
   }
 
   navigateTo(route: string) {

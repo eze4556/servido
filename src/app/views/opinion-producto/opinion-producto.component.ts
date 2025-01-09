@@ -57,10 +57,16 @@ import { IoniconsModule } from 'src/app/common/modules/ionicons.module';
 export class OpinionProductoComponent  implements OnInit {
   stars = Array(5).fill(0); // Genera un array de 5 elementos para las estrellas
   rating = 0; // Calificación actual seleccionada
+  currentRoute: string = '';
 
   constructor(   private router: Router,) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+     // Actualiza la ruta actual cada vez que cambia
+    this.router.events.subscribe(() => {
+      this.currentRoute = this.router.url.replace('/', '');
+    });
+  }
 
   setRating(rating: number): void {
     this.rating = rating; // Establece la calificación según el índice de la estrella seleccionada

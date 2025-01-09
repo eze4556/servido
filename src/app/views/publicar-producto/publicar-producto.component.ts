@@ -59,6 +59,7 @@ export class PublicarProductoComponent implements OnInit {
     images: [], // Aquí se almacenarán los enlaces de las imágenes
     brand: '', // Nueva propiedad para la marca
   };
+  currentRoute: string = '';
 
   constructor(
     private firestoreService: FirestoreService,
@@ -69,6 +70,10 @@ export class PublicarProductoComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+       // Actualiza la ruta actual cada vez que cambia
+    this.router.events.subscribe(() => {
+      this.currentRoute = this.router.url.replace('/', '');
+    });
     this.loadCategoriesAndBrands();
   }
 

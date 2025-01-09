@@ -49,6 +49,7 @@ export class TiendaComponent implements OnInit {
   productos: Producto[] = []; // Productos cargados desde el servicio
   isLoggedIn: boolean = false;
   isLoading: boolean = true;
+  currentRoute: string = '';
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -63,6 +64,10 @@ export class TiendaComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
     this.loadProducts(); // Cargar productos desde el servicio
     this.checkLoginStatus();
+       // Actualiza la ruta actual cada vez que cambia
+    this.router.events.subscribe(() => {
+      this.currentRoute = this.router.url.replace('/', '');
+    });
 
   if (this.isLoggedIn) {
     this.getLocation();
