@@ -39,6 +39,7 @@ import { IoniconsModule } from 'src/app/common/modules/ionicons.module';
   ]
 })
 export class NotificacionesComponent  implements OnInit {
+  currentRoute: string = '';
 
 constructor(
     private storage: Storage,
@@ -49,7 +50,12 @@ constructor(
   ) {}
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngOnInit() {}
+  ngOnInit() {
+       // Actualiza la ruta actual cada vez que cambia
+    this.router.events.subscribe(() => {
+      this.currentRoute = this.router.url.replace('/', '');
+    });
+  }
 
 
   navigateTo(route: string) {

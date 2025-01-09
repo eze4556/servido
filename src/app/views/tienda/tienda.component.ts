@@ -19,6 +19,7 @@ import { FirestoreService } from 'src/app/common/services/firestore.service'; //
 import { Producto } from 'src/app/common/models/producto.model'; // Modelo de producto
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../common/services/auth.service';
+import { ProductService } from 'src/app/common/services/product.service';
 
 @Component({
   selector: 'app-tienda',
@@ -46,6 +47,7 @@ export class TiendaComponent implements OnInit {
   productos: Producto[] = []; // Productos cargados desde el servicio
   isLoggedIn: boolean = false;
   isLoading: boolean = true;
+  currentRoute: string = '';
 
   filteredProductos: Producto[] = []; // Productos filtrados
 
@@ -58,7 +60,7 @@ export class TiendaComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private http: HttpClient,
     private authService: AuthService,
-
+    private productoService: ProductService,
     private router: Router,
     private firestoreService: FirestoreService
   ) {}
@@ -67,6 +69,10 @@ export class TiendaComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
     this.loadProducts();
     this.checkLoginStatus();
+       // Actualiza la ruta actual cada vez que cambia
+    this.router.events.subscribe(() => {
+      this.currentRoute = this.router.url.replace('/', '');
+    });
 
     if (this.isLoggedIn) {
       this.getLocation();
@@ -89,7 +95,7 @@ export class TiendaComponent implements OnInit {
   }
 
   loadProducts(): void {
-    this.firestoreService.getProductos().subscribe(
+    this.productoService.getProducts().subscribe(
       (data) => {
         console.log('Productos recibidos:', data);
         this.productos = data;

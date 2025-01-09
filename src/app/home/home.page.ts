@@ -111,6 +111,7 @@ export class HomePage implements OnInit {
     isLoggedIn: boolean = false;
   isLoading: boolean = true;
   location: string = 'Cargando ubicación...'; // Inicializa con mensaje
+  currentRoute: string = '';
 
 
 
@@ -124,14 +125,19 @@ export class HomePage implements OnInit {
 }
 
   async ngOnInit() {
-        this.checkLoginStatus();
+  this.checkLoginStatus();
 
   if (this.isLoggedIn) {
     this.getLocation();
   }
 
-   this.loadMarcas();       // Cargar marcas al iniciar
-    this.loadCategorias();   // Cargar categorías al iniciar
+  // Actualiza la ruta actual cada vez que cambia
+  this.router.events.subscribe(() => {
+    this.currentRoute = this.router.url.replace('/', '');
+  });
+
+  this.loadMarcas();       // Cargar marcas al iniciar
+  this.loadCategorias();   // Cargar categorías al iniciar
 
   }
 

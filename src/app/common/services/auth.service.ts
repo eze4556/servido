@@ -154,6 +154,7 @@ async signInWithGoogle() {
           id: user.uid,
           nombre: user.displayName || 'Sin Nombre',
           email: user.email || '',
+          tipo_usuario: 'cliente'
         };
 
         try {

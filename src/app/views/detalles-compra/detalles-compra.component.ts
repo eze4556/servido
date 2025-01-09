@@ -13,12 +13,18 @@ import { IoniconsModule } from 'src/app/common/modules/ionicons.module';
     ,IonButtons,IonBackButton,IonTitle,CommonModule, IonLabel,IoniconsModule]
 })
 export class DetallesCompraComponent  implements OnInit {
+  currentRoute: string ='';
 
   constructor(
     private router: Router
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+       // Actualiza la ruta actual cada vez que cambia
+    this.router.events.subscribe(() => {
+      this.currentRoute = this.router.url.replace('/', '');
+    });
+  }
 
 
   navigateTo(route: string) {

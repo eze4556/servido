@@ -7,7 +7,7 @@ import { Producto } from '../models/producto.model';
   providedIn: 'root', // Esto asegura que sea singleton y evita conflictos de inyección
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3333/products';
+  private apiUrl = 'http://localhost:3000/products';
 
   constructor(
     private http: HttpClient

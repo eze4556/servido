@@ -62,6 +62,7 @@ import { IoniconsModule } from 'src/app/common/modules/ionicons.module';
   ],
 })
 export class MarcaComponent implements OnInit {
+  currentRoute: string = '';
 
 
 
@@ -69,7 +70,10 @@ export class MarcaComponent implements OnInit {
 
  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
  async ngOnInit() {
-
+   // Actualiza la ruta actual cada vez que cambia
+    this.router.events.subscribe(() => {
+      this.currentRoute = this.router.url.replace('/', '');
+    });
   }
 
 

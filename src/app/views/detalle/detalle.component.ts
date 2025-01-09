@@ -61,6 +61,7 @@ export class DetalleComponent implements OnInit {
   selectedSegment: string = 'product-details';
   product$: Observable<Producto | undefined>; // Producto dinámico
   currentIndex = 0;
+  currentRoute: string = '';
 
   constructor(
 private router: Router,
@@ -75,6 +76,10 @@ private firestoreService: FirestoreService,
     if (productId) {
       this.product$ = this.firestoreService.getProductoById(productId);
     }
+       // Actualiza la ruta actual cada vez que cambia
+    this.router.events.subscribe(() => {
+      this.currentRoute = this.router.url.replace('/', '');
+    });
     this.cdr.detectChanges(); // Forzar detección de cambios
   }
 

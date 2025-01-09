@@ -6,15 +6,8 @@
 
 <ion-content class="ion-padding profile-content">
 
-  <ion-item button>
-    <ion-icon name="help-circle-outline" slot="start"></ion-icon>
-    <ion-label>Mis Subscripciones</ion-label>
-  </ion-item>
-  <ion-button expand="block" class="buy-button" (click)="navigateTo('elección')">
-    <ion-label>Vender</ion-label>
-  </ion-button>
-
-  <ion-list lines="none" class="options-list">
+  <!-- Sección Compras: Solo para usuarios tipo "cliente" -->
+  <ion-list *ngIf="tipoUsuario === 'cliente'" lines="none" class="options-list">
     <h1 class="section-title">Compras</h1>
     <ion-item button>
       <ion-icon name="help-circle-outline" slot="start"></ion-icon>
@@ -28,10 +21,18 @@
       <ion-icon name="ellipsis-horizontal-outline" slot="start"></ion-icon>
       <ion-label>Mis Opiniones</ion-label>
     </ion-item>
+    <ion-item button>
+      <ion-icon name="heart-outline" slot="start"></ion-icon>
+      <ion-label>Favoritos</ion-label>
+    </ion-item>
   </ion-list>
 
-  <ion-list lines="none" class="options-list">
+  <!-- Sección Ventas: Solo para usuarios tipo "tienda" -->
+  <ion-list *ngIf="tipoUsuario === 'tienda'" lines="none" class="options-list">
     <h1 class="section-title">Ventas</h1>
+    <ion-button expand="block" class="buy-button" (click)="navigateTo('elección')">
+      <ion-label>Publicar Productos o Servicios</ion-label>
+    </ion-button>
     <ion-item button>
       <ion-icon name="bar-chart-outline" slot="start"></ion-icon>
       <ion-label>Resumen</ion-label>
@@ -56,18 +57,19 @@
       <ion-icon name="analytics-outline" slot="start"></ion-icon>
       <ion-label>Métricas</ion-label>
     </ion-item>
-  </ion-list>
-
-  <ion-list lines="none" class="options-list">
-    <h1 class="section-title">Facturación</h1>
     <ion-item button>
       <ion-icon name="receipt-outline" slot="start"></ion-icon>
       <ion-label>Facturación</ion-label>
     </ion-item>
   </ion-list>
 
+  <!-- Sección Configuración: Disponible para todos -->
   <ion-list lines="none" class="options-list">
     <h1 class="section-title">Configuración</h1>
+    <ion-item button>
+      <ion-icon name="help-circle-outline" slot="start"></ion-icon>
+      <ion-label>Mis Subscripciones</ion-label>
+    </ion-item>
     <ion-item button (click)="navigateTo('mi-perfil')">
       <ion-icon name="person-outline" slot="start"></ion-icon>
       <ion-label>Mi Perfil</ion-label>
@@ -77,6 +79,10 @@
       <ion-label>Ajustes</ion-label>
     </ion-item>
     <ion-item button>
+      <ion-icon name="help-circle-outline" slot="start"></ion-icon>
+      <ion-label>Ayuda</ion-label>
+    </ion-item>
+    <ion-item button>
       <ion-icon name="log-out-outline" slot="start"></ion-icon>
       <ion-label>Cerrar Sesión</ion-label>
     </ion-item>
@@ -84,56 +90,50 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar class="scrollable-toolbar">
-    <!-- Indicador de deslizamiento -->
-    <div class="scroll-hint">
-      <ion-icon name="arrow-forward-outline"></ion-icon>
-      <span>Desliza para más opciones</span>
-    </div>
-
+  <ion-toolbar class="fixed-toolbar">
     <!-- Tabs -->
-    <div class="scrollable-tabs">
+    <div class="fixed-tabs">
       <!-- Tab: Inicio -->
-      <div class="tab-item">
-        <ion-icon name="home-outline" (click)="navigateTo('home')"></ion-icon>
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'home'"
+        (click)="navigateTo('home')"
+      >
+        <ion-icon name="home-outline"></ion-icon>
         <ion-label>Inicio</ion-label>
       </div>
 
       <!-- Tab: Tienda -->
-      <div class="tab-item">
-        <ion-icon name="storefront-outline" (click)="navigateTo('tienda')"></ion-icon>
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'tienda'"
+        (click)="navigateTo('tienda')"
+      >
+        <ion-icon name="storefront-outline"></ion-icon>
         <ion-label>Tienda</ion-label>
       </div>
 
       <!-- Tab: Notificaciones -->
-      <div class="tab-item">
-        <ion-icon name="notifications-outline" (click)="navigateTo('notificaciones')"></ion-icon>
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'notificaciones'"
+        (click)="navigateTo('notificaciones')"
+      >
+        <ion-icon name="notifications-outline"></ion-icon>
         <ion-label>Notificaciones</ion-label>
       </div>
 
-      <!-- Nueva Tab: Perfil -->
-      <div class="tab-item">
-        <ion-icon name="person-outline" (click)="navigateTo('mi-perfil')"></ion-icon>
-        <ion-label>Perfil</ion-label>
-      </div>
-
-      <!-- Nueva Tab: Favoritos -->
-      <div class="tab-item">
-        <ion-icon name="heart-outline" (click)="navigateTo('favoritos')"></ion-icon>
-        <ion-label>Favoritos</ion-label>
-      </div>
-
-      <!-- Nueva Tab: Configuración -->
-      <div class="tab-item">
-        <ion-icon name="settings-outline" (click)="navigateTo('mi-cuenta')"></ion-icon>
+      <!-- Tab: Configuración -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'mi-cuenta'"
+        (click)="navigateTo('mi-cuenta')"
+      >
+        <ion-icon name="settings-outline"></ion-icon>
         <ion-label>Más</ion-label>
-      </div>
-
-      <!-- Nueva Tab: Ayuda -->
-      <div class="tab-item">
-        <ion-icon name="help-circle-outline" (click)="navigateTo('ayuda')"></ion-icon>
-        <ion-label>Ayuda</ion-label>
       </div>
     </div>
   </ion-toolbar>
 </ion-footer>
+
+
