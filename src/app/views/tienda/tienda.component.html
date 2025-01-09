@@ -18,49 +18,67 @@
 
 <ion-content>
 
-  <ion-toolbar style="border-bottom: 1px solid #ccc;">
+<ion-toolbar style="border-bottom: 1px solid #ccc;">
   <ion-grid>
     <ion-row class="filters-row">
-      <!-- Categorías -->
+      <!-- Filtro por Categoría -->
       <ion-col size="auto">
         <ion-button fill="clear" class="filter-button" (click)="toggleFilter('category')">
           Categorías
           <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
         </ion-button>
       </ion-col>
-    
+
+      <!-- Filtro por Marca -->
+      <ion-col size="auto">
+        <ion-button fill="clear" class="filter-button" (click)="toggleFilter('brand')">
+          Marcas
+          <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
+        </ion-button>
+      </ion-col>
+
+      <!-- Filtro por Precio -->
       <ion-col size="auto">
         <ion-button fill="clear" class="filter-button" (click)="toggleFilter('price')">
           Precio
           <ion-icon slot="end" name="chevron-down-outline"></ion-icon>
         </ion-button>
       </ion-col>
+
+     <!-- Filtro por Búsqueda -->
+<ion-col size="auto">
+  <ion-input
+    [(ngModel)]="searchTerm"
+    (ionInput)="applyFilter('search', $event.target.value)"
+    placeholder="Buscar productos"
+  ></ion-input>
+</ion-col>
+
+
+      <ion-col size="auto">
+        <ion-button fill="clear" class="filter-button" (click)="clearFilters()">Limpiar filtros</ion-button>
+      </ion-col>
     </ion-row>
   </ion-grid>
-
-  <!-- Dropdown de Filtros -->
-  <div *ngIf="activeFilter === 'category'" class="dropdown">
-    <ion-item *ngFor="let cat of categories" (click)="applyFilter('category', cat)">
-      {{ cat }}
-    </ion-item>
-  </div>
-  <div *ngIf="activeFilter === 'brand'" class="dropdown">
-    <ion-item *ngFor="let brand of brands" (click)="applyFilter('brand', brand)">
-      {{ brand }}
-    </ion-item>
-  </div>
-  <div *ngIf="activeFilter === 'price'" class="dropdown">
-    <ion-item (click)="applyFilter('price', 'low-to-high')">Menor a mayor</ion-item>
-    <ion-item (click)="applyFilter('price', 'high-to-low')">Mayor a menor</ion-item>
-  </div>
 </ion-toolbar>
 
+<!-- Dropdown de Filtros -->
+<div *ngIf="activeFilter === 'category'" class="dropdown">
+  <ion-item *ngFor="let cat of categories" (click)="applyFilter('category', cat)">
+    {{ cat }}
+  </ion-item>
+</div>
+
+<div *ngIf="activeFilter === 'price'" class="dropdown">
+  <ion-item (click)="applyFilter('price', 'high-to-low')">Menor a mayor</ion-item>
+  <ion-item (click)="applyFilter('price', 'low-to-high')">Mayor a menor</ion-item>
+</div>
 
   <div class="product-grid">
     <ng-container *ngIf="!isLoading; else loading">
       <div
         class="product-card"
-        *ngFor="let producto of productos"
+        *ngFor="let producto of filteredProductos"
         (click)="navigateToProduct(producto.id)"
       >
         <div class="product-image">

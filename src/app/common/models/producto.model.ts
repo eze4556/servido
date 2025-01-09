@@ -5,6 +5,7 @@ export interface Producto {
   price: number;
   description: string;
   stock: number;
-  variants: string[]; // O cualquier tipo adecuado
-  images: string;   // O cualquier tipo adecuado
+  // variants: string[];
+  images: string[];   // O cualquier tipo adecuado
+  brand: '', // Nueva propiedad para la marca
 }

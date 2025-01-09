@@ -20,6 +20,8 @@ import { Producto } from 'src/app/common/models/producto.model'; // Modelo de pr
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../common/services/auth.service';
 import { ProductService } from 'src/app/common/services/product.service';
+import { FormsModule } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-tienda',
@@ -31,6 +33,7 @@ import { ProductService } from 'src/app/common/services/product.service';
     IonRow,
     IonCol,
     IoniconsModule,
+    FormsModule,
     IonLabel,
     IonGrid,
     IonInput,
@@ -49,12 +52,16 @@ export class TiendaComponent implements OnInit {
   isLoading: boolean = true;
   currentRoute: string = '';
 
-  filteredProductos: Producto[] = []; // Productos filtrados
-
-  categories: string[] = []; // Lista de categorías únicas
-  brands: string[] = []; // Lista de marcas únicas
-  activeFilter: string = ''; // Filtro activo
+   filteredProductos: Producto[] = []; // Productos filtrados
+  categories: string[] = [];
+  brands: string[] = [];
+   activeFilter: string = '';
   appliedFilters: any = {}; // Filtros aplicados
+  minPrice: number = 0;
+  maxPrice: number = 0;
+  searchTerm: string = '';
+
+
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -69,7 +76,6 @@ export class TiendaComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
     this.loadProducts();
     this.checkLoginStatus();
-       // Actualiza la ruta actual cada vez que cambia
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url.replace('/', '');
     });
@@ -94,14 +100,42 @@ export class TiendaComponent implements OnInit {
     });
   }
 
-  loadProducts(): void {
-    this.productoService.getProducts().subscribe(
-      (data) => {
-        console.log('Productos recibidos:', data);
-        this.productos = data;
+//  loadProducts(filters?: { category?: string; minPrice?: number; maxPrice?: number; brand?: string; search?: string }): void {
+//     this.isLoading = true;
 
-this.filteredProductos = [...data]; // Copia inicial
-        this.categories = [...new Set(data.map((p) => p.category))];
+//     this.productoService.getProducts(filters || {}).subscribe(
+//       (data) => {
+//         this.productos = data;
+//         this.filteredProductos = [...data];
+
+
+//         this.categories = [...new Set(data.map((p) => p.category))];
+//         this.brands = [...new Set(data.map((p) => p.brand))];
+
+//         this.isLoading = false;
+//       },
+//       (error) => {
+//         console.error('Error al obtener los productos:', error);
+//         this.isLoading = false;
+//       }
+//     );
+//   }
+
+loadProducts(filters?: { category?: string; minPrice?: number; maxPrice?: number; brand?: string; search?: string }): void {
+  this.isLoading = true;
+
+  this.firestoreService.getCategorias().subscribe((categorias) => {
+    const categoryMap = categorias.reduce((map, cat) => {
+      map[cat.id] = cat.nombre;
+      return map;
+    }, {});
+
+    this.productoService.getProducts(filters || {}).subscribe(
+      (data) => {
+        this.productos = data;
+        this.filteredProductos = [...data];
+
+        this.categories = [...new Set(data.map((p) => categoryMap[p.category] || p.category))];
         this.brands = [...new Set(data.map((p) => p.brand))];
 
         this.isLoading = false;
@@ -111,7 +145,47 @@ this.filteredProductos = [...data]; // Copia inicial
         this.isLoading = false;
       }
     );
+  });
+}
+
+
+ applyFilter(filterType: string, value: string | number): void {
+  if (filterType === 'category') {
+    this.appliedFilters['category'] = value;
+  } else if (filterType === 'brand') {
+    this.appliedFilters['brand'] = value;
+  } else if (filterType === 'price') {
+    const priceOrder = value as string;
+    if (priceOrder === 'low-to-high') {
+      // Orden ascendente: De menor a mayor precio
+      this.appliedFilters['minPrice'] = 0;
+      this.appliedFilters['maxPrice'] = undefined; // Sin límite superior
+    } else if (priceOrder === 'high-to-low') {
+      // Orden descendente: De mayor a menor precio
+      this.appliedFilters['minPrice'] = undefined; // Sin límite inferior
+      this.appliedFilters['maxPrice'] = Number.MAX_VALUE;
+    }
+  } else if (filterType === 'search') {
+    this.appliedFilters['search'] = value;
   }
+
+  this.loadProducts(this.appliedFilters); // Recarga productos con los filtros aplicados
+}
+
+
+  clearFilters() {
+    this.appliedFilters = {};
+    this.searchTerm = '';
+    this.loadProducts();
+  }
+ toggleFilter(filter: string) {
+    if (this.activeFilter === filter) {
+      this.activeFilter = '';  // Si el filtro ya está activo, lo desactiva
+    } else {
+      this.activeFilter = filter;  // Si el filtro no está activo, lo activa
+    }
+  }
+
 
   getSanitizedUrl(url: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -168,41 +242,23 @@ this.filteredProductos = [...data]; // Copia inicial
     this.router.navigate([`/product/${productId}`]);
   }
 
+  categorias$: Observable<any[]>;  // Observable para categorías
 
-
-
-
-
-
-
-
-
-
-
-    toggleFilter(filter: string) {
-    this.activeFilter = this.activeFilter === filter ? '' : filter;
-  }
-
-  applyFilter(type: string, value: string) {
-    this.appliedFilters[type] = value;
-
-    // Lógica para aplicar los filtros
-    this.filteredProductos = this.productos.filter((producto) => {
-      let matches = true;
-      if (this.appliedFilters['category']) {
-        matches = matches && producto.category === this.appliedFilters['category'];
-      }
-
-      if (this.appliedFilters['price']) {
-        if (this.appliedFilters['price'] === 'low-to-high') {
-          this.filteredProductos.sort((a, b) => a.price - b.price);
-        } else if (this.appliedFilters['price'] === 'high-to-low') {
-          this.filteredProductos.sort((a, b) => b.price - a.price);
-        }
-      }
-      return matches;
+  // Método para obtener categorías
+  loadCategorias() {
+    this.categorias$ = this.firestoreService.getCategorias();
+    this.categorias$.subscribe(categorias => {
+      console.log('Categorías cargadas:', categorias);
     });
-
-    this.activeFilter = ''; // Cerrar el dropdown
   }
+
+
+
+
+
+
+
+
+
+
 }
