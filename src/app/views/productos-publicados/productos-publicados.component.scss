@@ -1,15 +1,73 @@
-:host {
+.productos-container {
+  padding: 16px;
 
-      --ion-background-color:#ebebeb;
+  ion-card {
+    background: linear-gradient(90deg, #f7f7f7, #e0e0e0);
+    border-radius: 12px;
+
+    ion-card-title {
+      color: #4a008e;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .producto-info {
+      display: flex;
+      align-items: center;
+      width: 100%;
+
+      .producto-thumbnail {
+        margin-right: 12px;
+        img {
+          border-radius: 8px;
+          object-fit: cover;
+        }
+      }
+
+      .producto-details {
+        flex: 1;
+
+        h2 {
+          font-size: 1rem;
+          font-weight: bold;
+          color: #4a008e;
+          margin: 0;
+        }
+
+        p {
+          font-size: 0.9rem;
+          color: #6a1b9a;
+          margin: 0;
+        }
+      }
+    }
+
+    .producto-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      margin-left: 8px;
+
+      ion-button {
+        margin: 4px 0;
+        --padding-start: 0;
+        --padding-end: 0;
+      }
+    }
+
+    ion-item {
+      border-bottom: 1px solid #ddd;
+      padding: 8px 0;
+    }
+  }
 }
 
-  .custom-toolbar {
-    --background: #6a1b9a;
-    color: #fff;
-  }
 
-
-
+.custom-toolbar {
+  --background: #6a1b9a;
+  color: #fff;
+}
 
 // footer
 .fixed-toolbar {
@@ -18,7 +76,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100%;
   box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
@@ -84,57 +142,4 @@
       left: 0;
     }
   }
-}
-
-
-/* Título principal */
-.title-label {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 15px;
-  color: #333;
-}
-
-/* Tarjetas personalizadas */
-.custom-card {
-  margin: 10px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-  height: 100px; /* Igual al tamaño de las tarjetas en la imagen */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-}
-
-.custom-card:hover {
-  transform: scale(1.05);
-}
-
-/* Contenido de la tarjeta */
-.card-content {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-}
-
-/* Íconos grandes */
-.card-icon {
-  font-size: 60px;
-  color: #673ab7;
-  margin-right: 15px; /* Espacio entre ícono y texto */
-}
-
-/* Etiquetas grandes */
-.card-label {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-}
-
-/* Separador opcional si deseas más espacio entre filas */
-.spacer {
-  height: 20px;
 }

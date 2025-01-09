@@ -1,0 +1,144 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>Productos Publicados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="currentTab">
+    <ion-segment-button value="activos">
+      Productos Activos
+    </ion-segment-button>
+    <ion-segment-button value="desactivados">
+      Productos Desactivados
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Productos Activos -->
+  <div *ngIf="currentTab === 'activos'" class="productos-container">
+    <ion-card *ngIf="productos$ | async as productos; else loading">
+      <ion-card-header>
+        <ion-card-title>Productos Activos</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let producto of productos" lines="none">
+            <div class="producto-info">
+              <ion-thumbnail class="producto-thumbnail" slot="start">
+                <img [src]="producto.images" alt="Producto" />
+              </ion-thumbnail>
+              <div class="producto-details">
+                <h2>{{ producto.title }}</h2>
+                <p>Precio: {{ producto.price | currency }}</p>
+                <p>Stock: {{ producto.stock }}</p>
+              </div>
+            </div>
+            <div class="producto-actions">
+              <ion-button
+                (click)="editarProducto(producto.id)"
+                color="primary"
+                fill="clear"
+              >
+                <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+              </ion-button>
+              <ion-button
+                (click)="toggleProducto(producto.id, true)"
+                color="warning"
+                fill="clear"
+              >
+                <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Productos Desactivados -->
+  <div *ngIf="currentTab === 'desactivados'" class="productos-container">
+    <ion-card *ngIf="productosDesactivados$ | async as productosDesactivados; else loading">
+      <ion-card-header>
+        <ion-card-title>Productos Desactivados</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let producto of productosDesactivados" lines="none">
+            <div class="producto-info">
+              <ion-thumbnail class="producto-thumbnail" slot="start">
+                <img [src]="producto.images" alt="Producto" />
+              </ion-thumbnail>
+              <div class="producto-details">
+                <h2>{{ producto.title }}</h2>
+                <p>Precio: {{ producto.price | currency }}</p>
+                <p>Stock: {{ producto.stock }}</p>
+              </div>
+            </div>
+            <div class="producto-actions">
+              <ion-button
+                (click)="toggleProducto(producto.id, false)"
+                color="success"
+                fill="clear"
+              >
+                <ion-icon slot="icon-only" name="checkmark-circle-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ng-template #loading>
+    <ion-spinner></ion-spinner>
+  </ng-template>
+</ion-content>
+
+
+
+<ion-footer>
+  <ion-toolbar class="fixed-toolbar">
+    <!-- Tabs -->
+    <div class="fixed-tabs">
+      <!-- Tab: Inicio -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'home'"
+        (click)="navigateTo('home')"
+      >
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </div>
+
+      <!-- Tab: Tienda -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'tienda'"
+        (click)="navigateTo('tienda')"
+      >
+        <ion-icon name="storefront-outline"></ion-icon>
+        <ion-label>Tienda</ion-label>
+      </div>
+
+      <!-- Tab: Notificaciones -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'notificaciones'"
+        (click)="navigateTo('notificaciones')"
+      >
+        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-label>Notificaciones</ion-label>
+      </div>
+
+      <!-- Tab: Configuración -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'mi-cuenta'"
+        (click)="navigateTo('mi-cuenta')"
+      >
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Más</ion-label>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

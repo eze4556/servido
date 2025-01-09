@@ -19,6 +19,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { FirestoreService } from 'src/app/common/services/firestore.service';
 import { ProductService } from 'src/app/common/services/product.service';
+import { AuthService } from 'src/app/common/services/auth.service';
+import { UserI } from 'src/app/common/models/users.models';
 
 @Component({
   selector: 'app-pubicar-producto',
@@ -58,15 +60,20 @@ export class PublicarProductoComponent implements OnInit {
     // variants: [],
     images: [], // Aquí se almacenarán los enlaces de las imágenes
     brand: '', // Nueva propiedad para la marca
+    userId: '',
+    isActive: true
   };
+
   currentRoute: string = '';
+  currentUserId: string | null = null; // Variable para almacenar el userId actual
 
   constructor(
     private firestoreService: FirestoreService,
     private productoService: ProductService,
     private alertController: AlertController,
     private router: Router,
-    private loadingController: LoadingController // Inyectar el LoadingController
+    private loadingController: LoadingController, // Inyectar el LoadingController
+    private authService: AuthService, // Inyectar AuthService
   ) {}
 
   ngOnInit() {
@@ -75,6 +82,13 @@ export class PublicarProductoComponent implements OnInit {
       this.currentRoute = this.router.url.replace('/', '');
     });
     this.loadCategoriesAndBrands();
+
+     // Obtener el userId del usuario actual
+     this.authService.getCurrentUser().subscribe((user: UserI | null) => {
+      if (user && user.id) {
+        this.currentUserId = user.id; // Asignar el userId a una variable local
+      }
+    });
   }
 
   async createProduct() {
@@ -86,15 +100,23 @@ export class PublicarProductoComponent implements OnInit {
     try {
       await loading.present();
 
+      // Asegurarse de que el userId esté asignado
+      if (this.currentUserId) {
+        this.productData.userId = this.currentUserId; // Asignar el userId al producto
+      } else {
+        await this.showAlert('Error', 'No se pudo identificar al usuario actual.');
+        return;
+      }
+
       // Subir imágenes y obtener URLs
-      await this.uploadImages(); // Método para manejar carga de imágenes
+      await this.uploadImages();
 
       if (this.productData.images.length === 0) {
         await this.showAlert('Error', 'Debes subir al menos una imagen.');
         return;
       }
 
-      // Convertir a Promise para esperar el resultado
+      // Crear producto
       await this.productoService.createProduct(this.productData).toPromise();
 
       // Mostrar éxito y redirigir
@@ -107,7 +129,6 @@ export class PublicarProductoComponent implements OnInit {
       await loading.dismiss();
     }
   }
-
 
 
   private async showAlert(header: string, message: string) {

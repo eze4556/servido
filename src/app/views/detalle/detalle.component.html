@@ -15,82 +15,78 @@
 
 <ion-content>
   <div *ngIf="product$ | async as product">
-    <!-- Encabezado del producto -->
-    <div class="product-header">
-      <p class="product-title">{{ product.title }}</p>
-    </div>
+    <!-- Contenedor principal -->
+    <div>
+      <!-- Título del producto -->
+      <div class="product-header">
+        <p class="product-title">{{ product.title }}</p>
+      </div>
 
-    <!-- Carrusel de imágenes -->
-    <!-- <div
-      class="carousel-container"
-      (touchstart)="onTouchStart($event)"
-      (touchmove)="onTouchMove($event)"
-      (touchend)="onTouchEnd()"
-    >
+      <!-- Carrusel -->
       <div
-        class="carousel-track"
-        [style.transform]="'translateX(' + -currentIndex * 100 + '%)'"
+        class="carousel-container"
+        (touchstart)="onTouchStart($event)"
+        (touchmove)="onTouchMove($event)"
+        (touchend)="onTouchEnd()"
       >
-        <div class="carousel-slide" *ngFor="let image of product.images">
-          <img [src]="image" [alt]="product.title" class="slider-image" />
+        <!-- Contenedor del carrusel -->
+        <div
+          class="carousel-track"
+          [style.transform]="'translateX(' + -currentIndex * 100 + '%)'"
+        >
+          <div class="carousel-slide" *ngFor="let image of product.images">
+            <img [src]="image" [alt]="product.title" class="slider-image" />
+          </div>
+        </div>
+
+        <!-- Indicadores (círculos) -->
+        <div class="carousel-indicators">
+          <span
+            *ngFor="let image of product.images; let i = index"
+            class="indicator"
+            [class.active]="i === currentIndex"
+            (click)="currentIndex = i"
+          ></span>
         </div>
       </div>
-    </div> -->
 
-    <div class="carousel-container">
-      <!-- Contenedor principal que agrupa la imagen y los íconos -->
-      <div class="carousel-content">
-        <!-- Imagen del producto -->
-        <div class="carousel-slide">
-          <img [src]="product.images" [alt]="product.title" class="slider-image" />
+      <!-- Sección de precio, stock y acciones -->
+      <div class="price-section">
+        <div class="price-and-actions">
+          <!-- Precio -->
+          <div class="discount-line">
+            <span class="discount-price">
+              ${{ product.price }}
+            </span>
+            <!-- Descuento (opcional) -->
+            <!-- <span class="discount-percentage" *ngIf="product.discountPercentage">
+              {{ product.discountPercentage }}% OFF
+            </span> -->
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="action-buttons">
+            <div class="favorite-icon">
+              <ion-icon name="heart" slot="icon-only"></ion-icon>
+            </div>
+            <div class="share-icon">
+              <ion-icon name="share-social" slot="icon-only"></ion-icon>
+            </div>
+          </div>
         </div>
 
-        <!-- Botón de Favorito (arriba a la derecha) -->
-        <div class="favorite-icon">
-          <ion-icon name="heart" slot="icon-only"></ion-icon>
-        </div>
-
-        <!-- Botón de Compartir (abajo a la derecha) -->
-        <div class="share-icon">
-          <ion-icon name="share-social" slot="icon-only"></ion-icon>
+        <!-- Stock -->
+        <div class="stock-section">
+          <p>Stock disponible:</p>
+          <ion-chip color="success">
+            <ion-label>{{ product.stock }} unidades</ion-label>
+          </ion-chip>
         </div>
       </div>
     </div>
-
-
-
-    <!-- Sección de precio -->
-    <div class="price-section">
-      <!-- <p class="original-price">
-        ${{ product.price }}
-      </p> -->
-      <div class="discount-line">
-        <span class="discount-price">
-          ${{ product.price }}
-        </span>
-        <!-- <span class="discount-percentage" *ngIf="product.discountPercentage">
-          {{ product.discountPercentage }}% OFF
-        </span> -->
-      </div>
-      <!-- <p class="rating">
-        {{ product.rating || 0 }}
-        <ion-icon name="star" class="star-icon"></ion-icon>
-        <ion-icon name="star-half-outline" class="star-icon"></ion-icon>
-      </p> -->
-      <div class="stock-section">
-        <p>Stock disponible:</p>
-        <ion-chip color="success">
-          <ion-label>{{ product.stock }} unidades</ion-label>
-        </ion-chip>
-      </div>
-    </div>
-
-    <!-- Descripción -->
-    <!-- <div class="product-description">
-      <h3>Descripción</h3>
-      <p>{{ product.description }}</p>
-    </div> -->
   </div>
+
+
 
 
   <div class="action-buttons">
