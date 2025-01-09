@@ -5,7 +5,6 @@ import { Producto } from '../models/producto.model';
 
 @Injectable({
   providedIn: 'root',
-  providedIn: 'root',
 })
 export class ProductService {
 
