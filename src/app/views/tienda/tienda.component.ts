@@ -9,8 +9,7 @@ import {
   IonGrid,
   IonCol,
   IonRow,
-  IonFooter,
-} from '@ionic/angular/standalone';
+  IonFooter, IonItem } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -21,13 +20,12 @@ import { Producto } from 'src/app/common/models/producto.model'; // Modelo de pr
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../common/services/auth.service';
 
-
 @Component({
   selector: 'app-tienda',
   templateUrl: './tienda.component.html',
   styleUrls: ['./tienda.component.scss'],
   standalone: true,
-  imports: [
+  imports: [IonItem,
     IonFooter,
     IonRow,
     IonCol,
@@ -49,47 +47,57 @@ export class TiendaComponent implements OnInit {
   isLoggedIn: boolean = false;
   isLoading: boolean = true;
 
+  filteredProductos: Producto[] = []; // Productos filtrados
+
+  categories: string[] = []; // Lista de categorías únicas
+  brands: string[] = []; // Lista de marcas únicas
+  activeFilter: string = ''; // Filtro activo
+  appliedFilters: any = {}; // Filtros aplicados
+
   constructor(
     private sanitizer: DomSanitizer,
-        private http: HttpClient,
+    private http: HttpClient,
     private authService: AuthService,
 
     private router: Router,
-    private firestoreService: FirestoreService // Servicio actualizado
+    private firestoreService: FirestoreService
   ) {}
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId');
-    this.loadProducts(); // Cargar productos desde el servicio
+    this.loadProducts();
     this.checkLoginStatus();
 
-  if (this.isLoggedIn) {
-    this.getLocation();
-  }
+    if (this.isLoggedIn) {
+      this.getLocation();
+    }
   }
 
   navigateTo(route: string) {
     this.router.navigate([`/${route}`]);
   }
 
-    location: string = 'Cargando ubicación...'; // Inicializa con mensaje
-checkLoginStatus() {
-    this.authService.getUser().subscribe(user => {
+  location: string = 'Cargando ubicación...';
+  checkLoginStatus() {
+    this.authService.getUser().subscribe((user) => {
       this.isLoggedIn = !!user;
 
       if (this.isLoggedIn) {
         this.getLocation();
       }
-
-
     });
   }
 
   loadProducts(): void {
     this.firestoreService.getProductos().subscribe(
       (data) => {
-        console.log('Productos recibidos:', data); // Verificar los datos en la consola
+        console.log('Productos recibidos:', data);
         this.productos = data;
+
+this.filteredProductos = [...data]; // Copia inicial
+        this.categories = [...new Set(data.map((p) => p.category))];
+        this.brands = [...new Set(data.map((p) => p.brand))];
+
         this.isLoading = false;
       },
       (error) => {
@@ -103,11 +111,6 @@ checkLoginStatus() {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
-
-
-
-
-  // Obtener ubicación y luego la ciudad
   getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -115,7 +118,6 @@ checkLoginStatus() {
           const latitude = position.coords.latitude;
           const longitude = position.coords.longitude;
 
-          // Llama a la función para obtener la ciudad
           this.getCityName(latitude, longitude);
         },
         (error) => {
@@ -128,7 +130,6 @@ checkLoginStatus() {
     }
   }
 
-  // Obtener la ciudad a partir de las coordenadas
   getCityName(lat: number, lon: number) {
     const apiKey = '98b2a3c7dffc490c972b130ea176974d';
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${apiKey}`;
@@ -138,11 +139,14 @@ checkLoginStatus() {
         if (response && response.results && response.results.length > 0) {
           const components = response.results[0].components;
 
-          // Busca el nombre de la ciudad
-          const city = components.city || components.town || components.village || 'Ciudad no encontrada';
+          const city =
+            components.city ||
+            components.town ||
+            components.village ||
+            'Ciudad no encontrada';
           const country = components.country;
 
-          this.location = `${city}, ${country}`; // Mostrar ciudad y país
+          this.location = `${city}, ${country}`;
         } else {
           this.location = 'Ciudad no encontrada.';
         }
@@ -151,13 +155,48 @@ checkLoginStatus() {
         console.error('Error al obtener ciudad:', error);
         this.location = 'Error al cargar ciudad.';
       }
-    );
-  }
+    );
+  }
 
-navigateToProduct(productId: string) {
-  this.router.navigate([`/product/${productId}`]); // Navegar a la ruta dinámica
-}
+  navigateToProduct(productId: string) {
+    this.router.navigate([`/product/${productId}`]);
+  }
 
 
 
+
+
+
+
+
+
+
+
+
+    toggleFilter(filter: string) {
+    this.activeFilter = this.activeFilter === filter ? '' : filter;
+  }
+
+  applyFilter(type: string, value: string) {
+    this.appliedFilters[type] = value;
+
+    // Lógica para aplicar los filtros
+    this.filteredProductos = this.productos.filter((producto) => {
+      let matches = true;
+      if (this.appliedFilters['category']) {
+        matches = matches && producto.category === this.appliedFilters['category'];
+      }
+
+      if (this.appliedFilters['price']) {
+        if (this.appliedFilters['price'] === 'low-to-high') {
+          this.filteredProductos.sort((a, b) => a.price - b.price);
+        } else if (this.appliedFilters['price'] === 'high-to-low') {
+          this.filteredProductos.sort((a, b) => b.price - a.price);
+        }
+      }
+      return matches;
+    });
+
+    this.activeFilter = ''; // Cerrar el dropdown
+  }
 }
