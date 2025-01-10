@@ -53,7 +53,7 @@ export class TiendaComponent implements OnInit {
   currentRoute: string = '';
 
    filteredProductos: Producto[] = []; // Productos filtrados
-  categories: string[] = [];
+  categories: { id: string; nombre: string }[] = []; // Categorías con nombre e ID
   brands: string[] = [];
    activeFilter: string = '';
   appliedFilters: any = {}; // Filtros aplicados
@@ -73,6 +73,8 @@ export class TiendaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+      this.loadCategorias();
+
     this.userId = localStorage.getItem('userId');
     this.loadProducts();
     this.checkLoginStatus();
@@ -121,16 +123,13 @@ export class TiendaComponent implements OnInit {
 //     );
 //   }
 
- // Obtención de todos los productos sin filtros
+
   loadProducts(): void {
     this.isLoading = true;
-
     this.productoService.getProducts({}).subscribe(
       (data) => {
         this.productos = data;
         this.filteredProductos = [...data]; // Inicialmente, no se aplican filtros
-        this.categories = [...new Set(data.map((p) => p.category))];
-        this.brands = [...new Set(data.map((p) => p.brand))];
         this.isLoading = false;
       },
       (error) => {
@@ -252,14 +251,15 @@ applyFilters(): void {
 
   categorias$: Observable<any[]>;  // Observable para categorías
 
-  // Método para obtener categorías
+  // Carga las categorías con nombres
   loadCategorias() {
-    this.categorias$ = this.firestoreService.getCategorias();
-    this.categorias$.subscribe(categorias => {
-      console.log('Categorías cargadas:', categorias);
+    this.firestoreService.getCategorias().subscribe((categorias) => {
+      this.categories = categorias.map((cat) => ({
+        id: cat.id,
+        nombre: cat.nombre,
+      }));
     });
   }
-
 
 
 
