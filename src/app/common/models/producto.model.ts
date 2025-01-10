@@ -9,5 +9,7 @@ export interface Producto {
   images: string[];   // O cualquier tipo adecuado
   brand: '', // Nueva propiedad para la marca
   userId: string,
-  isActive: boolean
+  isActive: boolean,
+  discountedPrice?: number; // Nuevo campo
+  discount?: number;        // Nuevo campo
 }

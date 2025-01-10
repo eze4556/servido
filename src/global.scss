@@ -25,3 +25,11 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
+.custom-modal {
+  --width: 90%;
+  --height: auto;
+  --max-height: 80%;
+  --border-radius: 12px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --background: #ffffff;
+}

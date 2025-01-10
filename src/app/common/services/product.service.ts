@@ -54,8 +54,8 @@ export class ProductService {
   }
 
     // Obtener productos por userId
-  getProductById(id: string): Observable<Producto[]> {
-    return this.http.get<Producto[]>(`${this.apiUrl}/${id}`);
+  getProductById(id: string): Observable<Producto> {
+    return this.http.get<Producto>(`${this.apiUrl}/${id}`);
   }
 
   // Obtener productos por userId
@@ -77,7 +77,18 @@ export class ProductService {
   }
 
   // Actualizar producto
-  updateProduct(productId: string, data: Partial<Producto>): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${productId}`, data);
+  updateProduct(productId: string, updatedProduct: Partial<Producto>) {
+    return this.http.put<Producto>(`${this.apiUrl}/${productId}`, updatedProduct);
   }
+
+  // Obtener características de un producto
+  getProductFeatures(productId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${productId}/features`);
+  }
+
+  addProductFeature(productId: string, feature: { label: string; value: string }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${productId}/features`, { productId, feature });
+  }
+
+
 }
