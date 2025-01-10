@@ -121,23 +121,16 @@ export class TiendaComponent implements OnInit {
 //     );
 //   }
 
-loadProducts(filters?: { category?: string; minPrice?: number; maxPrice?: number; brand?: string; search?: string }): void {
-  this.isLoading = true;
+ // Obtención de todos los productos sin filtros
+  loadProducts(): void {
+    this.isLoading = true;
 
-  this.firestoreService.getCategorias().subscribe((categorias) => {
-    const categoryMap = categorias.reduce((map, cat) => {
-      map[cat.id] = cat.nombre;
-      return map;
-    }, {});
-
-    this.productoService.getProducts(filters || {}).subscribe(
+    this.productoService.getProducts({}).subscribe(
       (data) => {
         this.productos = data;
-        this.filteredProductos = [...data];
-
-        this.categories = [...new Set(data.map((p) => categoryMap[p.category] || p.category))];
+        this.filteredProductos = [...data]; // Inicialmente, no se aplican filtros
+        this.categories = [...new Set(data.map((p) => p.category))];
         this.brands = [...new Set(data.map((p) => p.brand))];
-
         this.isLoading = false;
       },
       (error) => {
@@ -145,44 +138,59 @@ loadProducts(filters?: { category?: string; minPrice?: number; maxPrice?: number
         this.isLoading = false;
       }
     );
+  }
+
+ // Manejar la selección de filtros
+setFilter(filterType: string, value: string | number | number[]): void {
+  if (filterType === 'category') {
+    this.appliedFilters.category = value;
+  } else if (filterType === 'brand') {
+    this.appliedFilters.brand = value;
+  } else if (filterType === 'priceRange' && Array.isArray(value)) {
+    const [min, max] = value; // Extraer el rango de precios
+    this.appliedFilters.minPrice = min;
+    this.appliedFilters.maxPrice = max;
+  } else if (filterType === 'search') {
+    this.appliedFilters.search = value;
+  }
+
+  this.applyFilters(); // Aplicar filtros con la nueva configuración
+}
+
+// Aplicar los filtros al conjunto de productos
+applyFilters(): void {
+  this.filteredProductos = this.productos.filter((producto) => {
+    const matchesCategory =
+      !this.appliedFilters.category ||
+      producto.category === this.appliedFilters.category;
+
+    const matchesBrand =
+      !this.appliedFilters.brand || producto.brand === this.appliedFilters.brand;
+
+    const matchesPrice =
+      (!this.appliedFilters.minPrice || producto.price >= this.appliedFilters.minPrice) &&
+      (!this.appliedFilters.maxPrice || producto.price <= this.appliedFilters.maxPrice);
+
+    const matchesSearch =
+      !this.appliedFilters.search ||
+      producto.title.toLowerCase().includes((this.appliedFilters.search as string).toLowerCase());
+
+    return matchesCategory && matchesBrand && matchesPrice && matchesSearch;
   });
 }
 
 
- applyFilter(filterType: string, value: string | number): void {
-  if (filterType === 'category') {
-    this.appliedFilters['category'] = value;
-  } else if (filterType === 'brand') {
-    this.appliedFilters['brand'] = value;
-  } else if (filterType === 'price') {
-    const priceOrder = value as string;
-    if (priceOrder === 'low-to-high') {
-      // Orden ascendente: De menor a mayor precio
-      this.appliedFilters['minPrice'] = 0;
-      this.appliedFilters['maxPrice'] = undefined; // Sin límite superior
-    } else if (priceOrder === 'high-to-low') {
-      // Orden descendente: De mayor a menor precio
-      this.appliedFilters['minPrice'] = undefined; // Sin límite inferior
-      this.appliedFilters['maxPrice'] = Number.MAX_VALUE;
-    }
-  } else if (filterType === 'search') {
-    this.appliedFilters['search'] = value;
-  }
-
-  this.loadProducts(this.appliedFilters); // Recarga productos con los filtros aplicados
-}
-
-
-  clearFilters() {
+  // Limpiar filtros
+  clearFilters(): void {
     this.appliedFilters = {};
-    this.searchTerm = '';
-    this.loadProducts();
+    this.filteredProductos = [...this.productos]; // Restaurar los productos originales
   }
+
  toggleFilter(filter: string) {
     if (this.activeFilter === filter) {
-      this.activeFilter = '';  // Si el filtro ya está activo, lo desactiva
+      this.activeFilter = '';
     } else {
-      this.activeFilter = filter;  // Si el filtro no está activo, lo activa
+      this.activeFilter = filter;
     }
   }
 

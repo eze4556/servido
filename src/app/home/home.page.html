@@ -41,22 +41,11 @@
     <p>Vender</p>
   </div>
 </a>
-    <div class="circle-button">
-      <img src="../../assets/icon/750_750-a235.jpg" alt="Icono" />
-      <p>Botón</p>
-    </div>
-    <div class="circle-button">
-      <img src="../../assets/icon/750_750-a235.jpg" alt="Icono" />
-      <p>Botón</p>
-    </div>
-    <div class="circle-button">
-      <img src="../../assets/icon/750_750-a235.jpg" alt="Icono" />
-      <p>Botón</p>
-    </div>
-    <div class="circle-button">
-      <img src="../../assets/icon/750_750-a235.jpg" alt="Icono" />
-      <p>Botón</p>
-    </div>
+   <!-- Botones de Categorías -->
+  <div *ngFor="let categoria of categorias$| async" class="circle-button">
+          <img [src]="categoria.imagen" alt="{{ categoria.nombre }}" />
+    <p>{{ categoria.nombre }}</p>
+  </div>
   </div>
 
   <!-- <button (click)="logout()">Cerrar sesión</button> -->
@@ -373,7 +362,7 @@
 </div>
 
 
- 
+
   <footer class="custom-footer">
     <div class="footer-contact">
       <h3>Contáctanos</h3>

@@ -164,7 +164,8 @@ export class HomePage implements OnInit {
 
 
     marcas$: Observable<any[]>;      // Observable para marcas
-  categorias$: Observable<any[]>;  // Observable para categorías
+  categorias$: Observable<any[]>;
+  categorias: any[] = []; // Aquí almacenaremos las categorías
 
 navigateTo(route: string) {
   this.router.navigate([`/${route}`]);
@@ -258,5 +259,8 @@ images = [
       console.log('Categorías cargadas:', categorias);
     });
   }
+
+
+  
 
 }
