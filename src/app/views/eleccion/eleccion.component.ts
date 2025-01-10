@@ -22,16 +22,14 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Marca } from '../../common/models/marca.model';
-import { Producto } from 'src/app/common/models/producto.model';
 import { Router } from '@angular/router';
 import { IoniconsModule } from 'src/app/common/modules/ionicons.module';
 
 
 @Component({
-  selector: 'app-marca',
-  templateUrl: './marca.component.html',
-  styleUrls: ['./marca.component.scss'],
+  selector: 'app-eleccion',
+  templateUrl: './eleccion.component.html',
+  styleUrls: ['./eleccion.component.scss'],
   standalone: true,
   imports: [IonModal, IonFabButton, IonImg, IonSpinner, IonButton,IonButtons, IonBackButton,
     IonHeader,
@@ -61,7 +59,7 @@ import { IoniconsModule } from 'src/app/common/modules/ionicons.module';
 
   ],
 })
-export class MarcaComponent implements OnInit {
+export class EleccionComponent implements OnInit {
   currentRoute: string = '';
 
 

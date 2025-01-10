@@ -16,7 +16,7 @@ export const routes: Routes = [
   // },
   {
     path: 'elección',
-    loadComponent: () => import('./views/marca/marca.component').then((m) => m.MarcaComponent),
+    loadComponent: () => import('./views/eleccion/eleccion.component').then((m) => m.EleccionComponent),
   },
    {
     path: 'product/:id',
@@ -39,7 +39,7 @@ export const routes: Routes = [
     loadComponent: () => import('./views/notificaciones/notificaciones.component').then((m) => m.NotificacionesComponent),
   },
   {
-    path: 'compras',
+    path: 'mis-compras',
     loadComponent: () => import('./views/carrito/carrito.component').then((m) => m.CarritoComponent),
   },
    {
@@ -66,6 +66,12 @@ export const routes: Routes = [
     path: 'mi-cuenta',
     loadComponent: () => import('../app/views/mi-cuenta/mi-cuenta.component').then((m) => m.MiCuentaComponent),
   },
+
+  {
+    path: 'mis-productos',
+    loadComponent: () => import('../app/views/productos-publicados/productos-publicados.component').then((m) => m.ProductosPublicadosComponent),
+  },
+
   {
     path: '',
     redirectTo: 'home',

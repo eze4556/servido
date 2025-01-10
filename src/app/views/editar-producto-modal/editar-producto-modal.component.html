@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>Editar Producto</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="close-button" (click)="closeModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-accordion-group expand="block" class="accordion-group">
+    <!-- Sección de Información del Producto -->
+    <ion-accordion value="product-info">
+      <ion-item slot="header" class="accordion-header">
+        <ion-label>Editar Información del Producto</ion-label>
+      </ion-item>
+      <div slot="content" class="accordion-content">
+        <form [formGroup]="productForm" (ngSubmit)="saveChanges()" class="product-form">
+          <ion-item>
+            <ion-label position="stacked">Nombre</ion-label>
+            <ion-input formControlName="title" placeholder="Ingrese el nombre"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Descripción</ion-label>
+            <ion-textarea formControlName="description" placeholder="Ingrese la descripción"></ion-textarea>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Precio</ion-label>
+            <ion-input type="number" formControlName="price" placeholder="Ingrese el precio"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Stock</ion-label>
+            <ion-input type="number" formControlName="stock" placeholder="Ingrese el stock"></ion-input>
+          </ion-item>
+
+          <div class="actions">
+            <ion-button expand="block" type="submit" [disabled]="productForm.invalid">Guardar Cambios</ion-button>
+          </div>
+        </form>
+      </div>
+    </ion-accordion>
+
+    <!-- Sección de Descuento -->
+    <ion-accordion value="discount">
+      <ion-item slot="header" class="accordion-header">
+        <ion-label>Agregar Descuento</ion-label>
+      </ion-item>
+      <div slot="content" class="accordion-content">
+        <form [formGroup]="discountForm" (ngSubmit)="applyDiscount()" class="discount-form">
+          <ion-item>
+            <ion-label position="stacked">Descuento (%)</ion-label>
+            <ion-input type="number" formControlName="discount" placeholder="Ingrese el descuento"></ion-input>
+          </ion-item>
+
+          <div class="actions">
+            <ion-button expand="block" type="submit" [disabled]="discountForm.invalid">Aplicar Descuento</ion-button>
+          </div>
+        </form>
+      </div>
+    </ion-accordion>
+
+        <!-- Sección de Características Generales -->
+        <ion-accordion value="general-features">
+          <ion-item slot="header" class="accordion-header">
+            <ion-label>Características Generales</ion-label>
+          </ion-item>
+          <div slot="content" class="accordion-content">
+         <!-- Lista de Características -->
+          <div class="feature-list">
+            <div *ngFor="let feature of features" class="feature-item">
+              <ion-label>{{ feature.label }}</ion-label>
+              <ion-note>{{ feature.value }}</ion-note>
+            </div>
+          </div>
+
+          <!-- Formulario para agregar nueva característica -->
+          <form [formGroup]="featureForm" (ngSubmit)="addFeature()" class="feature-form">
+            <ion-item>
+              <ion-label position="stacked">Etiqueta</ion-label>
+              <ion-input formControlName="label" placeholder="Ej. Color"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Valor</ion-label>
+              <ion-input formControlName="value" placeholder="Ej. Azul"></ion-input>
+            </ion-item>
+            <div class="actions">
+              <ion-button expand="block" type="submit" [disabled]="featureForm.invalid">
+                Agregar
+              </ion-button>
+            </div>
+          </form>
+
+          </div>
+        </ion-accordion>
+
+  </ion-accordion-group>
+</ion-content>

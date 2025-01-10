@@ -152,6 +152,11 @@ faqs = [
     }
   }
 
+   // Método para cambiar el índice actual
+   setCurrentIndex(index: number): void {
+    this.currentIndex = index;
+  }
+
   navigateTo(route: string) {
     this.router.navigate([`/${route}`]);
   }

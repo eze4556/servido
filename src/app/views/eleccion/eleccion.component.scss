@@ -1,99 +1,14 @@
-/* Header */
-ion-toolbar {
-  --background: #4a008e; /* Fondo violeta */
-  --color: #fff; /* Texto blanco */
+:host {
+
+      --ion-background-color:#ebebeb;
 }
 
-/* Card principal */
-.purchase-card {
-  margin: 12px;
-  border-radius: 8px;
-  background-color: #fff; /* Fondo blanco */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 12px;
-}
-
-h2, h3 {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 0 0 8px 0;
-  color: #4a008e; /* Título violeta */
-}
-
-.product-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-
-  &.total {
-    font-weight: bold;
-    margin-top: 12px;
-    border-top: 1px solid #ddd;
-    padding-top: 8px;
-  }
-}
-
-.product-name {
-  font-size: 14px;
-  color: #333; /* Texto oscuro */
-}
-
-.purchase-details {
-  font-size: 14px;
-  color: #555; /* Texto gris */
-}
-
-.payment-section h3 {
-  margin-left: 12px;
-  margin-top: 12px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #4a008e;
-}
-
-.payment-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.payment-logo {
-  width: 36px;
-  height: auto;
-}
-
-.payment-details {
-  font-size: 13px;
-  color: #555;
-
-  .payment-status {
-    color: green; /* Pago aprobado */
-    font-weight: bold;
-    font-size: 14px;
-  }
-}
-
-/* Ajustes responsivos */
-@media (max-width: 600px) {
-  .purchase-card {
-    margin: 8px;
-    padding: 10px;
+  .custom-toolbar {
+    --background: #6a1b9a;
+    color: #fff;
   }
 
-  h2, h3 {
-    font-size: 14px;
-  }
 
-  .product-name,
-  .purchase-details {
-    font-size: 12px;
-  }
-
-  .payment-logo {
-    width: 30px;
-  }
-}
 
 
 // footer
@@ -169,4 +84,57 @@ h2, h3 {
       left: 0;
     }
   }
+}
+
+
+/* Título principal */
+.title-label {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 15px;
+  color: #333;
+}
+
+/* Tarjetas personalizadas */
+.custom-card {
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  height: 100px; /* Igual al tamaño de las tarjetas en la imagen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.custom-card:hover {
+  transform: scale(1.05);
+}
+
+/* Contenido de la tarjeta */
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+/* Íconos grandes */
+.card-icon {
+  font-size: 60px;
+  color: #673ab7;
+  margin-right: 15px; /* Espacio entre ícono y texto */
+}
+
+/* Etiquetas grandes */
+.card-label {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Separador opcional si deseas más espacio entre filas */
+.spacer {
+  height: 20px;
 }
