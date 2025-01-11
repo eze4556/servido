@@ -55,8 +55,8 @@
 
 <!-- Dropdown de Filtros -->
 <div *ngIf="activeFilter === 'category'" class="dropdown">
-  <ion-item *ngFor="let cat of categories" (click)="setFilter('category', cat)">
-    {{ cat }}
+ <ion-item *ngFor="let cat of categories" (click)="setFilter('category', cat.id)">
+    {{ cat.nombre }}
   </ion-item>
 </div>
 
