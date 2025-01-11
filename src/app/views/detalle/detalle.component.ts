@@ -28,6 +28,8 @@ import { RouterModule } from '@angular/router';
 import { Producto } from 'src/app/common/models/producto.model';
 import { Observable } from 'rxjs/internal/Observable';
 import { FirestoreService } from 'src/app/common/services/firestore.service';
+import { CeilPipe } from 'src/app/common/pipe/ceil.pipe';
+import { ProductService } from 'src/app/common/services/product.service';
 
 
 @Component({
@@ -54,6 +56,7 @@ import { FirestoreService } from 'src/app/common/services/firestore.service';
     PdfViewerModule,
     IoniconsModule,
     RouterModule,
+    CeilPipe
   ],
 })
 export class DetalleComponent implements OnInit {
@@ -62,19 +65,31 @@ export class DetalleComponent implements OnInit {
   product$: Observable<Producto | undefined>; // Producto dinámico
   currentIndex = 0;
   currentRoute: string = '';
+  features: any[] = []; // Características del producto
 
   constructor(
-private router: Router,
-private route: ActivatedRoute,
-private cdr: ChangeDetectorRef,
-private firestoreService: FirestoreService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef,
+    private productService: ProductService,
   ) {}
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   async ngOnInit() {
-    const productId = this.route.snapshot.paramMap.get('id');
+      const productId = this.route.snapshot.paramMap.get('id');
     if (productId) {
-      this.product$ = this.firestoreService.getProductoById(productId);
+      // Cargar producto
+      this.product$ = this.productService.getProductById(productId);
+
+      // Cargar características
+      this.productService.getProductFeatures(productId).subscribe(
+        (features) => {
+          this.features = features;
+        },
+        (error) => {
+          console.error('Error al cargar características:', error);
+        }
+      );
     }
        // Actualiza la ruta actual cada vez que cambia
     this.router.events.subscribe(() => {

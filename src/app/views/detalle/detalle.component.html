@@ -55,13 +55,25 @@
         <div class="price-and-actions">
           <!-- Precio -->
           <div class="discount-line">
-            <span class="discount-price">
-              ${{ product.price }}
+            <!-- Mostrar precio con descuento si existe -->
+            <span *ngIf="product.discountedPrice && product.discount; else originalPrice">
+              <span class="original-price">
+                ${{ product.price | ceil }}
+              </span>
+              <span class="discount-price">
+                ${{ product.discountedPrice | ceil }}
+              </span>
+              <span class="discount-percentage">
+                ({{ product.discount }}% OFF)
+              </span>
             </span>
-            <!-- Descuento (opcional) -->
-            <!-- <span class="discount-percentage" *ngIf="product.discountPercentage">
-              {{ product.discountPercentage }}% OFF
-            </span> -->
+
+            <!-- Mostrar precio original si no hay descuento -->
+            <ng-template #originalPrice>
+              <span class="discount-price">
+                ${{ product.price | ceil }}
+              </span>
+            </ng-template>
           </div>
 
           <!-- Botones de acción -->
@@ -83,8 +95,8 @@
           </ion-chip>
         </div>
       </div>
+
     </div>
-  </div>
 
 
 
@@ -136,42 +148,20 @@
   <div [ngSwitch]="selectedSegment" class="segment-content">
 
     <!-- Sección Producto -->
-    <div *ngSwitchCase="'product-details'" class="product-section">
-      <h2 class="section-title">Características generales</h2>
-      <table class="product-details-table">
-        <tr>
-          <td class="details-label"><strong>Marca</strong></td>
-          <td>Fate</td>
-        </tr>
-        <tr>
-          <td class="details-label"><strong>Modelo</strong></td>
-          <td>Sensitiva</td>
-        </tr>
-        <tr>
-          <td class="details-label"><strong>Tamaño</strong></td>
-          <td>195/65R15</td>
-        </tr>
-        <tr>
-          <td class="details-label"><strong>Cantidad</strong></td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td class="details-label"><strong>Velocidad máxima</strong></td>
-          <td>210 km/h</td>
-        </tr>
-      </table>
+    <!-- Sección de características generales -->
+      <div  *ngSwitchCase="'product-details'" class="product-section">
+        <h2 class="section-title">Características generales</h2>
+        <table class="product-details-table">
+          <tr *ngFor="let feature of features">
+            <td class="details-label"><strong>{{ feature.label }}</strong></td>
+            <td>{{ feature.value }}</td>
+          </tr>
+        </table>
 
-      <h2 class="section-title">Descripción</h2>
-      <p class="product-description">
-        ¿Vas a esperar a que tu neumático se desgaste para cambiarlo?<br>
-        Podés evitar alargar la vida útil de una vieja cubierta y apostar a tu tranquilidad.
-        Encontrá la mejor tracción, dirección y confort con tu Fate Sport.<br>
-        Estabilidad y control.<br>
-        Gracias a su buen agarre, este neumático tiene un desempeño óptimo asegurado,
-        ya que se adapta a la usabilidad de tu vehículo.
-      </p>
-    </div>
-
+        <!-- Sección de descripción -->
+        <h2 class="section-title">Descripción</h2>
+        <p class="product-description">{{ product.description }}</p>
+      </div>
 
 <!-- Sección Vendedor -->
 <div *ngSwitchCase="'seller'" class="seller-section">
@@ -281,6 +271,10 @@
     </div>
 
   </div>
+
+  </div>
+
+
 
 </ion-content>
 
