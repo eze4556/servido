@@ -90,5 +90,16 @@ export class ProductService {
     return this.http.post(`${this.apiUrl}/${productId}/features`, { productId, feature });
   }
 
+  // Obtener las reseñas de un producto
+  getProductReviews(productId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${productId}/reviews`);
+  }
+
+  createProductReview(productId: string, review: { userId: string; rating: number; comment: string }): Observable<any> {
+    const payload = { productId, review };
+    return this.http.post(`${this.apiUrl}/${productId}/reviews`, payload);
+  }
+
+
 
 }

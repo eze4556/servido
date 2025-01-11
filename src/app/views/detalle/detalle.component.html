@@ -202,20 +202,23 @@
   </div>
 </div>
 
-
 <!-- Sección Opiniones -->
 <div *ngSwitchCase="'opinions'" class="opinions-section">
   <h3 class="section-title">Opiniones del producto</h3>
 
   <!-- Calificación general -->
-  <div class="general-rating">
-    <span class="rating-score">4.5</span>
-    <span class="stars">
-      ★★★★★
-      <span class="stars-filled">★★★★☆</span>
+  <div class="general-rating" *ngIf="opinions.length > 0">
+    <span class="rating-score">{{ averageRating.toFixed(1) }}</span>
+    <span class="stars" >
+      <span class="stars-filled">  {{ getStarsForAverage() }}</span>
     </span>
-    <span class="rating-count">363 calificaciones</span>
+    <span class="rating-count">{{ opinions.length }} calificaciones</span>
   </div>
+
+  <!-- Mensaje si no hay reseñas -->
+  <p *ngIf="opinions.length === 0" class="no-reviews">
+    Aún no hay opiniones para este producto.
+  </p>
 
   <!-- Lista de reseñas -->
   <div *ngFor="let opinion of opinions" class="review-item">
@@ -229,18 +232,16 @@
     <p class="review-comment">{{ opinion.comment }}</p>
   </div>
 
-  <!-- Mensaje si no hay reseñas -->
-  <p *ngIf="opinions.length === 0" class="no-reviews">
-    Aún no hay opiniones para este producto.
-  </p>
-
   <!-- Botón para agregar opinión -->
   <div class="add-opinion-button">
-    <ion-button class="buy-button" (click)="navigateTo('opinion')">
+    <ion-button
+      class="buy-button"
+      (click)="navigateToOpinion('opinion', route.snapshot.paramMap.get('id'))">
       Agregar Opinión
     </ion-button>
   </div>
 </div>
+
 
 
 

@@ -66,17 +66,20 @@ export class DetalleComponent implements OnInit {
   currentIndex = 0;
   currentRoute: string = '';
   features: any[] = []; // Características del producto
+  productId: string | null = null;
+  opinions: any[] = [];
+  averageRating: number | null = null;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     private cdr: ChangeDetectorRef,
     private productService: ProductService,
   ) {}
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   async ngOnInit() {
-      const productId = this.route.snapshot.paramMap.get('id');
+    const productId = this.route.snapshot.paramMap.get('id');
     if (productId) {
       // Cargar producto
       this.product$ = this.productService.getProductById(productId);
@@ -90,14 +93,60 @@ export class DetalleComponent implements OnInit {
           console.error('Error al cargar características:', error);
         }
       );
+
+      this.loadOpinions(productId)
     }
-       // Actualiza la ruta actual cada vez que cambia
+
+    // Actualiza la ruta actual cada vez que cambia
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url.replace('/', '');
     });
     this.cdr.detectChanges(); // Forzar detección de cambios
   }
 
+  loadOpinions(productId: string) {
+    this.productService.getProductReviews(productId).subscribe({
+      next: (opinions) => {
+        this.opinions = opinions || []; // Asegúrate de que sea un arreglo
+        this.calculateAverageRating();
+        this.cdr.detectChanges(); // Forzar detección de cambios si es necesario
+      },
+      error: (error) => {
+        console.error('Error al cargar opiniones:', error);
+        this.opinions = [];
+        this.calculateAverageRating(); // Asegúrate de manejar el caso de error
+      },
+    });
+  }
+
+
+
+
+// Generar estrellas dinámicamente para el promedio
+getStarsForAverage(): string {
+  const filledStars = Math.round(this.averageRating);
+  const emptyStars = 5 - filledStars;
+  return '★'.repeat(filledStars) + '☆'.repeat(emptyStars);
+}
+
+
+calculateAverageRating() {
+  if (this.opinions && this.opinions.length > 0) {
+    const totalRating = this.opinions.reduce((sum, opinion) => sum + (opinion.rating || 0), 0);
+    this.averageRating = totalRating / this.opinions.length;
+  } else {
+    this.averageRating = 0; // Si no hay opiniones, establece 0
+  }
+}
+
+
+  navigateToOpinion(route: string, productId: string | null) {
+    if (productId) {
+      this.router.navigate([`/${route}`, { id: productId }]);
+    } else {
+      console.error('No se pudo navegar porque el ID del producto es nulo.');
+    }
+  }
 
  onSegmentChange(event: any) {
     console.log('Opción seleccionada:', event.detail.value);
@@ -116,11 +165,11 @@ formatDate(date?: string): string {
 }
 
 // Ejemplo de datos actualizados
-opinions = [
-  { user: 'Juan Pérez', rating: 5, comment: '¡Excelente producto! Llegó en perfecto estado.', date: '2024-12-11' },
-  { user: 'María López', rating: 4, comment: 'Muy buen producto, recomendable.', date: '2024-12-07' },
-  { user: 'Carlos Gómez', rating: 4, comment: 'Como siempre. Excelente calidad.', date: '2024-12-07' }
-];
+// opinions = [
+//   { user: 'Juan Pérez', rating: 5, comment: '¡Excelente producto! Llegó en perfecto estado.', date: '2024-12-11' },
+//   { user: 'María López', rating: 4, comment: 'Muy buen producto, recomendable.', date: '2024-12-07' },
+//   { user: 'Carlos Gómez', rating: 4, comment: 'Como siempre. Excelente calidad.', date: '2024-12-07' }
+// ];
 
 // Ejemplo de datos FAQ
 faqs = [

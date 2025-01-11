@@ -502,13 +502,13 @@ ion-button:active {
 
 
 //
-
 /* Sección de Opiniones */
 .opinions-section {
   padding: 20px;
   font-family: Arial, sans-serif;
   color: #333;
 
+  /* Título de la sección */
   .section-title {
     font-size: 22px;
     font-weight: bold;
@@ -534,7 +534,7 @@ ion-button:active {
       position: relative;
 
       .stars-filled {
-        position: absolute;
+        // position: absolute;
         top: 0;
         left: 0;
         color: #7a00ff; /* Color de estrellas llenas */
@@ -596,6 +596,7 @@ ion-button:active {
     margin-top: 20px;
   }
 }
+
 
 //
 
