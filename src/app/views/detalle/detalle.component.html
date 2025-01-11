@@ -247,23 +247,56 @@
 
 <!-- Sección FAQ -->
 <div *ngSwitchCase="'faq'" class="faq-section">
-  <h3 class="section-title">Preguntas Frecuentes</h3>
+  <h3 class="faq-title">Preguntas Frecuentes</h3>
 
   <!-- Input de preguntas -->
-  <div class="faq-input-container">
-    <input type="text" placeholder="Escribí tu pregunta..." class="faq-input" />
-    <p class="response-time">Tiempo aproximado de respuesta: 8 minutos</p>
-    <button class="faq-button">Preguntar</button>
+  <div class="faq-input-container" *ngIf="userType === 'cliente'">
+    <input
+      [(ngModel)]="newQuestion"
+      type="text"
+      placeholder="Escribí tu pregunta..."
+      class="faq-input"
+    />
+    <p class="faq-response-time">Tiempo promedio de respuesta: 24 horas</p>
+    <button class="faq-button" (click)="addQuestion()">Preguntar</button>
   </div>
 
   <!-- Lista de preguntas y respuestas -->
   <div class="faq-list">
     <div *ngFor="let faq of faqs" class="faq-item">
-      <p class="question">{{ faq.question }}</p>
-      <p class="answer">{{ faq.answer }}</p>
+      <p class="faq-question">
+        <strong>Pregunta:</strong> {{ faq.text }}
+      </p>
+      <p class="faq-answer" *ngIf="faq.answer">
+        <strong>Respuesta:</strong> {{ faq.answer }}
+      </p>
+
+      <div
+        *ngIf="userType === 'tienda' && !faq.answer"
+        class="faq-response-container"
+      >
+        <input
+          [(ngModel)]="faq.response"
+          type="text"
+          placeholder="Escribí tu respuesta..."
+          class="faq-input"
+        />
+        <button class="faq-button" (click)="respondToQuestion(faq)">
+          Responder
+        </button>
+      </div>
     </div>
   </div>
+
+  <!-- Mensaje cuando no hay preguntas -->
+  <div *ngIf="faqs.length === 0" class="faq-empty">
+    Todavía no hay preguntas. ¡Sé el primero en preguntar!
+  </div>
 </div>
+
+
+
+
 
 
     <!-- Contenido por defecto -->

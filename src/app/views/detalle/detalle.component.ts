@@ -66,9 +66,14 @@ export class DetalleComponent implements OnInit {
   currentIndex = 0;
   currentRoute: string = '';
   features: any[] = []; // Características del producto
-  productId: string | null = null;
+  productId: string | null = null; // Declarar como propiedad de clase
   opinions: any[] = [];
   averageRating: number | null = null;
+
+  faqs: any[] = []; // Lista de preguntas frecuentes
+  newQuestion: string = ''; // Nueva pregunta del usuario
+  userType: string = ''; // Tipo de usuario (cliente/tienda)
+  userId: string = '';
 
   constructor(
     private router: Router,
@@ -77,15 +82,23 @@ export class DetalleComponent implements OnInit {
     private productService: ProductService,
   ) {}
 
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
+
   async ngOnInit() {
-    const productId = this.route.snapshot.paramMap.get('id');
-    if (productId) {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      this.userId = parsedUser.id;
+      this.userType = parsedUser.tipo_usuario || ''; // Verificar tipo de usuario
+    }
+
+    // Obtener el productId de la URL
+    this.productId = this.route.snapshot.paramMap.get('id');
+    if (this.productId) {
       // Cargar producto
-      this.product$ = this.productService.getProductById(productId);
+      this.product$ = this.productService.getProductById(this.productId);
 
       // Cargar características
-      this.productService.getProductFeatures(productId).subscribe(
+      this.productService.getProductFeatures(this.productId).subscribe(
         (features) => {
           this.features = features;
         },
@@ -94,7 +107,11 @@ export class DetalleComponent implements OnInit {
         }
       );
 
-      this.loadOpinions(productId)
+      // Cargar opiniones y FAQ
+      this.loadOpinions(this.productId);
+      this.loadFAQs();
+    } else {
+      console.error('No se encontró el productId en la URL.');
     }
 
     // Actualiza la ruta actual cada vez que cambia
@@ -103,6 +120,7 @@ export class DetalleComponent implements OnInit {
     });
     this.cdr.detectChanges(); // Forzar detección de cambios
   }
+
 
   loadOpinions(productId: string) {
     this.productService.getProductReviews(productId).subscribe({
@@ -119,6 +137,73 @@ export class DetalleComponent implements OnInit {
     });
   }
 
+ // Cargar preguntas frecuentes
+ loadFAQs() {
+  this.productService.getProductFAQs(this.productId).subscribe(
+    (data) => {
+      this.faqs = data;
+    },
+    (error) => {
+      console.error('Error al cargar preguntas frecuentes:', error);
+    }
+  );
+}
+
+ // Agregar una nueva pregunta
+  addQuestion() {
+    if (!this.newQuestion.trim()) {
+      alert('La pregunta no puede estar vacía.');
+      return;
+    }
+
+    if (!this.productId) {
+      alert('No se pudo enviar la pregunta porque no se encontró el ID del producto.');
+      return;
+    }
+
+    const question = {
+      productId: this.productId,
+      userId: this.userId,
+      text: this.newQuestion,
+    };
+
+    this.productService.createProductFAQ(this.productId, question).subscribe(
+      (response) => {
+        this.faqs.push(response.faq);
+        this.newQuestion = '';
+        alert('Pregunta agregada exitosamente.');
+      },
+      (error) => {
+        console.error('Error al agregar la pregunta:', error);
+      }
+    );
+  }
+
+  respondToQuestion(faq: any) {
+    if (!faq.response.trim()) {
+      alert('La respuesta no puede estar vacía.');
+      return;
+    }
+
+    if (!this.productId) {
+      alert('No se encontró el ID del producto.');
+      return;
+    }
+
+    const answer = faq.response;
+
+    this.productService.updateFaqAnswer(this.productId, faq.id, answer).subscribe(
+      (response) => {
+        faq.answer = answer; // Actualiza la respuesta localmente
+        delete faq.response; // Limpia la propiedad temporal
+        alert('Respuesta enviada exitosamente.');
+      },
+      (error) => {
+        console.error('Error al responder la pregunta:', error);
+        alert('Ocurrió un error al enviar la respuesta.');
+      }
+    );
+  }
 
 
 
@@ -163,20 +248,6 @@ formatDate(date?: string): string {
   const options: Intl.DateTimeFormatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
   return new Date(date).toLocaleDateString('es-ES', options);
 }
-
-// Ejemplo de datos actualizados
-// opinions = [
-//   { user: 'Juan Pérez', rating: 5, comment: '¡Excelente producto! Llegó en perfecto estado.', date: '2024-12-11' },
-//   { user: 'María López', rating: 4, comment: 'Muy buen producto, recomendable.', date: '2024-12-07' },
-//   { user: 'Carlos Gómez', rating: 4, comment: 'Como siempre. Excelente calidad.', date: '2024-12-07' }
-// ];
-
-// Ejemplo de datos FAQ
-faqs = [
-  { question: '¿Cuál es el tiempo de envío?', answer: 'El tiempo de envío estimado es de 3-5 días hábiles.' },
-  { question: '¿Puedo devolver el producto?', answer: 'Sí, puedes devolverlo dentro de los primeros 15 días.' },
-  { question: '¿Qué garantía tiene?', answer: 'El producto tiene garantía de 6 meses contra defectos de fábrica.' }
-];
 
   slides = [
     {
