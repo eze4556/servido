@@ -85,7 +85,7 @@ export class DetalleComponent implements OnInit {
   newQuestion: string = ''; // Nueva pregunta del usuario
   userType: string = ''; // Tipo de usuario (cliente/tienda)
   userId: string = '';
-  userId: string;
+  // userId: string;
   isLoggedIn: boolean = false;
   isLoading: boolean = true;
 
@@ -339,44 +339,43 @@ calculateAverageRating() {
     return new Date(date).toLocaleDateString('es-ES', options);
   }
 
-  // Ejemplo de datos actualizados
-  opinions = [
-    {
-      user: 'Juan Pérez',
-      rating: 5,
-      comment: '¡Excelente producto! Llegó en perfecto estado.',
-      date: '2024-12-11',
-    },
-    {
-      user: 'María López',
-      rating: 4,
-      comment: 'Muy buen producto, recomendable.',
-      date: '2024-12-07',
-    },
-    {
-      user: 'Carlos Gómez',
-      rating: 4,
-      comment: 'Como siempre. Excelente calidad.',
-      date: '2024-12-07',
-    },
-  ];
 
-  // Ejemplo de datos FAQ
-  faqs = [
-    {
-      question: '¿Cuál es el tiempo de envío?',
-      answer: 'El tiempo de envío estimado es de 3-5 días hábiles.',
-    },
-    {
-      question: '¿Puedo devolver el producto?',
-      answer: 'Sí, puedes devolverlo dentro de los primeros 15 días.',
-    },
-    {
-      question: '¿Qué garantía tiene?',
-      answer:
-        'El producto tiene garantía de 6 meses contra defectos de fábrica.',
-    },
-  ];
+  // opinions = [
+  //   {
+  //     user: 'Juan Pérez',
+  //     rating: 5,
+  //     comment: '¡Excelente producto! Llegó en perfecto estado.',
+  //     date: '2024-12-11',
+  //   },
+  //   {
+  //     user: 'María López',
+  //     rating: 4,
+  //     comment: 'Muy buen producto, recomendable.',
+  //     date: '2024-12-07',
+  //   },
+  //   {
+  //     user: 'Carlos Gómez',
+  //     rating: 4,
+  //     comment: 'Como siempre. Excelente calidad.',
+  //     date: '2024-12-07',
+  //   },
+  // ];
+
+  // faqs = [
+  //   {
+  //     question: '¿Cuál es el tiempo de envío?',
+  //     answer: 'El tiempo de envío estimado es de 3-5 días hábiles.',
+  //   },
+  //   {
+  //     question: '¿Puedo devolver el producto?',
+  //     answer: 'Sí, puedes devolverlo dentro de los primeros 15 días.',
+  //   },
+  //   {
+  //     question: '¿Qué garantía tiene?',
+  //     answer:
+  //       'El producto tiene garantía de 6 meses contra defectos de fábrica.',
+  //   },
+  // ];
 
   slides = [
     {

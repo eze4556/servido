@@ -74,13 +74,14 @@ export class TiendaComponent implements OnInit {
     private productoService: ProductService,
     private router: Router,
     private firestoreService: FirestoreService,
-    private serviceService: ServiceService, // Servicio de servicios
+    private serviceService: ServiceService,
   ) {}
 
   ngOnInit() {
+
     this.loadCategorias();
     this.userId = localStorage.getItem('userId');
-    this.loadProducts(); // Inicialmente cargar productos
+    this.loadProducts();
     this.checkLoginStatus();
 
     this.router.events.subscribe(() => {
