@@ -53,7 +53,6 @@ import { Categoria } from 'src/app/common/models/categoria.model';
 import { HttpClient } from '@angular/common/http';
 import { FirestoreService } from '../common/services/firestore.service';
 import { ProductService } from '../common/services/product.service';
-import { ProductService } from '../common/services/product.service';
 
 type DropdownSegment = 'categoria' | 'marcas' | 'productos' | 'perfil';
 
@@ -124,7 +123,6 @@ userId: string | null = null;
     private authService: AuthService,
     private http: HttpClient,
     private firestoreService: FirestoreService,
-    private productService: ProductService,
     private productService: ProductService
 
   ) {   setInterval(() => this.moveSlide(1), 3000);
@@ -274,27 +272,6 @@ images = [
       console.log('Categorías cargadas:', categorias);
     });
   }
-
-
-loadRecommendedProducts() {
-  if (!this.userId) {
-    console.warn('El usuario no está autenticado, no se pueden cargar productos recomendados.');
-    return;
-  }
-
-  const category = this.categorias.length > 0 ? this.categorias[0].name : null;
-
-  this.productService.getRecommendedProducts(this.userId, { category, limit: 5 })
-    .subscribe({
-      next: (products) => {
-        this.recommendedProducts = products;
-        console.log('Productos recomendados:', this.recommendedProducts);
-      },
-      error: (err) => {
-        console.error("Error al cargar productos recomendados:", err);
-      }
-    });
-}
 
 
 loadRecommendedProducts() {
