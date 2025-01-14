@@ -1,0 +1,308 @@
+
+.search-bar {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 0 10px;
+  width: 70%;
+  margin: 0 auto;
+}
+
+/* Estilo del ion-toolbar */
+ion-toolbar.custom-toolbar {
+--background: #4a008e; /* Fondo púrpura */
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 4px 8px; /* Reducido verticalmente para hacerla más fina */
+height: 70px; /* Ajuste de altura total del toolbar */
+}
+
+/* Contenedor de búsqueda y carrito */
+.search-cart-container {
+display: flex;
+align-items: center;
+width: 100%; /* Ocupa todo el ancho */
+max-width: 600px; /* Ancho máximo del contenedor */
+gap: 8px; /* Espaciado entre búsqueda y carrito */
+margin-top: 20px;
+}
+
+/* Barra de búsqueda más fina */
+.search-container {
+display: flex;
+align-items: center;
+background-color: white;
+border-radius: 20px; /* Ligeramente menos redondeado */
+padding: 4px 12px; /* Menor espaciado interno vertical */
+flex: 1; /* Ocupa el máximo espacio horizontal */
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil ajustada */
+height: 32px; /* Grosor reducido de la barra */
+}
+
+/* Icono de búsqueda */
+.icon-search {
+color: gray;
+font-size: 20px;
+margin-right: 6px; /* Espaciado entre icono y input */
+}
+
+/* Icono del carrito */
+.icon-cart {
+color: white;
+font-size: 24px;
+cursor: pointer;
+line-height: 1; /* Asegura alineación vertical con el grosor reducido */
+}
+
+/* Input de la barra de búsqueda */
+ion-input {
+  font-size: 14px;
+  height: 100%; /* Alineado con el grosor de la barra */
+  line-height: 1; /* Ajusta la altura de línea */
+}
+
+/* Texto de dirección */
+.address-text {
+  font-size: 12px;
+  color: #fff;
+  margin-top: 4px;
+  text-align: center;
+}
+
+
+
+/* Encabezado */
+.service-header {
+  text-align: center;
+  padding: 5px 0;
+  background-color: #f4f4f4;
+}
+
+.service-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Contenedor del carrusel */
+.carousel-container {
+  position: relative;
+  width: 90%;
+  margin: 20px auto;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider-image {
+  // width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* Sección de precios */
+/* Sección de precios */
+.price-section {
+  text-align: center; /* Centrar texto */
+  margin: 20px auto; /* Centrar horizontalmente con auto */
+  max-width: 300px;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+
+  display: flex; /* Habilitar flexbox */
+  flex-direction: column; /* Alinear elementos en columna */
+  align-items: center; /* Centrar horizontalmente */
+  justify-content: center; /* Centrar verticalmente */
+}
+
+/* Precio y acciones */
+.price-and-actions {
+  display: flex;
+  justify-content: center; /* Centrar elementos dentro del contenedor */
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px; /* Espaciado entre elementos */
+}
+
+/* Estilo del precio */
+.price {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+/* Descripción */
+.description {
+  font-size: 14px;
+  color: #555;
+  text-align: center; /* Asegurar texto centrado */
+}
+
+
+/* Barra de búsqueda */
+.search-bar {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  width: 70%;
+  margin: 0 auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.icon-search {
+  font-size: 20px;
+  color: gray;
+}
+
+ion-input {
+  font-size: 14px;
+  color: #333;
+  border: none;
+}
+
+
+// footer
+.fixed-toolbar {
+  --background: #fff;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.fixed-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+  width: 100%;
+  height: 100%; /* Asegura que ocupe todo el footer */
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #333; /* Texto e icono en gris oscuro */
+  font-size: 12px;
+  cursor: pointer;
+  width: 100%; /* Ocupa el ancho completo */
+  height: 100%; /* Hace que sean cuadrados */
+  transition: all 0.3s ease;
+  border-radius: 0; /* Elimina bordes redondeados para un diseño limpio */
+
+  ion-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+    color: #333; /* Iconos en gris oscuro */
+    transition: color 0.3s ease;
+  }
+
+  ion-label {
+    color: #333;
+    transition: color 0.3s ease;
+  }
+
+  &:hover {
+    background-color: rgba(74, 0, 142, 0.1); /* Fondo suave al pasar el cursor */
+    transform: scale(1.05); /* Ligero aumento */
+  }
+
+  &.active {
+    background-color: rgba(74, 0, 142, 0.5); /* Fondo violeta más evidente */
+    color: #fff; /* Texto e iconos en blanco para contraste */
+    padding: 10px;
+    ion-icon {
+      color: #fff; /* Icono en blanco */
+    }
+    ion-label {
+      font-weight: bold;
+    }
+
+    /* Indicador visual */
+    &:after {
+      content: '';
+      display: block;
+      width: 100%; /* Indicador cubre todo el botón */
+      height: 3px;
+      background-color: #4a008e;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+}
+
+
+.discount-line {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-bottom: 8px;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #b0b0b0;
+  font-size: 0.9rem;
+  margin-right: 8px;
+}
+
+.discount-price {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4a008e;
+}
+
+.discount-percentage {
+  font-size: 0.9rem;
+  color: #ff5722;
+  margin-left: 4px;
+}
+
+/* Contenedor de botones */
+.action-buttons {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el botón */
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.whatsapp-button {
+  --background: #25d366; /* Verde de WhatsApp */
+  --color: #ffffff; /* Texto blanco */
+  --padding-start: 12px; /* Ajusta el padding interno */
+  --padding-end: 12px;
+  --border-radius: 25px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño del texto */
+  font-weight: bold; /* Negrita */
+  text-transform: none; /* Desactiva mayúsculas automáticas */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Espaciado entre icono y texto */
+  box-shadow: none; /* Elimina sombras adicionales */
+  border: none; /* Asegura que no haya borde */
+  outline: none; /* Elimina el contorno */
+  margin: 0; /* Elimina márgenes */
+  transition: transform 0.2s ease-in-out;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.05); /* Efecto hover */
+}
+
+.whatsapp-button ion-icon {
+  font-size: 20px; /* Tamaño del icono */
+  margin: 0;
+}

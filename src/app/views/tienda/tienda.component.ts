@@ -22,6 +22,7 @@ import { AuthService } from '../../common/services/auth.service';
 import { ProductService } from 'src/app/common/services/product.service';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { ServiceService } from 'src/app/common/services/services.service';
 
 @Component({
   selector: 'app-tienda',
@@ -51,7 +52,10 @@ export class TiendaComponent implements OnInit {
   isLoggedIn: boolean = false;
   isLoading: boolean = true;
   currentRoute: string = '';
+  servicios: any[] = []; // Array para almacenar los servicios
+  isViewingProducts: boolean = true; // Estado para alternar entre productos y servicios
 
+  filteredItems: any[] = []; // Items filtrados (pueden ser productos o servicios)
    filteredProductos: Producto[] = []; // Productos filtrados
   categories: { id: string; nombre: string }[] = []; // Categorías con nombre e ID
   brands: string[] = [];
@@ -69,15 +73,16 @@ export class TiendaComponent implements OnInit {
     private authService: AuthService,
     private productoService: ProductService,
     private router: Router,
-    private firestoreService: FirestoreService
+    private firestoreService: FirestoreService,
+    private serviceService: ServiceService, // Servicio de servicios
   ) {}
 
   ngOnInit() {
-      this.loadCategorias();
-
+    this.loadCategorias();
     this.userId = localStorage.getItem('userId');
-    this.loadProducts();
+    this.loadProducts(); // Inicialmente cargar productos
     this.checkLoginStatus();
+
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url.replace('/', '');
     });
@@ -85,6 +90,39 @@ export class TiendaComponent implements OnInit {
     if (this.isLoggedIn) {
       this.getLocation();
     }
+  }
+
+
+  toggleView(): void {
+    this.isViewingProducts = !this.isViewingProducts;
+
+    if (this.isViewingProducts) {
+      this.loadProducts(); // Mostrar productos
+    } else {
+      this.loadServices(); // Mostrar servicios
+    }
+  }
+
+
+  loadServices(): void {
+    this.isLoading = true;
+    // console.log('Obteniendo servicios del servidor...');
+    this.serviceService.getServices({}).subscribe(
+      (data) => {
+        if (!data || data.length === 0) {
+          console.warn('No se obtuvieron servicios.');
+        } else {
+          // console.log('Servicios obtenidos:', data);
+        }
+        this.servicios = data;
+        this.filteredItems = [...data]; // Mostrar servicios
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Error al obtener los servicios:', error);
+        this.isLoading = false;
+      }
+    );
   }
 
   navigateTo(route: string) {
@@ -123,22 +161,26 @@ export class TiendaComponent implements OnInit {
 //     );
 //   }
 
-
-  loadProducts(): void {
-    this.isLoading = true;
-    this.productoService.getProducts({}).subscribe(
-      (data) => {
-        this.productos = data;
-        this.filteredProductos = [...data]; // Inicialmente, no se aplican filtros
-        this.isLoading = false;
-      },
-      (error) => {
-        console.error('Error al obtener los productos:', error);
-        this.isLoading = false;
+loadProducts(): void {
+  this.isLoading = true;
+  // console.log('Obteniendo productos del servidor...');
+  this.productoService.getProducts({}).subscribe(
+    (data) => {
+      if (!data || data.length === 0) {
+        console.warn('No se obtuvieron productos.');
+      } else {
+        // console.log('Productos obtenidos:', data);
       }
-    );
-  }
-
+      this.productos = data;
+      this.filteredItems = [...data]; // Inicialmente, no se aplican filtros
+      this.isLoading = false;
+    },
+    (error) => {
+      console.error('Error al obtener los productos:', error);
+      this.isLoading = false;
+    }
+  );
+}
  // Manejar la selección de filtros
 setFilter(filterType: string, value: string | number | number[]): void {
   if (filterType === 'category') {
@@ -156,26 +198,44 @@ setFilter(filterType: string, value: string | number | number[]): void {
   this.applyFilters(); // Aplicar filtros con la nueva configuración
 }
 
-// Aplicar los filtros al conjunto de productos
 applyFilters(): void {
-  this.filteredProductos = this.productos.filter((producto) => {
-    const matchesCategory =
-      !this.appliedFilters.category ||
-      producto.category === this.appliedFilters.category;
+  if (this.isViewingProducts) {
+    this.filteredItems = this.productos.filter((item) => {
+      const matchesCategory =
+        !this.appliedFilters.category || item.category === this.appliedFilters.category;
 
-    const matchesBrand =
-      !this.appliedFilters.brand || producto.brand === this.appliedFilters.brand;
+      const matchesBrand =
+        !this.appliedFilters.brand || item.brand === this.appliedFilters.brand;
 
-    const matchesPrice =
-      (!this.appliedFilters.minPrice || producto.price >= this.appliedFilters.minPrice) &&
-      (!this.appliedFilters.maxPrice || producto.price <= this.appliedFilters.maxPrice);
+      const matchesPrice =
+        (!this.appliedFilters.minPrice || item.price >= this.appliedFilters.minPrice) &&
+        (!this.appliedFilters.maxPrice || item.price <= this.appliedFilters.maxPrice);
 
-    const matchesSearch =
-      !this.appliedFilters.search ||
-      producto.title.toLowerCase().includes((this.appliedFilters.search as string).toLowerCase());
+      const matchesSearch =
+        !this.appliedFilters.search ||
+        item.title.toLowerCase().includes((this.appliedFilters.search as string).toLowerCase());
 
-    return matchesCategory && matchesBrand && matchesPrice && matchesSearch;
-  });
+      return matchesCategory && matchesBrand && matchesPrice && matchesSearch;
+    });
+  } else {
+    this.filteredItems = this.servicios.filter((item) => {
+      const matchesCategory =
+        !this.appliedFilters.category || item.category === this.appliedFilters.category;
+
+      const matchesBrand =
+        !this.appliedFilters.brand || item.brand === this.appliedFilters.brand;
+
+      const matchesPrice =
+        (!this.appliedFilters.minPrice || item.price >= this.appliedFilters.minPrice) &&
+        (!this.appliedFilters.maxPrice || item.price <= this.appliedFilters.maxPrice);
+
+      const matchesSearch =
+        !this.appliedFilters.search ||
+        item.title.toLowerCase().includes((this.appliedFilters.search as string).toLowerCase());
+
+      return matchesCategory && matchesBrand && matchesPrice && matchesSearch;
+    });
+  }
 }
 
 
@@ -249,6 +309,11 @@ applyFilters(): void {
     this.router.navigate([`/product/${productId}`]);
   }
 
+  navigateToService(serviceId: string) {
+    this.router.navigate([`/service/${serviceId}`]);
+  }
+
+
   categorias$: Observable<any[]>;  // Observable para categorías
 
   // Carga las categorías con nombres
@@ -260,13 +325,4 @@ applyFilters(): void {
       }));
     });
   }
-
-
-
-
-
-
-
-
-
 }

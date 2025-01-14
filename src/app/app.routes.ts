@@ -1,3 +1,5 @@
+import { ProductosPublicadosComponent } from './views/productos-publicados/productos-publicados.component';
+import { ServiceService } from './common/services/services.service';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -10,10 +12,10 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () => import('../app/views/login/login.component').then((m) => m.LoginComponent),
   },
-  //   {
-  //   path: 'perfil',
-  //   loadComponent: () => import('../app/views/perfil/perfil.component').then((m) => m.PerfilComponent),
-  // },
+    {
+    path: 'servicios',
+    loadComponent: () => import('../app/views/servicios/servicios.component').then((m) => m.ServicioComponent),
+  },
   {
     path: 'elección',
     loadComponent: () => import('./views/eleccion/eleccion.component').then((m) => m.EleccionComponent),
@@ -21,6 +23,10 @@ export const routes: Routes = [
    {
     path: 'product/:id',
     loadComponent: () => import('./views/detalle/detalle.component').then((m) => m.DetalleComponent),
+  },
+  {
+    path: 'service/:id',
+    loadComponent: () => import('./views/detalle-servicios/detalle-servicios.component').then((m) => m.DetalleServiciosComponent),
   },
   {
     path: 'tienda',
@@ -71,7 +77,10 @@ export const routes: Routes = [
     path: 'mis-productos',
     loadComponent: () => import('../app/views/productos-publicados/productos-publicados.component').then((m) => m.ProductosPublicadosComponent),
   },
-
+  {
+    path: 'mis-servicios',
+    loadComponent: () => import('../app/views/servicios-publicados/servicios-publicados.component').then((m) => m.ServiciosPublicadosComponent),
+  },
   {
     path: '',
     redirectTo: 'home',
