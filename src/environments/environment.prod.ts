@@ -2,12 +2,6 @@ export const environment = {
   production: false,
   firebase: {
 
-//  apiKey: "AIzaSyAV_I3JGbW998fVQQdf5cV-DYDcu2V6R7o",
-//   authDomain: "grupoargentina-adebd.firebaseapp.com",
-//   projectId: "grupoargentina-adebd",
-//   storageBucket: "grupoargentina-adebd.firebasestorage.app",
-//   messagingSenderId: "192920896716",
-//   appId: "1:192920896716:web:a630c89d6cd030d2d4ae69"
 
 apiKey: "AIzaSyBdwb8icJm8ibGiK1EautKz-Di3CGtYUKk",
 authDomain: "pencuentro-8fdb3.firebaseapp.com",

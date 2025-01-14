@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Producto } from '../models/producto.model';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -10,16 +11,15 @@ export class ProductService {
 
   private apiUrl = 'http://localhost:3000/products';
 
+
+
   constructor(private http: HttpClient) {}
 
   createProduct(product: Producto): Observable<any> {
     return this.http.post(`${this.apiUrl}/create`, product);
   }
 
-  // Obtener todos los productos
-  // getProducts(): Observable<Producto[]> {
-  //   return this.http.get<Producto[]>(this.apiUrl);
-  // }
+
 
 
     // Método para obtener productos filtrados
@@ -119,6 +119,20 @@ export class ProductService {
   getDiscountedProducts(): Observable<Producto[]> {
     return this.http.get<Producto[]>(`${this.apiUrl}/discounted`);
   }
+
+
+getRecommendedProducts(userId: string, options?: { category?: string; limit?: number }): Observable<Producto[]> {
+  let params = new HttpParams().set('userId', userId);
+
+  if (options?.category) {
+    params = params.set('category', options.category);
+  }
+  if (options?.limit) {
+    params = params.set('limit', options.limit.toString());
+  }
+
+  return this.http.get<Producto[]>(`${this.apiUrl}/recommended`, { params });
+}
 
 
 }

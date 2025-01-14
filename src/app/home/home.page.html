@@ -7,7 +7,7 @@
       </div>
       <ion-icon name="cart-outline" class="icon-cart" (click)="navigateTo('carrito')"></ion-icon>
     </div>
-    <p class="address-text" (click)="navigateTo('login')" *ngIf="!isLoggedIn">Login de prueba</p>
+    <!-- <p class="address-text" (click)="navigateTo('login')" *ngIf="!isLoggedIn">Login de prueba</p> -->
     <p class="location-info" *ngIf="isLoggedIn">
       <ion-icon name="location-outline" style="margin-right: 8px;"></ion-icon>
       {{ location }}
@@ -36,7 +36,7 @@
   <!-- Botones en la parte inferior -->
   <div class="buttons-row">
     <a href="/elección">
-  <div class="circle-button">
+  <div class="circle-button" *ngIf="isLoggedIn">
     <img src="../../assets/icon/vender.png" alt="Icono" />
     <p>Vender</p>
   </div>
@@ -80,8 +80,8 @@
 
 <div class="contenedor-principal">
   <div class="section-deslogueado" *ngIf="!isLoggedIn">
-    <div class="item-deslogueado">
-      <img
+    <div class="item-deslogueado" >
+      <img (click)="navigateTo('login')"
         src="../../assets/icon/registrar.jpeg"
         alt="Crea tu cuenta"
         class="image-deslogueado"
@@ -140,7 +140,7 @@
   </div> -->
 
   <!-- Recomendados -->
-  <div class="recommended-section" *ngIf="isLoggedIn">
+  <!-- <div class="recommended-section" *ngIf="isLoggedIn">
     <h2 class="recommended-title">Recomendados</h2>
     <div class="recommended-items">
       <div class="recommended-item">
@@ -183,7 +183,25 @@
         </p>
       </div>
     </div>
+  </div> -->
+
+  <div class="recommended-section" *ngIf="isLoggedIn">
+  <h2 class="recommended-title">Recomendados</h2>
+  <div class="recommended-items">
+    <div class="recommended-item" *ngFor="let product of recommendedProducts">
+      <img
+        [src]="product.images || '../../assets/icon/default-image.png'"
+        class="recommended-image"
+      />
+      <p class="recommended-name">{{ product.title }}</p>
+      <p class="recommended-price">
+        <span class="old-price" *ngIf="product.price">
+          {{ product.price | currency:'USD':true }}
+        </span>
+      </p>
+    </div>
   </div>
+</div>
 
   <div class="div" *ngIf="isLoggedIn">
     <div class="subscription-card">
@@ -375,8 +393,7 @@
       <div class="links-column">
         <a href="#">Mis compras</a>
         <a href="#">Ofertas</a>
-        <a href="#">Tiendas oficiales</a>
-        <a href="#">Mercado Puntos</a>
+
         <a href="#">Vender</a>
       </div>
     </div>
@@ -390,7 +407,7 @@
   </footer>
 </ion-content>
 
-<ion-footer>
+<ion-footer *ngIf="isLoggedIn">
   <ion-toolbar class="fixed-toolbar">
     <!-- Tabs -->
     <div class="fixed-tabs">
