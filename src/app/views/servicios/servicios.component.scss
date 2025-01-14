@@ -1,0 +1,207 @@
+:host {
+  --ion-background-color: #f8f9fa;
+}
+
+.custom-toolbar {
+  --background: #6a1b9a;
+  color: #fff;
+}
+
+.form-container {
+  padding: 16px;
+  background: #fff;
+  border-radius: 8px;
+  margin: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-item {
+  margin-bottom: 16px;
+}
+
+.form-item label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #6a1b9a;
+  margin-bottom: 4px;
+}
+
+.form-item input,
+.form-item select,
+.form-item textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #6a1b9a;
+  border-radius: 4px;
+  background-color: #000;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.form-item input::placeholder,
+.form-item textarea::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form-item textarea {
+  resize: vertical;
+  height: 80px;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.publish-button {
+  background-color: #6a1b9a;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.publish-button:hover {
+  background-color: #4a008e;
+}
+
+.helper-text {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.preview-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.image-preview-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.image-preview {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.delete-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #ff5b5b;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.delete-button:hover {
+  background: #e04646;
+}
+
+// footer
+.fixed-toolbar {
+  --background: #fff;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.fixed-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+  width: 100%;
+  height: 100%; /* Asegura que ocupe todo el footer */
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #333; /* Texto e icono en gris oscuro */
+  font-size: 12px;
+  cursor: pointer;
+  width: 100%; /* Ocupa el ancho completo */
+  height: 100%; /* Hace que sean cuadrados */
+  transition: all 0.3s ease;
+  border-radius: 0; /* Elimina bordes redondeados para un diseño limpio */
+
+  ion-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+    color: #333; /* Iconos en gris oscuro */
+    transition: color 0.3s ease;
+  }
+
+  ion-label {
+    color: #333;
+    transition: color 0.3s ease;
+  }
+
+  &:hover {
+    background-color: rgba(74, 0, 142, 0.1); /* Fondo suave al pasar el cursor */
+    transform: scale(1.05); /* Ligero aumento */
+  }
+
+  &.active {
+    background-color: rgba(74, 0, 142, 0.5); /* Fondo violeta más evidente */
+    color: #fff; /* Texto e iconos en blanco para contraste */
+    padding: 10px;
+    ion-icon {
+      color: #fff; /* Icono en blanco */
+    }
+    ion-label {
+      font-weight: bold;
+    }
+
+    /* Indicador visual */
+    &:after {
+      content: '';
+      display: block;
+      width: 100%; /* Indicador cubre todo el botón */
+      height: 3px;
+      background-color: #4a008e;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+}

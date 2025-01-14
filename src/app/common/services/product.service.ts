@@ -90,6 +90,32 @@ export class ProductService {
     return this.http.post(`${this.apiUrl}/${productId}/features`, { productId, feature });
   }
 
+  // Obtener las reseñas de un producto
+  getProductReviews(productId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${productId}/reviews`);
+  }
+
+  createProductReview(productId: string, review: { userId: string; rating: number; comment: string }): Observable<any> {
+    const payload = { productId, review };
+    return this.http.post(`${this.apiUrl}/${productId}/reviews`, payload);
+  }
+
+    // Crear una pregunta frecuente
+  createProductFAQ(productId: string, question: { userId: string; text: string }): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${productId}/faqs`, { productId, question });
+  }
+
+  // Obtener preguntas frecuentes de un producto
+  getProductFAQs(productId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${productId}/faqs`);
+  }
+
+  // ProductService
+  updateFaqAnswer(productId: string, faqId: string, answer: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${productId}/faqs/${faqId}`, { answer });
+  }
+
+
 
 getRecommendedProducts(userId: string, options?: { category?: string; limit?: number }): Observable<Producto[]> {
   let params = new HttpParams().set('userId', userId);

@@ -1,46 +1,46 @@
-
-
-
 <ion-header>
   <ion-toolbar class="custom-toolbar">
-    <ion-title>Publicar</ion-title>
+    <div class="search-cart-container">
+      <div class="search-container">
+        <ion-icon name="search" class="icon-search"></ion-icon>
+        <ion-input placeholder="Buscar producto o servicio"></ion-input>
+      </div>
+      <ion-icon name="cart-outline" class="icon-cart" (click)="navigateTo('carrito')"></ion-icon>
+    </div>
+  <p class="address-text">Acá iría la dirección</p>
+
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <!-- Título -->
-  <ion-list>
-    <ion-item lines="none">
-      <ion-label class="title-label">¿Qué deseas publicar?</ion-label>
-    </ion-item>
-  </ion-list>
+  <div *ngIf="service$ | async as service">
+    <div class="service-header">
+      <p class="service-title">{{ service.title }}</p>
+    </div>
 
-  <!-- Opciones -->
-  <ion-grid>
-    <ion-row>
-      <!-- Producto -->
-      <ion-col size="12">
-        <ion-card button class="custom-card" (click)="navigateTo('publicar')">
-          <ion-card-content class="card-content">
-            <ion-icon name="cube" class="card-icon"></ion-icon>
-            <ion-label class="card-label">Productos</ion-label>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+    <!-- Carrusel -->
+    <div class="carousel-container">
+      <div *ngFor="let image of service.images" class="carousel-slide">
+        <img [src]="image" [alt]="service.title" class="slider-image" />
+      </div>
+    </div>
 
-    <ion-row>
-      <!-- Servicio -->
-      <ion-col size="12">
-        <ion-card button class="custom-card"  (click)="navigateTo('servicios')">
-          <ion-card-content class="card-content">
-            <ion-icon name="cog" class="card-icon"></ion-icon>
-            <ion-label class="card-label">Servicios</ion-label>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <!-- Precio y detalles -->
+    <div class="price-section">
+      <div class="price-and-actions">
+        <span class="price">{{ service.price | currency }}</span>
+      </div>
+      <p class="description">{{ service.description }}</p>
+    </div>
+
+    <!-- Botón de contacto por WhatsApp -->
+    <div class="action-buttons">
+      <ion-button class="whatsapp-button" [href]="'https://wa.me/' + service.telefono" target="_blank">
+        <ion-icon name="logo-whatsapp"></ion-icon>
+        Contactar por WhatsApp
+      </ion-button>
+    </div>
+  </div>
 </ion-content>
 
 <ion-footer>
@@ -89,3 +89,4 @@
     </div>
   </ion-toolbar>
 </ion-footer>
+

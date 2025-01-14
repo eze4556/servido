@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>Crear Servicio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="form-container">
+    <div class="form-item">
+      <label for="title">Título del servicio</label>
+      <input id="title" type="text" [(ngModel)]="servicioData.title" />
+    </div>
+
+    <div class="form-item">
+      <label for="category">Categoría</label>
+      <input id="category" type="text" [(ngModel)]="servicioData.category" placeholder="Escribe una categoría" />
+    </div>
+
+
+    <div class="form-item">
+      <label for="price">Precio</label>
+      <input id="price" type="number" [(ngModel)]="servicioData.price" />
+    </div>
+
+    <div class="form-item">
+      <label for="price">Telefono</label>
+      <input id="price" type="number" [(ngModel)]="servicioData.telefono" />
+    </div>
+
+    <div class="form-item">
+      <label for="description">Descripción</label>
+      <textarea id="description" [(ngModel)]="servicioData.description"></textarea>
+    </div>
+
+    <div class="form-item">
+      <label for="images">Imágenes del servicio</label>
+      <p class="helper-text">
+        Puedes agregar más de una imagen para el servicio (máximo 6 imágenes).
+      </p>
+      <input
+        id="images"
+        type="file"
+        (change)="onImagesChange($event)"
+        multiple
+        accept="image/*"
+      />
+    </div>
+
+    <h3 class="preview-title">Previsualización de imágenes</h3>
+    <div class="image-preview-container">
+      <div
+        class="image-preview"
+        *ngFor="let image of previewImages; let i = index"
+      >
+        <img [src]="image" alt="Imagen del servicio" />
+        <button type="button" class="delete-button" (click)="removeImage(i)">×</button>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button class="publish-button" (click)="createService()">Publicar</button>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="fixed-toolbar">
+    <!-- Tabs -->
+    <div class="fixed-tabs">
+      <!-- Tab: Inicio -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'home'"
+        (click)="navigateTo('home')"
+      >
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </div>
+
+      <!-- Tab: Tienda -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'tienda'"
+        (click)="navigateTo('tienda')"
+      >
+        <ion-icon name="storefront-outline"></ion-icon>
+        <ion-label>Tienda</ion-label>
+      </div>
+
+      <!-- Tab: Notificaciones -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'notificaciones'"
+        (click)="navigateTo('notificaciones')"
+      >
+        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-label>Notificaciones</ion-label>
+      </div>
+
+      <!-- Tab: Configuración -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'mi-cuenta'"
+        (click)="navigateTo('mi-cuenta')"
+      >
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Más</ion-label>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

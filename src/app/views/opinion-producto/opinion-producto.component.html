@@ -8,14 +8,14 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card class="opinion-card">
+  <ion-card class="opinion-card" *ngIf="product">
     <ion-item lines="none">
       <ion-thumbnail slot="start">
-        <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Imagen del producto">
+        <img [src]="product.images[0]" [alt]="product.name">
       </ion-thumbnail>
       <ion-label>
-        <h2 class="product-name">Cubierta Fate Sentiva 195 65 15</h2>
-        <p class="product-status">Entregado</p>
+        <h2 class="product-name">{{ product.name }}</h2>
+        <p class="product-status">Promedio: {{ averageRating.toFixed(1) }}</p>
       </ion-label>
     </ion-item>
 
@@ -36,16 +36,18 @@
       </div>
 
       <ion-item lines="none">
-        <ion-input placeholder="El producto me pareció..."></ion-input>
+        <ion-input
+          [(ngModel)]="comment"
+          placeholder="El producto me pareció..."></ion-input>
       </ion-item>
 
       <div class="action-buttons">
-        <ion-button expand="block">Opinar</ion-button>
-        <ion-button expand="block" color="danger" fill="outline">Eliminar opinión</ion-button>
+        <ion-button expand="block" (click)="submitReview()">Opinar</ion-button>
       </div>
     </ion-card-content>
   </ion-card>
 </ion-content>
+
 
 <ion-footer>
   <ion-toolbar class="fixed-toolbar">

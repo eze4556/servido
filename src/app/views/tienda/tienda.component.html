@@ -28,6 +28,13 @@
         </ion-button>
       </ion-col>
 
+           <!-- Botón para alternar entre productos y servicios -->
+      <ion-col size="auto">
+        <ion-button fill="clear" class="filter-button" (click)="toggleView()">
+          {{ isViewingProducts ? 'Ver Servicios' : 'Ver Productos' }}
+        </ion-button>
+      </ion-col>
+
       <!-- Filtro por Precio -->
       <ion-col size="auto">
         <ion-button fill="clear" class="filter-button" (click)="toggleFilter('price')">
@@ -65,51 +72,65 @@
   <ion-item (click)="setFilter('priceRange', [10000, 0])">Mayor a menor</ion-item>
 </div>
 
-
-  <div class="product-grid">
-    <ng-container *ngIf="!isLoading; else loading">
+<div class="product-grid">
+  <ng-container *ngIf="!isLoading; else loading">
+    <!-- Mostrar productos -->
+    <ng-container *ngIf="isViewingProducts">
       <div
         class="product-card"
-        *ngFor="let producto of filteredProductos"
-        (click)="navigateToProduct(producto.id)"
+        *ngFor="let product of filteredItems"
+        (click)="navigateToProduct(product.id)"
       >
         <div class="product-image">
           <img
-            *ngIf="producto.images"
-            [src]="producto.images"
-            [alt]="producto.title || 'Producto sin título'"
+            *ngIf="product.images"
+            [src]="product.images"
+            [alt]="product.title || 'Producto sin título'"
           />
         </div>
-        <h2 class="product-title">{{ producto.title || 'Producto sin título' }}</h2>
+        <h2 class="product-title">{{ product.title || 'Producto sin título' }}</h2>
         <div class="product-pricing">
-          <p class="price">{{ producto.price | currency }}</p>
+          <p class="price">{{ product.price | currency }}</p>
         </div>
       </div>
     </ng-container>
-    <ng-template #loading>
-      <div style="align-items: center;">
-        <div class="spinner-border" role="status">
-          <span class="sr-only">Cargando...</span>
+
+    <!-- Mostrar servicios -->
+    <ng-container *ngIf="!isViewingProducts">
+      <div
+        class="product-card"
+        *ngFor="let service of filteredItems"
+        (click)="navigateToService(service.id)"
+      >
+        <div class="product-image">
+          <img
+            *ngIf="service.images"
+            [src]="service.images"
+            [alt]="service.title || 'Servicio sin título'"
+          />
         </div>
-        <p>Cargando productos...</p>
+        <h2 class="product-title">{{ service.title || 'Servicio sin título' }}</h2>
+        <div class="product-pricing">
+          <p class="price">{{ service.price | currency }}</p>
+        </div>
       </div>
-    </ng-template>
-  </div>
+    </ng-container>
+  </ng-container>
+
+  <!-- Cargando -->
+  <ng-template #loading>
+    <div style="align-items: center;">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Cargando...</span>
+      </div>
+      <p>Cargando...</p>
+    </div>
+  </ng-template>
+</div>
 
 
 </ion-content>
 
-
-<!-- <div class="product-card">
-  <div class="product-image" (click)="navigateTo('detalle')">
-    <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Cubierta Michelin">
-  </div>
-  <h2 class="product-title">Cubierta Michelin 225 50 17</h2>
-  <div class="product-pricing">
-    <p class="price">$200.000</p>
-    <p class="discount">15% OFF</p>
-  </div>
-</div> -->
 
 <ion-footer>
   <ion-toolbar class="fixed-toolbar">

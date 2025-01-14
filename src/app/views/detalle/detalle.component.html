@@ -62,13 +62,25 @@
         <div class="price-and-actions">
           <!-- Precio -->
           <div class="discount-line">
-            <span class="discount-price">
-              ${{ product.price }}
+            <!-- Mostrar precio con descuento si existe -->
+            <span *ngIf="product.discountedPrice && product.discount; else originalPrice">
+              <span class="original-price">
+                ${{ product.price | ceil }}
+              </span>
+              <span class="discount-price">
+                ${{ product.discountedPrice | ceil }}
+              </span>
+              <span class="discount-percentage">
+                ({{ product.discount }}% OFF)
+              </span>
             </span>
-            <!-- Descuento (opcional) -->
-            <!-- <span class="discount-percentage" *ngIf="product.discountPercentage">
-              {{ product.discountPercentage }}% OFF
-            </span> -->
+
+            <!-- Mostrar precio original si no hay descuento -->
+            <ng-template #originalPrice>
+              <span class="discount-price">
+                ${{ product.price | ceil }}
+              </span>
+            </ng-template>
           </div>
 
           <!-- Botones de acción -->
@@ -90,8 +102,8 @@
           </ion-chip>
         </div>
       </div>
+
     </div>
-  </div>
 
 
 
@@ -143,42 +155,20 @@
   <div [ngSwitch]="selectedSegment" class="segment-content">
 
     <!-- Sección Producto -->
-    <div *ngSwitchCase="'product-details'" class="product-section">
-      <h2 class="section-title">Características generales</h2>
-      <table class="product-details-table">
-        <tr>
-          <td class="details-label"><strong>Marca</strong></td>
-          <td>Fate</td>
-        </tr>
-        <tr>
-          <td class="details-label"><strong>Modelo</strong></td>
-          <td>Sensitiva</td>
-        </tr>
-        <tr>
-          <td class="details-label"><strong>Tamaño</strong></td>
-          <td>195/65R15</td>
-        </tr>
-        <tr>
-          <td class="details-label"><strong>Cantidad</strong></td>
-          <td>2</td>
-        </tr>
-        <tr>
-          <td class="details-label"><strong>Velocidad máxima</strong></td>
-          <td>210 km/h</td>
-        </tr>
-      </table>
+    <!-- Sección de características generales -->
+      <div  *ngSwitchCase="'product-details'" class="product-section">
+        <h2 class="section-title">Características generales</h2>
+        <table class="product-details-table">
+          <tr *ngFor="let feature of features">
+            <td class="details-label"><strong>{{ feature.label }}</strong></td>
+            <td>{{ feature.value }}</td>
+          </tr>
+        </table>
 
-      <h2 class="section-title">Descripción</h2>
-      <p class="product-description">
-        ¿Vas a esperar a que tu neumático se desgaste para cambiarlo?<br>
-        Podés evitar alargar la vida útil de una vieja cubierta y apostar a tu tranquilidad.
-        Encontrá la mejor tracción, dirección y confort con tu Fate Sport.<br>
-        Estabilidad y control.<br>
-        Gracias a su buen agarre, este neumático tiene un desempeño óptimo asegurado,
-        ya que se adapta a la usabilidad de tu vehículo.
-      </p>
-    </div>
-
+        <!-- Sección de descripción -->
+        <h2 class="section-title">Descripción</h2>
+        <p class="product-description">{{ product.description }}</p>
+      </div>
 
 <!-- Sección Vendedor -->
 <div *ngSwitchCase="'seller'" class="seller-section">
@@ -219,20 +209,23 @@
   </div>
 </div>
 
-
 <!-- Sección Opiniones -->
 <div *ngSwitchCase="'opinions'" class="opinions-section">
   <h3 class="section-title">Opiniones del producto</h3>
 
   <!-- Calificación general -->
-  <div class="general-rating">
-    <span class="rating-score">4.5</span>
-    <span class="stars">
-      ★★★★★
-      <span class="stars-filled">★★★★☆</span>
+  <div class="general-rating" *ngIf="opinions.length > 0">
+    <span class="rating-score">{{ averageRating.toFixed(1) }}</span>
+    <span class="stars" >
+      <span class="stars-filled">  {{ getStarsForAverage() }}</span>
     </span>
-    <span class="rating-count">363 calificaciones</span>
+    <span class="rating-count">{{ opinions.length }} calificaciones</span>
   </div>
+
+  <!-- Mensaje si no hay reseñas -->
+  <p *ngIf="opinions.length === 0" class="no-reviews">
+    Aún no hay opiniones para este producto.
+  </p>
 
   <!-- Lista de reseñas -->
   <div *ngFor="let opinion of opinions" class="review-item">
@@ -246,14 +239,11 @@
     <p class="review-comment">{{ opinion.comment }}</p>
   </div>
 
-  <!-- Mensaje si no hay reseñas -->
-  <p *ngIf="opinions.length === 0" class="no-reviews">
-    Aún no hay opiniones para este producto.
-  </p>
-
   <!-- Botón para agregar opinión -->
   <div class="add-opinion-button">
-    <ion-button class="buy-button" (click)="navigateTo('opinion')">
+    <ion-button
+      class="buy-button"
+      (click)="navigateToOpinion('opinion', route.snapshot.paramMap.get('id'))">
       Agregar Opinión
     </ion-button>
   </div>
@@ -261,25 +251,59 @@
 
 
 
+
 <!-- Sección FAQ -->
 <div *ngSwitchCase="'faq'" class="faq-section">
-  <h3 class="section-title">Preguntas Frecuentes</h3>
+  <h3 class="faq-title">Preguntas Frecuentes</h3>
 
   <!-- Input de preguntas -->
-  <div class="faq-input-container">
-    <input type="text" placeholder="Escribí tu pregunta..." class="faq-input" />
-    <p class="response-time">Tiempo aproximado de respuesta: 8 minutos</p>
-    <button class="faq-button">Preguntar</button>
+  <div class="faq-input-container" *ngIf="userType === 'cliente'">
+    <input
+      [(ngModel)]="newQuestion"
+      type="text"
+      placeholder="Escribí tu pregunta..."
+      class="faq-input"
+    />
+    <p class="faq-response-time">Tiempo promedio de respuesta: 24 horas</p>
+    <button class="faq-button" (click)="addQuestion()">Preguntar</button>
   </div>
 
   <!-- Lista de preguntas y respuestas -->
   <div class="faq-list">
     <div *ngFor="let faq of faqs" class="faq-item">
-      <p class="question">{{ faq.question }}</p>
-      <p class="answer">{{ faq.answer }}</p>
+      <p class="faq-question">
+        <strong>Pregunta:</strong> {{ faq.text }}
+      </p>
+      <p class="faq-answer" *ngIf="faq.answer">
+        <strong>Respuesta:</strong> {{ faq.answer }}
+      </p>
+
+      <div
+        *ngIf="userType === 'tienda' && !faq.answer"
+        class="faq-response-container"
+      >
+        <input
+          [(ngModel)]="faq.response"
+          type="text"
+          placeholder="Escribí tu respuesta..."
+          class="faq-input"
+        />
+        <button class="faq-button" (click)="respondToQuestion(faq)">
+          Responder
+        </button>
+      </div>
     </div>
   </div>
+
+  <!-- Mensaje cuando no hay preguntas -->
+  <div *ngIf="faqs.length === 0" class="faq-empty">
+    Todavía no hay preguntas. ¡Sé el primero en preguntar!
+  </div>
 </div>
+
+
+
+
 
 
     <!-- Contenido por defecto -->
@@ -288,6 +312,10 @@
     </div>
 
   </div>
+
+  </div>
+
+
 
 </ion-content>
 
