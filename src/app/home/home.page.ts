@@ -52,7 +52,7 @@ import { Productoferta } from '../common/models/productofree.model';
 import { Categoria } from 'src/app/common/models/categoria.model';
 import { HttpClient } from '@angular/common/http';
 import { FirestoreService } from '../common/services/firestore.service';
-
+import { ProductService } from '../common/services/product.service';
 
 type DropdownSegment = 'categoria' | 'marcas' | 'productos' | 'perfil';
 
@@ -112,6 +112,8 @@ export class HomePage implements OnInit {
   isLoading: boolean = true;
   location: string = 'Cargando ubicación...'; // Inicializa con mensaje
   currentRoute: string = '';
+  recommendedProducts: Producto[] = [];
+userId: string | null = null;
 
 
 
@@ -119,16 +121,22 @@ export class HomePage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private http: HttpClient,
-    private firestoreService: FirestoreService
+    private firestoreService: FirestoreService,
+    private productService: ProductService
 
   ) {   setInterval(() => this.moveSlide(1), 3000);
 }
 
   async ngOnInit() {
+
+
+
   this.checkLoginStatus();
 
   if (this.isLoggedIn) {
     this.getLocation();
+        this.loadRecommendedProducts(); // Cargar productos recomendados si el usuario está logueado
+
   }
 
   // Actualiza la ruta actual cada vez que cambia
@@ -146,7 +154,11 @@ export class HomePage implements OnInit {
       this.isLoggedIn = !!user;
 
       if (this.isLoggedIn) {
+              this.userId = user.id; // Asegúrate de que 'id' sea el nombre del campo correspondiente en tu modelo de usuario
+
         this.getLocation();
+              this.loadRecommendedProducts(); // Llamar aquí si ya tienes el userId
+
       }
 
 
@@ -261,6 +273,27 @@ images = [
   }
 
 
-  
+loadRecommendedProducts() {
+  if (!this.userId) {
+    console.warn('El usuario no está autenticado, no se pueden cargar productos recomendados.');
+    return;
+  }
+
+  const category = this.categorias.length > 0 ? this.categorias[0].name : null; 
+
+  this.productService.getRecommendedProducts(this.userId, { category, limit: 5 })
+    .subscribe({
+      next: (products) => {
+        this.recommendedProducts = products;
+        console.log('Productos recomendados:', this.recommendedProducts);
+      },
+      error: (err) => {
+        console.error("Error al cargar productos recomendados:", err);
+      }
+    });
+}
+
+
+
 
 }

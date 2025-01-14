@@ -1,45 +1,31 @@
-
-
-
-
 <ion-header>
   <ion-toolbar class="custom-toolbar">
     <ion-title>Notificaciones</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
-
 <ion-content>
-
   <div class="notifications-container">
-    <ion-card class="notification-card">
-      <!-- Imagen del producto -->
-   <div class="notification-image-container">
-
-  <img src="../../../assets/icon/rueda-removebg-preview.png" alt="Oferta especial" class="notification-image"    />
-
-</div>
-
-
-      <!-- Contenido de la notificación -->
+    <ion-card
+      *ngFor="let notificacion of notificaciones"
+      class="notification-card"
+      (click)="onNotificacionClick()"
+    >
       <ion-card-content>
-        <h3 class="notification-title"><strong>¡Aprovecha esta oferta!</strong></h3>
-        <p class="notification-description">
-          Tu vehículo se lo merece, viaja más seguro, renová tus cubiertas con esta nueva oferta <strong>imperdible</strong>.
-        </p>
-           <p>18:40</p>
+        <h3 class="notification-title">
+          <strong>{{ notificacion.titulo }}</strong>
+        </h3>
+        <p class="notification-description">{{ notificacion.descripcion }}</p>
+        <p>{{ notificacion.hora }}</p>
       </ion-card-content>
     </ion-card>
   </div>
-
 </ion-content>
 
 <ion-footer>
   <ion-toolbar class="fixed-toolbar">
     <!-- Tabs -->
     <div class="fixed-tabs">
-      <!-- Tab: Inicio -->
       <div
         class="tab-item"
         [class.active]="currentRoute === 'home'"
@@ -48,8 +34,6 @@
         <ion-icon name="home-outline"></ion-icon>
         <ion-label>Inicio</ion-label>
       </div>
-
-      <!-- Tab: Tienda -->
       <div
         class="tab-item"
         [class.active]="currentRoute === 'tienda'"
@@ -58,8 +42,6 @@
         <ion-icon name="storefront-outline"></ion-icon>
         <ion-label>Tienda</ion-label>
       </div>
-
-      <!-- Tab: Notificaciones -->
       <div
         class="tab-item"
         [class.active]="currentRoute === 'notificaciones'"
@@ -68,8 +50,6 @@
         <ion-icon name="notifications-outline"></ion-icon>
         <ion-label>Notificaciones</ion-label>
       </div>
-
-      <!-- Tab: Configuración -->
       <div
         class="tab-item"
         [class.active]="currentRoute === 'mi-cuenta'"

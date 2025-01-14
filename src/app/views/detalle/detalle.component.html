@@ -8,9 +8,16 @@
       </div>
       <ion-icon name="cart-outline" class="icon-cart" (click)="navigateTo('carrito')"></ion-icon>
     </div>
-  <p class="address-text">Acá iría la dirección</p>
+<p class="floating-location" *ngIf="isLoggedIn">
+    <ion-icon name="location-outline" style="margin-right: 8px;"></ion-icon>
+    {{ location }}
+
+  </p>
 
   </ion-toolbar>
+
+
+
 </ion-header>
 
 <ion-content>
