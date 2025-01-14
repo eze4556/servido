@@ -107,8 +107,9 @@ type DropdownSegment = 'categoria' | 'marcas' | 'productos' | 'perfil';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage implements OnInit {
+  discountedProducts: Producto[] = [];
 
-    isLoggedIn: boolean = false;
+  isLoggedIn: boolean = false;
   isLoading: boolean = true;
   location: string = 'Cargando ubicación...';
   currentRoute: string = '';
@@ -142,12 +143,12 @@ userId: string | null = null;
         this.loadRecommendedProducts(); // Cargar productos recomendados si el usuario está logueado
 
   }
-
   // Actualiza la ruta actual cada vez que cambia
   this.router.events.subscribe(() => {
     this.currentRoute = this.router.url.replace('/', '');
   });
 
+  this.loadDiscountedProducts();
   this.loadMarcas();       // Cargar marcas al iniciar
   this.loadCategorias();   // Cargar categorías al iniciar
 
@@ -296,6 +297,19 @@ loadRecommendedProducts() {
       }
     });
 }
+
+  loadDiscountedProducts(): void {
+    console.log("Cargando productos con descuento...");
+    this.productService.getDiscountedProducts().subscribe({
+      next: (products) => {
+        this.discountedProducts = products;
+        console.log("Productos con descuento:", this.discountedProducts);
+      },
+      error: (error) => {
+        console.error("Error cargando productos con descuento:", error);
+      },
+    });
+  }
 
 
 loadProducts(): void {
