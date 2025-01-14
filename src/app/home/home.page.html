@@ -224,53 +224,27 @@
     </div>
   </div>
 
-  <div class="promociones" *ngIf="isLoggedIn">
-    <!-- Promociones-->
+  <div class="promociones" *ngIf="discountedProducts.length > 0">
     <div class="recommended-section">
       <h2 class="recommended-title">Promociones</h2>
       <div class="recommended-items">
-        <div class="recommended-item">
+        <div class="recommended-item" *ngFor="let product of discountedProducts">
           <img
-            src="../../assets/icon/rueda-removebg-preview.png"
-            alt="Tire 1"
+            [src]="product.images[0] || 'assets/default-image.jpg'"
+            [alt]="product.title"
             class="recommended-image"
           />
-          <p class="recommended-name">Cubierta Fate Sentiva 195 65 15</p>
+          <p class="recommended-name">{{ product.title }}</p>
           <p class="recommended-price">
-            <span class="old-price">$150.000</span>
-            <span class="new-price">$10.000</span>
-            <span class="discount">30% OFF</span>
-          </p>
-        </div>
-        <div class="recommended-item">
-          <img
-            src="../../assets/icon/rueda-removebg-preview.png"
-            alt="Tire 2"
-            class="recommended-image"
-          />
-          <p class="recommended-name">Cubierta Fate Sentiva 195 65 15</p>
-          <p class="recommended-price">
-            <span class="old-price">$150.000</span>
-            <span class="new-price">$10.000</span>
-            <span class="discount">30% OFF</span>
-          </p>
-        </div>
-        <div class="recommended-item">
-          <img
-            src="../../assets/icon/rueda-removebg-preview.png"
-            alt="Tire 3"
-            class="recommended-image"
-          />
-          <p class="recommended-name">Cubierta Fate Sentiva 195 65 15</p>
-          <p class="recommended-price">
-            <span class="old-price">$150.000</span>
-            <span class="new-price">$10.000</span>
-            <span class="discount">30% OFF</span>
+            <span class="old-price">${{ product.price }}</span>
+            <span class="new-price">${{ product.discountedPrice }}</span>
+            <span class="discount">{{ product.discount }}% OFF</span>
           </p>
         </div>
       </div>
     </div>
   </div>
+
 
   <!-- Nuevos banners -->
   <div class="banners-container1" *ngIf="isLoggedIn">

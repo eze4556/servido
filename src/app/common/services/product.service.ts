@@ -115,6 +115,10 @@ export class ProductService {
     return this.http.put(`${this.apiUrl}/${productId}/faqs/${faqId}`, { answer });
   }
 
+  // Obtener productos con descuento
+  getDiscountedProducts(): Observable<Producto[]> {
+    return this.http.get<Producto[]>(`${this.apiUrl}/discounted`);
+  }
 
 
 }

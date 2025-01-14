@@ -1,3 +1,103 @@
-<p>
-  servicios-publicados works!
-</p>
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>Servicios Publicados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Lista de Servicios -->
+  <div class="servicios-container">
+    <ion-card *ngIf="servicios$ | async as servicios; else loading">
+      <ion-card-header>
+        <ion-card-title>Lista de Servicios</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item *ngFor="let servicio of servicios" lines="none">
+            <div class="servicio-info">
+              <ion-thumbnail class="servicio-thumbnail" slot="start">
+                <img [src]="servicio.images[0]" alt="Servicio" />
+              </ion-thumbnail>
+              <div class="servicio-details">
+                <h2>{{ servicio.title }}</h2>
+                <p>Categoría: {{ servicio.category }}</p>
+                <p>Precio: {{ servicio.price | currency }}</p>
+                <p>Teléfono: {{ servicio.telefono }}</p>
+                <p>{{ servicio.description }}</p>
+              </div>
+            </div>
+            <div class="servicio-actions">
+              <!-- <ion-button
+                (click)="editarServicio(servicio.id)"
+                color="primary"
+                fill="clear"
+              >
+                <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+              </ion-button> -->
+              <ion-button
+                (click)="eliminarServicio(servicio.id)"
+                color="danger"
+                fill="clear"
+              >
+                <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Cargando -->
+  <ng-template #loading>
+    <ion-spinner></ion-spinner>
+  </ng-template>
+</ion-content>
+
+
+<ion-footer>
+  <ion-toolbar class="fixed-toolbar">
+    <!-- Tabs -->
+    <div class="fixed-tabs">
+      <!-- Tab: Inicio -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'home'"
+        (click)="navigateTo('home')"
+      >
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </div>
+
+      <!-- Tab: Tienda -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'tienda'"
+        (click)="navigateTo('tienda')"
+      >
+        <ion-icon name="storefront-outline"></ion-icon>
+        <ion-label>Tienda</ion-label>
+      </div>
+
+      <!-- Tab: Notificaciones -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'notificaciones'"
+        (click)="navigateTo('notificaciones')"
+      >
+        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-label>Notificaciones</ion-label>
+      </div>
+
+      <!-- Tab: Configuración -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'mi-cuenta'"
+        (click)="navigateTo('mi-cuenta')"
+      >
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Más</ion-label>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

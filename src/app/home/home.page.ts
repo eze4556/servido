@@ -52,6 +52,7 @@ import { Productoferta } from '../common/models/productofree.model';
 import { Categoria } from 'src/app/common/models/categoria.model';
 import { HttpClient } from '@angular/common/http';
 import { FirestoreService } from '../common/services/firestore.service';
+import { ProductService } from '../common/services/product.service';
 
 
 type DropdownSegment = 'categoria' | 'marcas' | 'productos' | 'perfil';
@@ -107,8 +108,9 @@ type DropdownSegment = 'categoria' | 'marcas' | 'productos' | 'perfil';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HomePage implements OnInit {
+  discountedProducts: Producto[] = [];
 
-    isLoggedIn: boolean = false;
+  isLoggedIn: boolean = false;
   isLoading: boolean = true;
   location: string = 'Cargando ubicación...'; // Inicializa con mensaje
   currentRoute: string = '';
@@ -119,7 +121,8 @@ export class HomePage implements OnInit {
     private router: Router,
     private authService: AuthService,
     private http: HttpClient,
-    private firestoreService: FirestoreService
+    private firestoreService: FirestoreService,
+    private productService: ProductService
 
   ) {   setInterval(() => this.moveSlide(1), 3000);
 }
@@ -130,12 +133,12 @@ export class HomePage implements OnInit {
   if (this.isLoggedIn) {
     this.getLocation();
   }
-
   // Actualiza la ruta actual cada vez que cambia
   this.router.events.subscribe(() => {
     this.currentRoute = this.router.url.replace('/', '');
   });
 
+  this.loadDiscountedProducts();
   this.loadMarcas();       // Cargar marcas al iniciar
   this.loadCategorias();   // Cargar categorías al iniciar
 
@@ -260,7 +263,19 @@ images = [
     });
   }
 
+  loadDiscountedProducts(): void {
+    console.log("Cargando productos con descuento...");
+    this.productService.getDiscountedProducts().subscribe({
+      next: (products) => {
+        this.discountedProducts = products;
+        console.log("Productos con descuento:", this.discountedProducts);
+      },
+      error: (error) => {
+        console.error("Error cargando productos con descuento:", error);
+      },
+    });
+  }
 
-  
+
 
 }
