@@ -56,4 +56,9 @@ export class MiCuentaComponent implements OnInit {
   ngOnDestroy() {
     this.subscription.unsubscribe(); // Limpia la suscripción
   }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

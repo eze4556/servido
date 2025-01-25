@@ -99,7 +99,18 @@ text-align: center;
 }
 
 
-
+.location-info {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background-color: #4a008e;
+  padding: 4px 12px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
 
 
 // --------------
