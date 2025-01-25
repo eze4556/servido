@@ -9,7 +9,7 @@ import { UserI } from '../models/users.models';
 })
 export class UserService {
 
-  private apiUrl = 'http://localhost:3000/usuarios';
+  private apiUrl = 'https://backservido.onrender.com/usuarios';
 
   constructor(private http: HttpClient) {}
 

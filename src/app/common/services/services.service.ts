@@ -8,7 +8,7 @@ import { Servicio } from '../models/services.model'; // Asegúrate de tener este
 })
 export class ServiceService {
 
-  private apiUrl = 'http://localhost:3000/services';
+  private apiUrl = 'https://backservido.onrender.com/services';
 
   constructor(private http: HttpClient) {}
 

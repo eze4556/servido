@@ -9,7 +9,7 @@ import { Producto } from '../models/producto.model';
 })
 export class ProductService {
 
-  private apiUrl = 'http://localhost:3000/products';
+  private apiUrl = 'https://backservido.onrender.com/products';
 
 
 

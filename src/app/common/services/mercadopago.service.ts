@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class MercadoPagoService {
 
-  private apiUrl = 'http://localhost:3000/subscription';
+  private apiUrl = 'https://backservido.onrender.com/subscription';
 
   constructor(private http: HttpClient) {}
 
