@@ -54,7 +54,7 @@ export class SubscripcionesComponent implements OnInit {
   }
 
   subscribe(plan: string) {
-    const email = this.email[plan]; // El índice ahora está tipado correctamente
+    const email = this.email[plan];
     const price = plan === 'basic' ? 100.0 : plan === 'standard' ? 200.0 : 300.0;
     console.log("Precio enviado al backend:", price);
 
@@ -68,7 +68,7 @@ export class SubscripcionesComponent implements OnInit {
       return;
     }
 
-    const subscriptionData = { email, userId: this.userId, price };
+    const subscriptionData = { email, userId: this.userId, price, plan }; // Agregar el plan aquí
 
     this.mercadopagoService.createSubscription(subscriptionData).subscribe({
       next: (response) => {
