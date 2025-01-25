@@ -188,7 +188,7 @@
   <div class="recommended-section" *ngIf="isLoggedIn">
   <h2 class="recommended-title">Recomendados</h2>
   <div class="recommended-items">
-    <div class="recommended-item" *ngFor="let product of recommendedProducts">
+    <div class="recommended-item"  *ngFor="let product of productos">
       <img
         [src]="product.images || '../../assets/icon/default-image.png'"
         class="recommended-image"

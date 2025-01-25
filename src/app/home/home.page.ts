@@ -111,10 +111,11 @@ export class HomePage implements OnInit {
 
   isLoggedIn: boolean = false;
   isLoading: boolean = true;
-  location: string = 'Cargando ubicación...'; // Inicializa con mensaje
+  location: string = 'Cargando ubicación...';
   currentRoute: string = '';
   recommendedProducts: Producto[] = [];
 userId: string | null = null;
+  productos: Producto[] = [];
 
 
 
@@ -123,12 +124,15 @@ userId: string | null = null;
     private authService: AuthService,
     private http: HttpClient,
     private firestoreService: FirestoreService,
-    private productService: ProductService
+    private productService: ProductService,
+
 
   ) {   setInterval(() => this.moveSlide(1), 3000);
 }
 
   async ngOnInit() {
+
+    this.loadProducts();
 
 
 
@@ -307,6 +311,27 @@ loadRecommendedProducts() {
     });
   }
 
+
+loadProducts(): void {
+  this.isLoading = true;
+  // console.log('Obteniendo productos del servidor...');
+  this.productService.getProducts({}).subscribe(
+    (data) => {
+      if (!data || data.length === 0) {
+        console.warn('No se obtuvieron productos.');
+      } else {
+
+      }
+      this.productos = data;
+
+      this.isLoading = false;
+    },
+    (error) => {
+      console.error('Error al obtener los productos:', error);
+      this.isLoading = false;
+    }
+  );
+}
 
 
 
