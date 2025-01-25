@@ -9,60 +9,189 @@
     <div class="perfil-info">
       <div class="avatar-container">
         <ion-avatar>
-          <ion-icon name="person-circle-outline" class="avatar-icon"></ion-icon>
+          <img *ngIf="user?.imagenPerfilUrl" [src]="user.imagenPerfilUrl" alt="Imagen de perfil" />
+          <ion-icon *ngIf="!user?.imagenPerfilUrl" name="person-circle-outline" class="avatar-icon"></ion-icon>
         </ion-avatar>
-        <ion-button fill="clear" class="edit-icon">
-          <ion-icon name="create-outline"></ion-icon>
+        <ion-button expand="block" class="edit-button" (click)="editProfile()">
+          {{ user?.tipo_usuario === 'cliente' ? 'Completar o editar los datos de tu perfil' : 'Completar o editar los datos de tu tienda' }}
         </ion-button>
       </div>
       <div class="user-details">
-        <h2>Jonathan</h2>
-        <p>jonathan&#64;gmail.com</p>
+        <h2>{{ user?.nombre }}</h2>
+        <p>{{ user?.email }}</p>
       </div>
     </div>
-    <ion-list>
-      <ion-item button (click)="navigateTo('personal-info')">
-        <ion-label>
-          <h3>Información personal</h3>
-          <p>Información de tu documento de identidad y actividad fiscal</p>
-        </ion-label>
-        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-      </ion-item>
-      <ion-item button (click)="navigateTo('account-info')">
-        <ion-label>
-          <h3>Datos de tu cuenta</h3>
-          <p>Datos que representan tu cuenta</p>
-        </ion-label>
-        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-      </ion-item>
-      <ion-item button (click)="navigateTo('security')">
-        <ion-label>
-          <h3>Seguridad</h3>
-          <p>Configura la seguridad de tu cuenta</p>
-        </ion-label>
-        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-      </ion-item>
-      <ion-item button (click)="navigateTo('cards')">
-        <ion-label>
-          <h3>Tarjetas</h3>
-          <p>Tarjetas guardadas de tu cuenta</p>
-        </ion-label>
-        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-      </ion-item>
-      <ion-item button (click)="navigateTo('addresses')">
-        <ion-label>
-          <h3>Direcciones</h3>
-          <p>Direcciones guardadas de tu cuenta</p>
-        </ion-label>
-        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-      </ion-item>
-    </ion-list>
-    <div class="cancel-account">
-      <p>Puedes <a href="#">cancelar tu cuenta</a> siempre que lo desees.</p>
+
+    <!-- Información del usuario -->
+    <div class="user-info">
+      <ng-container *ngIf="user?.tipo_usuario === 'cliente'">
+        <div class="info-item">
+          <ion-icon name="person-outline"></ion-icon>
+          <span>{{ user.apellido }}</span>
+        </div>
+        <div class="info-item">
+          <ion-icon name="id-card-outline"></ion-icon>
+          <span>{{ user.dni }}</span>
+        </div>
+        <div class="info-item">
+          <ion-icon name="call-outline"></ion-icon>
+          <span>{{ user.telefono }}</span>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="user?.tipo_usuario === 'tienda'">
+        <div class="info-item">
+          <ion-icon name="business-outline"></ion-icon>
+          <span>{{ user.nombre_empresa }}</span>
+        </div>
+        <div class="info-item">
+          <ion-icon name="location-outline"></ion-icon>
+          <span>{{ user.direccion }}</span>
+        </div>
+        <div class="info-item">
+          <ion-icon name="call-outline"></ion-icon>
+          <span>{{ user.telefono }}</span>
+        </div>
+        <div class="info-item">
+          <ion-icon name="logo-whatsapp"></ion-icon>
+          <span>{{ user.redes_sociales?.wsp }}</span>
+        </div>
+        <div class="info-item">
+          <ion-icon name="logo-instagram"></ion-icon>
+          <span>{{ user.redes_sociales?.instagram }}</span>
+        </div>
+        <div class="info-item">
+          <ion-icon name="logo-facebook"></ion-icon>
+          <span>{{ user.redes_sociales?.facebook }}</span>
+        </div>
+        <div class="info-item">
+          <ion-icon name="globe-outline"></ion-icon>
+          <span>{{ user.redes_sociales?.sitio_web }}</span>
+        </div>
+        <div class="info-item">
+          <ion-icon name="time-outline"></ion-icon>
+          <span>{{ user.horario_atencion }}</span>
+        </div>
+        <div class="info-item">
+          <ion-icon name="information-circle-outline"></ion-icon>
+          <span>{{ user.sobre_nosotros }}</span>
+        </div>
+        <div class="info-item">
+          <ion-icon name="document-text-outline"></ion-icon>
+          <span>{{ user.descripcion }}</span>
+        </div>
+      </ng-container>
     </div>
   </div>
-</ion-content>
 
+  <!-- Formulario de edición -->
+  <ion-modal [isOpen]="isEditModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Editar Perfil</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeEditModal()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <form (ngSubmit)="saveProfile()">
+          <!-- Campos comunes -->
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input [(ngModel)]="user.nombre" name="nombre"></ion-input>
+          </ion-item>
+
+          <!-- Campos específicos para clientes -->
+          <ng-container *ngIf="user.tipo_usuario === 'cliente'">
+            <ion-item>
+              <ion-label position="floating">Apellido</ion-label>
+              <ion-input [(ngModel)]="user.apellido" name="apellido"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">DNI</ion-label>
+              <ion-input [(ngModel)]="user.dni" name="dni"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Teléfono</ion-label>
+              <ion-input [(ngModel)]="user.telefono" name="telefono"></ion-input>
+            </ion-item>
+          </ng-container>
+
+          <!-- Campos específicos para tiendas -->
+          <ng-container *ngIf="user.tipo_usuario === 'tienda'">
+            <ion-item>
+              <ion-label position="floating">Dirección</ion-label>
+              <ion-input [(ngModel)]="user.direccion" name="direccion"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Nombre de la empresa</ion-label>
+              <ion-input [(ngModel)]="user.nombre_empresa" name="nombre_empresa"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Teléfono</ion-label>
+              <ion-input [(ngModel)]="user.telefono" name="telefono"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">WhatsApp</ion-label>
+              <ion-input [(ngModel)]="user.redes_sociales.wsp" name="wsp"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Instagram</ion-label>
+              <ion-input [(ngModel)]="user.redes_sociales.instagram" name="instagram"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Facebook</ion-label>
+              <ion-input [(ngModel)]="user.redes_sociales.facebook" name="facebook"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Sitio web</ion-label>
+              <ion-input [(ngModel)]="user.redes_sociales.sitio_web" name="sitio_web"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Horario de atención</ion-label>
+              <ion-input [(ngModel)]="user.horario_atencion" name="horario_atencion"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Sobre nosotros</ion-label>
+              <ion-input [(ngModel)]="user.sobre_nosotros" name="sobre_nosotros"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Descripción</ion-label>
+              <ion-input [(ngModel)]="user.descripcion" name="descripcion"></ion-input>
+            </ion-item>
+          </ng-container>
+
+          <!-- Input para subir imágenes -->
+          <div class="form-item">
+            <label for="images">Imagen de perfil</label>
+            <p class="helper-text">
+              Puedes agregar una imagen para tu perfil.
+            </p>
+            <input
+              id="images"
+              type="file"
+              (change)="onImageChange($event)"
+              accept="image/*"
+            />
+          </div>
+
+          <!-- Previsualización de la imagen -->
+          <h3 class="preview-title">Previsualización de la imagen</h3>
+          <div class="image-preview-container">
+            <div class="image-preview" *ngIf="previewImage">
+              <img [src]="previewImage" alt="Imagen del perfil" />
+              <button type="button" class="delete-button" (click)="removeImage()">×</button>
+            </div>
+          </div>
+
+          <ion-button expand="full" type="submit">Guardar</ion-button>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>
 
 <ion-footer>
   <ion-toolbar class="fixed-toolbar">

@@ -1,0 +1,192 @@
+
+
+
+  .custom-toolbar {
+    --background: #6a1b9a;
+    color: #fff;
+  }
+
+  .subscription-content {
+    background: #f9f9f9;
+  }
+
+  .subscription-header {
+    background: #6a1b9a;
+    color: #ffffff;
+    padding: 12px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .subscription-title {
+    font-size: 1.2rem;
+    color: #ffffff;
+  }
+
+  .subscription-list {
+    margin: 16px 0;
+    padding: 10px;
+  }
+
+  .subscription-item {
+    margin: 8px 0;
+    border-radius: 8px;
+    background: #f7f7f7;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 12px;
+  }
+
+  .plan-label h2 {
+    font-size: 1.2rem;
+    color: #6a1b9a;
+    margin: 0;
+  }
+
+  .plan-price {
+    font-size: 1rem;
+    color: #9c27b0;
+  }
+
+  .toggle-button {
+    --background: #6a1b9a;
+    color: #ffffff;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+
+  .plan-details {
+    padding: 16px;
+    border-top: 1px solid #ddd;
+    background: #ffffff;
+    border-radius: 8px;
+  }
+
+  .highlight-container {
+    background: #fff9c4;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ffeb3b;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .subscription-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+
+    .input-wrapper {
+      display: flex;
+      width: 100%;
+      position: relative;
+
+      ion-input {
+        flex: 1;
+        margin: 0;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+        --padding-start: 0;
+        --padding-end: 0;
+      }
+    }
+  }
+
+  .email-input {
+    width: 100%;
+    margin: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 1rem;
+  }
+
+  .subscribe-button {
+    --background: #4caf50;
+    color: #ffffff;
+    font-size: 1rem;
+    border-radius: 8px;
+    width: 100%;
+  }
+
+
+
+// footer
+.fixed-toolbar {
+  --background: #fff;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.fixed-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+  width: 100%;
+  height: 100%; /* Asegura que ocupe todo el footer */
+}
+
+.tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #333; /* Texto e icono en gris oscuro */
+  font-size: 12px;
+  cursor: pointer;
+  width: 100%; /* Ocupa el ancho completo */
+  height: 100%; /* Hace que sean cuadrados */
+  transition: all 0.3s ease;
+  border-radius: 0; /* Elimina bordes redondeados para un diseño limpio */
+
+  ion-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+    color: #333; /* Iconos en gris oscuro */
+    transition: color 0.3s ease;
+  }
+
+  ion-label {
+    color: #333;
+    transition: color 0.3s ease;
+  }
+
+  &:hover {
+    background-color: rgba(74, 0, 142, 0.1); /* Fondo suave al pasar el cursor */
+    transform: scale(1.05); /* Ligero aumento */
+  }
+
+  &.active {
+    background-color: rgba(74, 0, 142, 0.5); /* Fondo violeta más evidente */
+    color: #fff; /* Texto e iconos en blanco para contraste */
+    padding: 10px;
+    ion-icon {
+      color: #fff; /* Icono en blanco */
+    }
+    ion-label {
+      font-weight: bold;
+    }
+
+    /* Indicador visual */
+    &:after {
+      content: '';
+      display: block;
+      width: 100%; /* Indicador cubre todo el botón */
+      height: 3px;
+      background-color: #4a008e;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
+}
+
+
+

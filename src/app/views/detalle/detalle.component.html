@@ -29,33 +29,35 @@
         <p class="product-title">{{ product.title }}</p>
       </div>
 
-      <!-- Carrusel -->
       <div
-        class="carousel-container"
-        (touchstart)="onTouchStart($event)"
-        (touchmove)="onTouchMove($event)"
-        (touchend)="onTouchEnd()"
+      class="carousel-container"
+      (touchstart)="onTouchStart($event)"
+      (touchmove)="onTouchMove($event)"
+      (touchend)="onTouchEnd()"
+    >
+      <!-- Contenedor del carrusel -->
+      <div
+        class="carousel-track"
+        [style.transform]="'translateX(' + -currentIndex * 100 + '%)'"
+        [style.transition]="'transform 0.3s ease-out'"
       >
-        <!-- Contenedor del carrusel -->
-        <div
-          class="carousel-track"
-          [style.transform]="'translateX(' + -currentIndex * 100 + '%)'"
-        >
-          <div class="carousel-slide" *ngFor="let image of product.images">
-            <img [src]="image" [alt]="product.title" class="slider-image" />
-          </div>
-        </div>
-
-        <!-- Indicadores (círculos) -->
-        <div class="carousel-indicators">
-          <span
-            *ngFor="let image of product.images; let i = index"
-            class="indicator"
-            [class.active]="i === currentIndex"
-            (click)="currentIndex = i"
-          ></span>
+        <div class="carousel-slide" *ngFor="let image of product.images">
+          <img [src]="image" [alt]="product.title" class="slider-image" />
         </div>
       </div>
+
+      <!-- Indicadores (círculos) -->
+      <div class="carousel-indicators">
+        <span
+          *ngFor="let image of product.images; let i = index"
+          class="indicator"
+          [class.active]="i === currentIndex"
+          (click)="setCurrentIndex(i)"
+        ></span>
+      </div>
+    </div>
+
+
 
       <!-- Sección de precio, stock y acciones1 -->
       <div class="price-section">

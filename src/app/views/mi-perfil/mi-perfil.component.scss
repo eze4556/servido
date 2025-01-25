@@ -23,6 +23,7 @@ ion-content {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column; /* Cambiar a columna en móviles */
 }
 
 ion-avatar {
@@ -35,14 +36,15 @@ ion-avatar {
   color: #6c757d;
 }
 
-.edit-icon {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  --background: #ffffff;
-  --color: #6200ea;
-  border-radius: 50%;
+.edit-button {
+  --background: #6200ea;
+  --color: #fff;
+  margin-top: 16px;
+  font-weight: bold;
+  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 100%; /* Asegurar que el botón ocupe todo el ancho disponible */
+  max-width: 300px; /* Limitar el ancho máximo del botón */
 }
 
 .user-details {
@@ -61,49 +63,124 @@ ion-avatar {
   margin: 0;
 }
 
-ion-list {
+.user-info {
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
 }
 
-ion-item {
-  --background: #ffffff;
-  --border-color: #e0e0e0;
-  margin: 0;
-  padding: 12px 16px;
+.info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
-ion-label h3 {
+.info-item ion-icon {
+  font-size: 1.2rem;
+  color: #6200ea;
+  margin-right: 8px;
+}
+
+.info-item span {
   font-size: 1rem;
-  font-weight: 500;
   color: #333333;
-  margin: 0;
 }
 
-ion-label p {
+.form-item {
+  margin-bottom: 16px;
+}
+
+.form-item label {
+  font-size: 1rem;
+  color: #333333;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.helper-text {
   font-size: 0.875rem;
   color: #6c757d;
   margin: 0;
 }
 
-ion-icon {
-  color: #6200ea;
-}
-
-.cancel-account {
-  text-align: center;
+.preview-title {
+  font-size: 1rem;
+  color: #333333;
   margin-top: 16px;
 }
 
-.cancel-account a {
-  color: #6200ea;
-  text-decoration: none;
-  font-weight: 500;
+.image-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
+.image-preview {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+}
 
-// footer
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Estilos para el input de archivo */
+.form-item input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #f4f4f4;
+  font-size: 1rem;
+  color: #333333;
+  margin-top: 8px;
+}
+
+/* Estilos para el botón de eliminar imagen */
+.delete-button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Estilos para el botón de guardar en el formulario */
+ion-modal ion-button[type="submit"] {
+  --background: #6200ea;
+  --color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 16px;
+}
+
+/* Estilos para el botón de cerrar en el formulario */
+ion-modal ion-button[slot="end"] {
+  --background: transparent;
+  --color: #fff;
+  font-weight: bold;
+}
+
+/* Estilos para el footer */
 .fixed-toolbar {
   --background: #fff;
   height: 70px;
@@ -118,9 +195,9 @@ ion-icon {
 
 .fixed-tabs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+  grid-template-columns: repeat(4, 1fr);
   width: 100%;
-  height: 100%; /* Asegura que ocupe todo el footer */
+  height: 100%;
 }
 
 .tab-item {
@@ -128,18 +205,18 @@ ion-icon {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #333; /* Texto e icono en gris oscuro */
+  color: #333;
   font-size: 12px;
   cursor: pointer;
-  width: 100%; /* Ocupa el ancho completo */
-  height: 100%; /* Hace que sean cuadrados */
+  width: 100%;
+  height: 100%;
   transition: all 0.3s ease;
-  border-radius: 0; /* Elimina bordes redondeados para un diseño limpio */
+  border-radius: 0;
 
   ion-icon {
     font-size: 24px;
     margin-bottom: 4px;
-    color: #333; /* Iconos en gris oscuro */
+    color: #333;
     transition: color 0.3s ease;
   }
 
@@ -149,31 +226,66 @@ ion-icon {
   }
 
   &:hover {
-    background-color: rgba(74, 0, 142, 0.1); /* Fondo suave al pasar el cursor */
-    transform: scale(1.05); /* Ligero aumento */
+    background-color: rgba(74, 0, 142, 0.1);
+    transform: scale(1.05);
   }
 
   &.active {
-    background-color: rgba(74, 0, 142, 0.5); /* Fondo violeta más evidente */
-    color: #fff; /* Texto e iconos en blanco para contraste */
+    background-color: rgba(74, 0, 142, 0.5);
+    color: #fff;
     padding: 10px;
     ion-icon {
-      color: #fff; /* Icono en blanco */
+      color: #fff;
     }
     ion-label {
       font-weight: bold;
     }
 
-    /* Indicador visual */
     &:after {
       content: '';
       display: block;
-      width: 100%; /* Indicador cubre todo el botón */
+      width: 100%;
       height: 3px;
       background-color: #4a008e;
       position: absolute;
       bottom: 0;
       left: 0;
     }
+  }
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 768px) {
+  .perfil-info {
+    flex-direction: column; /* Apilar elementos verticalmente */
+    align-items: center;
+  }
+
+  .avatar-container {
+    flex-direction: column; /* Apilar avatar y botón verticalmente */
+    align-items: center;
+  }
+
+  ion-avatar {
+    width: 80px; /* Reducir el tamaño del avatar en móviles */
+    height: 80px;
+  }
+
+  .avatar-icon {
+    font-size: 80px; /* Reducir el tamaño del ícono en móviles */
+  }
+
+  .edit-button {
+    width: 100%; /* Asegurar que el botón ocupe todo el ancho */
+    max-width: 100%; /* Eliminar el límite de ancho en móviles */
+    margin-top: 8px; /* Reducir el margen superior */
+  }
+
+  .user-details h2 {
+    font-size: 1.25rem; /* Reducir el tamaño del texto en móviles */
+  }
+
+  .user-details p {
+    font-size: 0.875rem; /* Reducir el tamaño del texto en móviles */
   }
 }

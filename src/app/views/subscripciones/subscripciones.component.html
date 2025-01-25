@@ -1,0 +1,132 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title>Subscripciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="subscription-content">
+
+  <ion-list class="subscription-list">
+    <!-- Plan Básico -->
+    <div class="subscription-item">
+      <ion-label class="plan-label">
+        <h2 class="plan-title">Plan Básico</h2>
+        <p class="plan-price">Precio: $10/mes</p>
+      </ion-label>
+      <ion-button class="toggle-button" (click)="toggleDetails('basic')">
+        {{ expandedPlan === 'basic' ? 'Cerrar' : 'Ver más' }}
+      </ion-button>
+    </div>
+    <div *ngIf="expandedPlan === 'basic'" class="plan-details">
+      <div class="highlight-container">
+        <p>Beneficios: Acceso limitado a contenido exclusivo.</p>
+        <p>El pago se realiza con Mercado Pago.</p>
+        <p>Ingrese el email vinculado a su cuenta para recibir el descuento:</p>
+      </div>
+      <div class="subscription-input-container">
+        <div class="input-wrapper">
+          <ion-input class="email-input" placeholder="Ingrese su email" [(ngModel)]="email['basic']"></ion-input>
+        </div>
+        <ion-button class="subscribe-button" (click)="subscribe('basic')">Subscribirse</ion-button>
+      </div>
+    </div>
+
+    <!-- Plan Estándar -->
+    <div class="subscription-item">
+      <ion-label class="plan-label">
+        <h2 class="plan-title">Plan Estándar</h2>
+        <p class="plan-price">Precio: $20/mes</p>
+      </ion-label>
+      <ion-button class="toggle-button" (click)="toggleDetails('standard')">
+        {{ expandedPlan === 'standard' ? 'Cerrar' : 'Ver más' }}
+      </ion-button>
+    </div>
+    <div *ngIf="expandedPlan === 'standard'" class="plan-details">
+      <div class="highlight-container">
+        <p>Beneficios: Acceso a contenido exclusivo + Soporte personalizado.</p>
+        <p>El pago se realiza con Mercado Pago.</p>
+        <p>Ingrese el email vinculado a su cuenta para recibir el descuento:</p>
+      </div>
+      <div class="subscription-input-container">
+        <div class="input-wrapper">
+          <ion-input class="email-input" placeholder="Ingrese su email" [(ngModel)]="email['standard']"></ion-input>
+        </div>
+        <ion-button class="subscribe-button" (click)="subscribe('standard')">Subscribirse</ion-button>
+      </div>
+    </div>
+
+    <!-- Plan Premium -->
+    <div class="subscription-item">
+      <ion-label class="plan-label">
+        <h2 class="plan-title">Plan Premium</h2>
+        <p class="plan-price">Precio: $30/mes</p>
+      </ion-label>
+      <ion-button class="toggle-button" (click)="toggleDetails('premium')">
+        {{ expandedPlan === 'premium' ? 'Cerrar' : 'Ver más' }}
+      </ion-button>
+    </div>
+    <div *ngIf="expandedPlan === 'premium'" class="plan-details">
+      <div class="highlight-container">
+        <p>Beneficios: Acceso completo a contenido exclusivo + Soporte Premium.</p>
+        <p>El pago se realiza con Mercado Pago.</p>
+        <p>Ingrese el email vinculado a su cuenta para recibir el descuento:</p>
+      </div>
+      <div class="subscription-input-container">
+        <div class="input-wrapper">
+          <ion-input class="email-input" placeholder="Ingrese su email" [(ngModel)]="email['premium']"></ion-input>
+        </div>
+        <ion-button class="subscribe-button" (click)="subscribe('premium')">Subscribirse</ion-button>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>
+
+
+
+<ion-footer>
+  <ion-toolbar class="fixed-toolbar">
+    <!-- Tabs -->
+    <div class="fixed-tabs">
+      <!-- Tab: Inicio -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'home'"
+        (click)="navigateTo('home')"
+      >
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </div>
+
+      <!-- Tab: Tienda -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'tienda'"
+        (click)="navigateTo('tienda')"
+      >
+        <ion-icon name="storefront-outline"></ion-icon>
+        <ion-label>Tienda</ion-label>
+      </div>
+
+      <!-- Tab: Notificaciones -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'notificaciones'"
+        (click)="navigateTo('notificaciones')"
+      >
+        <ion-icon name="notifications-outline"></ion-icon>
+        <ion-label>Notificaciones</ion-label>
+      </div>
+
+      <!-- Tab: Configuración -->
+      <div
+        class="tab-item"
+        [class.active]="currentRoute === 'mi-cuenta'"
+        (click)="navigateTo('mi-cuenta')"
+      >
+        <ion-icon name="settings-outline"></ion-icon>
+        <ion-label>Más</ion-label>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>

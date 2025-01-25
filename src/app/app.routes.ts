@@ -82,6 +82,10 @@ export const routes: Routes = [
     loadComponent: () => import('../app/views/servicios-publicados/servicios-publicados.component').then((m) => m.ServiciosPublicadosComponent),
   },
   {
+    path: 'subscripciones',
+    loadComponent: () => import('../app/views/subscripciones/subscripciones.component').then((m) => m.SubscripcionesComponent),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
